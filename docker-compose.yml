@@ -3,7 +3,7 @@ services:
     src:
         build: .
         ports: 
-            - "8003:81"
+            - "8003:80"
         volumes:
             - ./src:/var/www/html/
         links:
@@ -14,7 +14,7 @@ services:
         image: mysql:latest
         restart: always
         ports: 
-            - "3307:3307"
+            - "3306:3306"
         environment:
             MYSQL_DATABASE: myDatabase
             MYSQL_ROOT_PASSWORD: admin
@@ -30,7 +30,7 @@ services:
         links: 
             - db:db
         ports:
-            - 8002:81
+            - 8002:80
         environment:
             MYSQL_ROOT_PASSWORD: admin
 volumes:

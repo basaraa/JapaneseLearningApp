@@ -1,0 +1,237 @@
+.nav-item:hover .dropdown-content {display: block;}
+.nav-item a:hover,.dropdown-content a:hover {background-color: red;}
+#success_insert,#result_edit,#succes_found_coinstraint{
+    color: green;
+    position: center;
+}
+#no_coinstraint{
+    color: red;
+    position: center;
+}
+.dropdown{
+    margin-bottom: 15px ;
+}
+.dropdown-menu li {
+    position: relative;
+}
+.dropdown-menu, .dropdown-submenu  {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+.dropdown-menu .dropdown-grade-left {
+    right: 100%;
+    left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+}
+.form{
+    width: 50%;
+    display: inline-block;
+}
+.form-control{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+header{
+    margin-bottom: 90px;
+}
+.fieldOfStudyContainer{
+    margin-bottom: 15px;
+}
+select,input{
+    margin-bottom: 15px;
+}
+#modal_background,#modal_background2,#modal_background3{
+    position: fixed;
+    display: none;
+    width:100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background: rgba(0,0,0,0.6);
+    z-index:5;
+}
+.modal_div,.modal_div2,.modal_div3{
+    position: fixed;
+    display: none;
+    width:100%;
+    height: 100%;
+    top:0;
+    left:0;
+    align-items: center;
+    justify-content: center;
+    z-index: 6;
+}
+#modal_vrstva,#modal_vrstva2,#modal_vrstva3{
+    position: fixed;
+    background-color: lightblue;
+    padding: 20px;
+    text-align: center;
+}
+input[type=checkbox]{
+    margin: 5px;
+}
+.checkboxPlace{
+    display: flex;
+    position: center;
+    align-items: center;
+    justify-content: center;
+}
+.checkboxPlaceContainer{
+    flex-direction: row;
+    position: center;
+    align-items: center;
+    justify-content: center;
+}
+.checkboxPlaceContainer label,.control-label{
+    color: black;
+    font-weight: unset;
+    font-size: 15px;
+
+}
+.btn{
+    margin-top: 10px;
+}
+.flexdiv{
+    display:flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+    justify-content: center;
+}
+.inflexdiv{
+    margin-left:10px;
+    margin-top:10px;
+    padding:10px;
+    text-align:center;
+    background-color: beige;
+}
+label{
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.editForm{
+    width: 100%;
+    display: inline-block;
+}
+h5{
+    color:green;
+    font-weight: bold;
+    margin-top: 5px;
+}
+p{
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+}
+#modal_text3{
+    color:red;
+    font-size: 20px;
+}
+#modal_textx{
+    font-size: 18px;
+    font-weight: bold;
+}
+.numberPlace{
+    width: 50px;
+}
+.tabulka {
+    text-align:center;
+    border-color: black;
+    border-collapse: collapse;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 102px;
+    min-width: 70%;
+    z-index: 1;
+}
+th,td{
+    outline: 1px solid black;
+}
+
+th{
+    font-size: 20px;
+}
+td{
+    font-size: 18px;
+}
+.tabulka>thead{
+    font-weight:bold;
+    background-color:silver;
+    color:red;
+    position: sticky;
+    top: 65px;
+}
+.tabulka>tbody>tr:nth-child(even) {background-color:white;}
+.tabulka>tbody{
+    color:black;
+
+    background-color:lightgreen;
+}
+header:hover ~ .tabfix thead{
+    position: static;
+}
+
+.empty{
+    width:10px;
+}
+
+
+.day {
+    font-weight:bold;
+    background-color:lightgray;
+    color:red;
+}
+
+.exercise {
+    background-color:lightskyblue;
+}
+
+.lecture {
+    background-color:limegreen;
+}
+.legend{
+    position:center;
+    text-align: center;
+    color: black;
+}
+
+.legend_item{
+    border: solid black 1px;
+    width: 150px;
+    height: 60px;
+    line-height: 60px;
+    list-style-type: none;
+    display: inline-block;
+}
+.purple{
+    color:purple;
+}
+.red{
+    color:red;
+}
+.blue{
+    color:blue;
+}
+
+.romaji{
+    font-size:20px;
+}
+.kana{
+    font-size: 22px;
+    font-weight: bold;
+}
+span{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
