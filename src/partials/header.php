@@ -18,7 +18,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Zoznam predmetov</a>
+                            <a class="nav-link" href="index.php">Domov</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Abeceda</a>
@@ -29,16 +29,34 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="words.php?type=4">Slovíčka</a>
+                            <a class="nav-link" href="words.php?type=4&showType=0">Slovíčka</a>
                             <div class="dropdown-content">
-                                <a class="nav-link" href="words.php?type=0">Podstatné mená</a>
-                                <a class="nav-link" href="words.php?type=1">Prídavné mená</a>
-                                <a class="nav-link" href="words.php?type=2">Slovesá</a>
-                                <a class="nav-link" href="words.php?type=3">Ostatne</a>
+                                <div><a class="nav-link" href="words.php?type=0&showType=0">Podstatné mená</a>
+                                <div class="dropdown-subcontent">
+                                    <a class="nav-link" href="words.php?type=0&showType=2">Zoznam kategórii</a>
+                                    <a class="nav-link" href="words.php?type=0&showType=0">Zoznam slov</a>
+                                    <a class="nav-link" href="words.php?type=0&showType=1&frontLanguage=JP">Karty z japončiny</a>
+                                    <a class="nav-link" href="words.php?type=0&showType=1&frontLanguage=SVK">Karty zo slovenčiny</a>
+                                </div></div>
+                                <div><a class="nav-link" href="words.php?type=1&showType=0">Prídavné mená</a>
+                                <div class="dropdown-subcontent">
+                                    <a class="nav-link" href="words.php?type=1&showType=0">Zoznam</a>
+                                    <a class="nav-link" href="words.php?type=1&showType=1&frontLanguage=JP">Karty z japončiny</a>
+                                    <a class="nav-link" href="words.php?type=1&showType=1&frontLanguage=SVK">Karty zo slovenčiny</a>
+                                </div></div>
+                                <div><a class="nav-link" href="words.php?type=2&showType=0">Slovesá</a>
+                                <div class="dropdown-subcontent">
+                                    <a class="nav-link" href="words.php?type=2&showType=0">Zoznam</a>
+                                    <a class="nav-link" href="words.php?type=2&showType=1&frontLanguage=JP">Karty z japončiny</a>
+                                    <a class="nav-link" href="words.php?type=2&showType=1&frontLanguage=SVK">Karty zo slovenčiny</a>
+                                </div></div>
+                                    <div><a class="nav-link" href="words.php?type=3&showType=0">Ostatne</a>
+                                <div class="dropdown-subcontent">
+                                    <a class="nav-link" href="words.php?type=3&showType=0">Zoznam</a>
+                                    <a class="nav-link" href="words.php?type=3&showType=1&frontLanguage=JP">Karty z japončiny</a>
+                                    <a class="nav-link" href="words.php?type=3&showType=1&frontLanguage=SVK">Karty zo slovenčiny</a>
+                                </div></div>
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Gramatika</a>
                         </li>
                     </ul>
                 </div>
