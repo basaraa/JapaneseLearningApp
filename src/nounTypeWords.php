@@ -10,17 +10,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"])){
                     <thead>
                         <tr>
                             <th>Japonsky
-                                <span onclick="zoradenie(0,false,0)"> (x)</span>
-                                <span onclick="zoradenie(0,true,0)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(0,false,0)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(0,true,0)">(y)</span>
                             </th>
                             <th>Slovensky
-                                <span onclick="zoradenie(1,false,0)"> (x)</span>
-                                <span onclick="zoradenie(1,true,0)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(1,false,0)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(1,true,0)">(y)</span>
                             </th>
                             ';
         echo '                <th>Dátum pridania
-                                <span onclick="zoradenie(2,false,1)"> (x)</span>
-                                <span onclick="zoradenie(2,true,1)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(2,false,1)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(2,true,1)">(y)</span>
                               </th>
                               <th></th>
                          </tr>

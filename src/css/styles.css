@@ -27,30 +27,20 @@
 .dropdown-menu > li:hover > .dropdown-submenu {
     display: block;
 }
-.form{
-    width: 50%;
-    display: inline-block;
-}
-.form-control{
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
+
 header{
     margin-bottom: 90px;
 }
-.fieldOfStudyContainer{
-    margin-bottom: 15px;
+.dropdown-subcontent > a{
+    min-width: 170px;
 }
-select,input{
-    margin-bottom: 15px;
-}
+
 #modal_background,#modal_background2,#modal_background3{
     position: fixed;
     display: none;
     width:100%;
     height: 100%;
-    top:0;
+    top:50px;
     left:0;
     background: rgba(0,0,0,0.6);
     z-index:5;
@@ -72,27 +62,7 @@ select,input{
     padding: 20px;
     text-align: center;
 }
-input[type=checkbox]{
-    margin: 5px;
-}
-.checkboxPlace{
-    display: flex;
-    position: center;
-    align-items: center;
-    justify-content: center;
-}
-.checkboxPlaceContainer{
-    flex-direction: row;
-    position: center;
-    align-items: center;
-    justify-content: center;
-}
-.checkboxPlaceContainer label,.control-label{
-    color: black;
-    font-weight: unset;
-    font-size: 15px;
 
-}
 .btn{
     margin-top: 10px;
 }
@@ -124,32 +94,11 @@ input[type=checkbox]{
 }
 
 label{
-    color: red;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
+    color:black;
+}
 
-}
-.editForm{
-    width: 100%;
-    display: inline-block;
-}
-h5{
-    color:green;
-    font-weight: bold;
-    margin-top: 5px;
-}
-p{
-    padding-bottom: 4px;
-    margin-bottom: 4px;
-}
-#modal_text3{
-    color:red;
-    font-size: 20px;
-}
-#modal_textx{
-    font-size: 18px;
-    font-weight: bold;
-}
 .numberPlace{
     width: 50px;
 }
@@ -189,39 +138,10 @@ td{
 header:hover ~ .tabfix thead{
     position: static;
 }
-
 .empty{
     width:10px;
 }
 
-
-.day {
-    font-weight:bold;
-    background-color:lightgray;
-    color:red;
-}
-
-.exercise {
-    background-color:lightskyblue;
-}
-
-.lecture {
-    background-color:limegreen;
-}
-.legend{
-    position:center;
-    text-align: center;
-    color: black;
-}
-
-.legend_item{
-    border: solid black 1px;
-    width: 150px;
-    height: 60px;
-    line-height: 60px;
-    list-style-type: none;
-    display: inline-block;
-}
 .purple{
     color:purple;
 }
@@ -231,6 +151,9 @@ header:hover ~ .tabfix thead{
 .blue{
     color:blue;
 }
+.green{
+    color:green;
+}
 
 .romaji{
     font-size:20px;
@@ -239,7 +162,7 @@ header:hover ~ .tabfix thead{
     font-size: 22px;
     font-weight: bold;
 }
-span{
+.cursor{
     cursor: pointer;
 }
 .card-place {
@@ -297,6 +220,16 @@ span{
     text-align:center;
     color:red;
 }
+
+input[type=radio]{
+    cursor: pointer;
+    position:absolute;
+    left:40%;
+    margin-right: 5px;
+    padding: 0;
+}
+
+
 
 
 

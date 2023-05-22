@@ -16,28 +16,28 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                     <thead>
                         <tr>
                             <th>Japonsky
-                                <span onclick="zoradenie(0,false,0)"> (x)</span>
-                                <span onclick="zoradenie(0,true,0)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(0,false,0)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(0,true,0)">(y)</span>
                             </th>
                             <th>Slovensky
-                                <span onclick="zoradenie(1,false,0)"> (x)</span>
-                                <span onclick="zoradenie(1,true,0)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(1,false,0)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(1,true,0)">(y)</span>
                             </th>
                             <th>Typ
-                                <span onclick="zoradenie(2,false,0)"> (x)</span>
-                                <span onclick="zoradenie(2,true,0)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(2,false,0)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(2,true,0)">(y)</span>
                             </th>
                             ';
             if ($type === 0) {
                 echo '          <th>Podtyp
-                                <span onclick="zoradenie(3,false,0)"> (x)</span>
-                                <span onclick="zoradenie(3,true,0)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(3,false,0)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(3,true,0)">(y)</span>
                             </th>';
                 $x = 4;
             }
             echo '                <th>Dátum pridania
-                                <span onclick="zoradenie(' . $x . ',false,1)"> (x)</span>
-                                <span onclick="zoradenie(' . $x . ',true,1)">(y)</span>
+                                <span class="cursor" onclick="zoradenie(' . $x . ',false,1)"> (x)</span>
+                                <span class="cursor" onclick="zoradenie(' . $x . ',true,1)">(y)</span>
                               </th>
                               <th></th>
                          </tr>
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                 while ($row=mysqli_fetch_assoc($result)){
                     $nounTypeName=$row["type_name"];
                     $nounTypeId=$row["id"];
-                    echo '<div class="inflexdiv" onclick="location.href=\'nounSubTypeWords.php?subType='.$nounTypeId.'\'">                            
+                    echo '<div class="inflexdiv" onclick="location.href=\'nounTypeWords.php?subType='.$nounTypeId.'\'">                            
                             <img src="img/nounTypes/'.$row["image_name"].'" class="imgx" alt="x">
                             <h2>'.$nounTypeName.'</h2>
                           </div>';
