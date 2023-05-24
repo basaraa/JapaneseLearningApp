@@ -54,9 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                         echo '<td>' . $row["type_name"] . '</td>';
                     }
                     echo '<td>' . date("d.m.Y", strtotime($row["day_of_addition"])) . '</td>';
-                    echo '<td><a class="nodec" href="edit_form.php?idcko=' . $row["id"] . '">
+                    echo '<td><a class="nodec editWord" id = "' . $row["id"] . '">
                         <i class = "bi bi-pencil-square"></i></a>
-                        <a class="nodec" href="delete.php?idcko=' . $row["id"] . '">
+                        <a class="nodec deleteWord" id = "' . $row["id"] . '">
                         <i class = "bi bi-trash"></i></a></td>';
                     echo '</tr>';
                 }
@@ -107,4 +107,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
     else http_response_code(400);
 }
 else http_response_code(400);
+
+?>
+<div id="modal_background2"></div>
+<div class="modal_div2">
+    <div id="modal_vrstva2">
+        <div id="modal_text2"></div>
+        <button class="btn btn-primary" onclick="window.location.href='index.php'">Späť na hlavnú stránku</button>
+    </div>
+</div>
+<div id="modal_background"></div>
+<div class="modal_div">
+    <div id="modal_vrstva">
+        <div id="modal_text"></div>
+        <button class="btn btn-primary" onclick="go_back();">Vrátiť sa späť</button>
+    </div>
+</div>
+<?php
 include ("partials/footer.php");
+?>

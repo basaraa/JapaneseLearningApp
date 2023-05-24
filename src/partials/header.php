@@ -29,7 +29,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="words.php?type=4&showType=0">Slovíčka</a>
+                            <a class="nav-link" href="words.php?type=4&showType=0">Slová</a>
                             <div class="dropdown-content">
                                 <div><a class="nav-link" href="words.php?type=0&showType=0">Podstatné mená</a>
                                 <div class="dropdown-subcontent">
@@ -64,6 +64,13 @@
                                     <a class="nav-link" href="exam.php?type=3&subType=&questionLanguage=SVK">Test SVK->JP</a>
                                     <a class="nav-link" href="exam.php?type=3&subType=&questionLanguage=JP">Test JP->SVK</a>
                                 </div></div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pridať</a>
+                            <div class="dropdown-content">
+                                <a class="nav-link" href="addForm.php?addType=0">Slová</a>
+                                <a class="nav-link" href="addForm.php?addType=1">Gramatiku</a>
                             </div>
                         </li>
                     </ul>

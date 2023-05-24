@@ -22,6 +22,11 @@ function selectWords($conn,$type){
     return $result;
 
 }
+function selectWordByName($conn,$word){
+    $sql="SELECT * FROM words where jap_word='".$word."'";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
 function selectNounTypes($conn){
     $sql = "SELECT * FROM nounTypes";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
@@ -35,6 +40,7 @@ function selectSubTypeWords($conn,$type){
     return $result;
 
 }
+//exam
 function selectExamQuestions ($conn,$type,$subType,$language){
     if ($subType==0){
         if ($language=="SVK")
@@ -81,6 +87,20 @@ function checkAnswer($conn,$id,$language){
         $sql="SELECT jap_word as 'word' FROM words WHERE id = '".$id."'";
     else
         $sql="SELECT svk_word as 'word' FROM words WHERE id = '".$id."'";
+    $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+
+//delete word
+function deleteWord($conn,$id){
+    $sql = "DELETE FROM words where id = '".$id."'";
+    $result = $conn->query($sql) or die("Chyba pri vykonaní query: " . $conn->error);
+    return $result;
+}
+
+//insert queries
+function insertWord($conn,$japWord,$svkWord,$type,$nounType){
+    $sql="INSERT INTO words (jap_word,svk_word,word_type,word_subtype_id,day_of_addition) VALUES ('$japWord','$svkWord','$type',NULLIF('$nounType',''),now())";
     $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }

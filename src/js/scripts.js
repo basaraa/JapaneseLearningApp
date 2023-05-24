@@ -1,3 +1,4 @@
+//sort items in table
 function zoradenie(stlpec,typ,typ_hodnoty) {
     let tabulka, riadky, switching, i, x, y, shouldSwitch, r1, r2;
     tabulka = document.getElementById("tabulka");
@@ -20,14 +21,24 @@ function zoradenie(stlpec,typ,typ_hodnoty) {
                 }
             }
             if (typ_hodnoty===1){
-                let p,d;
-                p=new Date(x.textContent);
-                d=new Date(y.textContent);
-                if ((p - d > 0)&&typ===false) {
+                let p,p2;
+                if (y.textContent != null) {
+                    let [d, m, y] = (x.textContent).split('.');
+                    p = new Date(y, m - 1, d);
+                }
+                else
+                    p = new Date();
+                if (y.textContent != null){
+                    [d, m, y] = (y.textContent).split('.');
+                    p2=new Date(y,m-1,d);
+                }
+                else
+                    p2=new Date();
+                if ((p - p2 > 0)&&typ===false) {
                     shouldSwitch = true;
                     break;
                 }
-                if ((p - d < 0)&&typ===true) {
+                if ((p - p2 < 0)&&typ===true) {
                     shouldSwitch = true;
                     break;
                 }
@@ -39,7 +50,7 @@ function zoradenie(stlpec,typ,typ_hodnoty) {
         }
     }
 }
-
+//check answers of exam
 $(function (){
     $('.exam').submit (function (e){
         e.preventDefault();
@@ -58,3 +69,128 @@ $(function (){
         });
     })
 });
+//generate noun option
+$(function () {
+    $(".wordType").change(function(){
+        let index = $(".wordType option:selected").index();
+        let nounType=document.getElementById("nounType");
+        let nounTypeLabel=document.getElementById("nounTypeLabel");
+        if (index===0){
+            nounType.style.display="block";
+            nounTypeLabel.style.display="block";
+        }
+        else{
+            nounType.style.display="none";
+            nounTypeLabel.style.display="none";
+        }
+    })
+});
+//add new words manual
+$(function () {
+    $('.addForm').submit( function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'postHandlers/add.php',
+            data: $('.addForm').serialize(),
+            success: function (data) {
+                try {
+                    let result = JSON.parse(data)
+                    if(result.scs===true){
+                        document.getElementById("modal_background2").style.display="block";
+                        document.getElementsByClassName("modal_div2")[0].style.display="flex";
+                        document.getElementById("modal_text2").innerHTML=result.msg;
+                    }
+                    else{
+                        document.getElementById("modal_background").style.display="block";
+                        document.getElementsByClassName("modal_div")[0].style.display="flex";
+                        document.getElementById("modal_text").innerHTML=result.msg;
+                    }
+                }
+                catch{
+                    alert (data)
+                }
+            },
+            error: function (){
+                alert ("Nastala chyba skúste to znova")
+            }
+        });
+    })
+});
+//add new words from csv
+$(function () {
+    $('.addFormCSV').submit( function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'postHandlers/importCSV.php',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function (data) {
+                try {
+                    let result = JSON.parse(data)
+                    if(result.scs===true){
+                        document.getElementById("modal_background2").style.display="block";
+                        document.getElementsByClassName("modal_div2")[0].style.display="flex";
+                        document.getElementById("modal_text2").innerHTML=result.msg;
+                    }
+                    else{
+                        document.getElementById("modal_background").style.display="block";
+                        document.getElementsByClassName("modal_div")[0].style.display="flex";
+                        document.getElementById("modal_text").innerHTML=result.msg;
+                    }
+                }
+                catch{
+                    alert (data)
+                }
+            },
+            error: function (){
+                alert ("Nastala chyba skúste to znova")
+            }
+        });
+    })
+});
+
+//delete
+$(function () {
+    $('.deleteWord').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'postHandlers/delete.php',
+            data: {id:this.id},
+            success: function (data) {
+                try {
+                    let result = JSON.parse(data)
+                    if(result.scs===true){
+                        document.getElementById("modal_background2").style.display="block";
+                        document.getElementsByClassName("modal_div2")[0].style.display="flex";
+                        document.getElementById("modal_text2").innerHTML=result.msg;
+                    }
+                    else{
+                        document.getElementById("modal_background").style.display="block";
+                        document.getElementsByClassName("modal_div")[0].style.display="flex";
+                        document.getElementById("modal_text").innerHTML=result.msg;
+                    }
+                }
+                catch{
+                    alert (data)
+                }
+            },
+            error: function (){
+                alert ("Nastala chyba skúste to znova")
+            }
+        });
+    })
+});
+
+function go_back(){
+    document.getElementById("modal_background").style.display="none";
+    document.getElementsByClassName("modal_div")[0].style.display="none";
+}
+function go_back2(){
+    document.getElementById("modal_background3").style.display="none";
+    document.getElementsByClassName("modal_div3")[0].style.display="none";
+}
