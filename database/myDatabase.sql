@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Út 16.Máj 2023, 14:10
+-- Čas generovania: St 31.Máj 2023, 09:39
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -20,6 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Databáza: `myDatabase`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Štruktúra tabuľky pre tabuľku `grammar`
+--
+
+CREATE TABLE `grammar` (
+  `id` int UNSIGNED NOT NULL,
+  `grammar_title` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `grammar_description` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Sťahujem dáta pre tabuľku `grammar`
+--
+
+INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
+(1, 'Vyjadrenie ukončenia aktivity', 'Slovné spojenie -te shimau na konci vety popisuje aktivitu ktorá už skončila.');
+
+-- --------------------------------------------------------
+
+--
+-- Štruktúra tabuľky pre tabuľku `grammar_sentences`
+--
+
+CREATE TABLE `grammar_sentences` (
+  `id` int UNSIGNED NOT NULL,
+  `grammar_id` int UNSIGNED NOT NULL,
+  `jap_sentence` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `svk_sentence` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Sťahujem dáta pre tabuľku `grammar_sentences`
+--
+
+INSERT INTO `grammar_sentences` (`id`, `grammar_id`, `jap_sentence`, `svk_sentence`) VALUES
+(3, 1, 'Hon o yonde shimaimashita.', 'Už som dočítal knihu.');
 
 -- --------------------------------------------------------
 
@@ -149,7 +188,8 @@ INSERT INTO `kanji` (`id`, `kanji_char`, `kunyoumi`, `onyoumi`, `slovak`) VALUES
 (43, '父', 'chichi', 'fu', 'otec'),
 (44, '母', 'haha/mo', 'bo', 'mama'),
 (45, '山', 'yama', 'san/sen', 'hora'),
-(46, '円', 'maru/mado/maru', 'en', 'yen/kruh');
+(46, '円', 'maru/mado/maru', 'en', 'yen/kruh'),
+(47, '肉', 'shishi', 'niku', 'mäso');
 
 -- --------------------------------------------------------
 
@@ -241,7 +281,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (33, 'Chikai', 'Blízko', 'pridavne meno', NULL, '2023-05-10'),
 (34, 'Iroiro(na)', 'Rôzny/viacdruhov', 'pridavne meno', NULL, '2023-05-10'),
 (35, 'Kechi(na)', 'Lakomý', 'pridavne meno', NULL, '2023-05-10'),
-(36, 'Karai', 'Pikantné (7', 'pridavne meno', NULL, '2023-05-10'),
+(36, 'Karai', 'Pikantné', 'pridavne meno', NULL, '2023-05-10'),
 (37, 'Dame', 'Nedobré', 'pridavne meno', NULL, '2023-05-10'),
 (38, 'Yukkuri/Motto yukkuri', 'Pomalšie/Trochu pomalšie', 'pridavne meno', NULL, '2023-05-10'),
 (39, 'Saitei', 'Najhorší', 'pridavne meno', NULL, '2023-05-10'),
@@ -272,7 +312,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (64, 'Harau', 'Zaplatiť', 'sloveso', NULL, '2023-05-10'),
 (65, 'Kimeru', 'Rozhodnúť sa', 'sloveso', NULL, '2023-05-10'),
 (66, 'Narau', 'Naučiť sa', 'sloveso', NULL, '2023-05-10'),
-(67, 'Kau', 'Vlastniť (nejaké zviera)', 'sloveso', NULL, '2023-05-10'),
+(67, 'Kau(kawanai/kaimasu)', 'Kúpiť', 'sloveso', NULL, '2023-05-10'),
 (68, 'Ryokou suru', 'Cestovať', 'sloveso', NULL, '2023-05-10'),
 (69, 'Noru', 'Nasadnút(do vlaku)/jazdiť (na bicykli)', 'sloveso', NULL, '2023-05-10'),
 (70, 'Noboru', 'Vyliezť (napr. na horu)', 'sloveso', NULL, '2023-05-10'),
@@ -685,11 +725,63 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (477, 'Tatoeba', 'Napríklad', 'ostatne', NULL, '2023-05-10'),
 (478, 'Yappari', 'Nakoniec/predsalen', 'ostatne', NULL, '2023-05-10'),
 (479, 'Hokano', 'Ostatne', 'ostatne', NULL, '2023-05-10'),
-(480, 'Kondokoso', 'Tentokrát', 'ostatne', NULL, '2023-05-10');
+(480, 'Kondokoso', 'Tentokrát', 'ostatne', NULL, '2023-05-10'),
+(483, 'Te o arau(araimasu)', 'Umyť si ruky', 'sloveso', NULL, '2023-05-24'),
+(484, 'Iwanakya', 'Musieť niečo povedať', 'sloveso', NULL, '2023-05-24'),
+(485, 'Kyuryou', 'Plat', 'podstatne meno', 12, '2023-05-24'),
+(486, 'Shanpuu', 'Šampón', 'podstatne meno', 12, '2023-05-24'),
+(487, 'Shouyuu', 'Sójová omáčka', 'podstatne meno', 7, '2023-05-24'),
+(488, 'Suupu', 'Polievka', 'podstatne meno', 7, '2023-05-24'),
+(489, 'Banana', 'Banán', 'podstatne meno', 7, '2023-05-24'),
+(490, 'Mushi', 'Hmyz', 'podstatne meno', 16, '2023-05-24'),
+(491, 'Reizouko', 'Chladnička', 'podstatne meno', 5, '2023-05-24'),
+(492, 'Kibun ga warui', 'Cítiť sa chorý', 'podstatne meno', 9, '2023-05-24'),
+(493, 'Aku', 'Otvoriť', 'podstatne meno', 12, '2023-05-24'),
+(494, 'Ayamaru', 'Ospravedlniť sa (niekomu)', 'ostatne', NULL, '2023-05-24'),
+(495, 'Otosu', 'Upustiť (niečo)', 'sloveso', NULL, '2023-05-24'),
+(496, 'Korobu', 'Spadnúť', 'sloveso', NULL, '2023-05-24'),
+(497, 'Kowasu', 'Rozbiť (niečo)', 'sloveso', NULL, '2023-05-24'),
+(498, 'Tasukaru', 'Byť zachránený/dostať pomoc', 'sloveso', NULL, '2023-05-24'),
+(499, 'Tanomu', 'Opýtať sa/mať prosbu (na niekoho)', 'sloveso', NULL, '2023-05-24'),
+(500, 'Chuumon suru', 'Objednať si (napr. v reštaurácii)', 'sloveso', NULL, '2023-05-24'),
+(501, '(no) Okagede', 'Vďaka (niekomu/niečomu)', 'ostatne', NULL, '2023-05-24'),
+(502, 'Dou shiyou', ' Čo by sme mali urobiť', 'ostatne', NULL, '2023-05-24'),
+(503, 'Mazu', 'Najprv', 'ostatne', NULL, '2023-05-24'),
+(504, 'Kedo', 'Ale(medzi 2 vetami)', 'ostatne', NULL, '2023-05-24'),
+(505, 'Shokuryouhin mise', 'Obchod s potravinami', 'podstatne meno', 1, '2023-05-31'),
+(506, 'Shoutai suru', 'Pozvať', 'sloveso', NULL, '2023-05-31'),
+(507, 'Orei', 'Vyjadrenie vďačnosti', 'ostatne', NULL, '2023-05-31'),
+(508, 'Nakaga ii', 'Uzmieriť sa', 'sloveso', NULL, '2023-05-31'),
+(509, 'Majime', 'Seriózny', 'pridavne meno', NULL, '2023-05-31'),
+(510, 'Okuru', 'Odviesť niekoho (autom)', 'sloveso', NULL, '2023-05-31'),
+(511, 'Okoru', 'Nahnevať sa', 'sloveso', NULL, '2023-05-31'),
+(512, 'Kimaru', 'Rozhodnúť sa', 'sloveso', NULL, '2023-05-31'),
+(513, 'Okureru', 'Meškať', 'sloveso', NULL, '2023-05-31'),
+(514, 'Hareru', 'Je slnečno', 'sloveso', NULL, '2023-05-31'),
+(515, 'Gochisou suru', 'Pozvať/zaplatiť niekomu za jedlo', 'sloveso', NULL, '2023-05-31'),
+(516, 'Chuui suru', 'Varovanie - dávať si pozor', 'sloveso', NULL, '2023-05-31'),
+(517, 'Touchaku suru', 'Prísť (niekam)', 'sloveso', NULL, '2023-05-31'),
+(518, 'Kantan', 'Jednoduché/ľahké', 'pridavne meno', NULL, '2023-05-31'),
+(519, 'Nonbiri', 'Pohodový (napr. človek)', 'pridavne meno', NULL, '2023-05-31'),
+(520, 'Makeru', 'Prehrať (napr. zápas)', 'sloveso', NULL, '2023-05-31'),
+(521, 'Goro', 'Cca/približne (len pre čas napr. cca o 8 večer)', 'ostatne', NULL, '2023-05-31');
 
 --
 -- Kľúče pre exportované tabuľky
 --
+
+--
+-- Indexy pre tabuľku `grammar`
+--
+ALTER TABLE `grammar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexy pre tabuľku `grammar_sentences`
+--
+ALTER TABLE `grammar_sentences`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `grammar_id` (`grammar_id`);
 
 --
 -- Indexy pre tabuľku `kana`
@@ -721,6 +813,18 @@ ALTER TABLE `words`
 --
 
 --
+-- AUTO_INCREMENT pre tabuľku `grammar`
+--
+ALTER TABLE `grammar`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pre tabuľku `grammar_sentences`
+--
+ALTER TABLE `grammar_sentences`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pre tabuľku `kana`
 --
 ALTER TABLE `kana`
@@ -730,7 +834,7 @@ ALTER TABLE `kana`
 -- AUTO_INCREMENT pre tabuľku `kanji`
 --
 ALTER TABLE `kanji`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pre tabuľku `nounTypes`
@@ -742,11 +846,17 @@ ALTER TABLE `nounTypes`
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=481;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=524;
 
 --
 -- Obmedzenie pre exportované tabuľky
 --
+
+--
+-- Obmedzenie pre tabuľku `grammar_sentences`
+--
+ALTER TABLE `grammar_sentences`
+  ADD CONSTRAINT `grammar_sentences_ibfk_1` FOREIGN KEY (`grammar_id`) REFERENCES `grammar` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Obmedzenie pre tabuľku `words`

@@ -27,6 +27,26 @@ function selectWordByName($conn,$word){
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
+function selectGrammarByTitle($conn,$grammarTitle){
+    $sql="SELECT * FROM grammar where grammar_title='".$grammarTitle."' limit 1";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function selectGrammarByID($conn,$grammarID){
+    $sql="SELECT * FROM grammar where id='".$grammarID."' limit 1";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function selectGrammars($conn){
+    $sql="SELECT * FROM grammar";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function selectSentencesByGrammarID($conn,$grammarID){
+    $sql="SELECT * FROM grammar_sentences where grammar_id='".$grammarID."'";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
 function selectNounTypes($conn){
     $sql = "SELECT * FROM nounTypes";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
@@ -104,3 +124,19 @@ function insertWord($conn,$japWord,$svkWord,$type,$nounType){
     $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
+function insertGrammar($conn,$grammarTitle,$grammarDescription){
+    $sql="INSERT INTO grammar (grammar_title,grammar_description) VALUES ('$grammarTitle','$grammarDescription')";
+    $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function insertGrammarSentence($conn,$grammarID,$grammarJapSentence,$grammarSvkSentence){
+    $sql="INSERT INTO grammar_sentences (grammar_id,jap_sentence,svk_sentence) VALUES ('$grammarID','$grammarJapSentence','$grammarSvkSentence')";
+    $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function insertKanji($conn,$kanji,$kunyoumi,$onyoumi,$slovak){
+    $sql="INSERT INTO kanji (kanji_char,kunyoumi,onyoumi,slovak) VALUES ('$kanji','$kunyoumi','$onyoumi','$slovak')";
+    $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+

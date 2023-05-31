@@ -4,10 +4,12 @@ require_once("config/config.php");
 include "databaseQueries/databaseQueries.php";
 if ((isset($_GET["addType"]))) {
     $addType=intval($_GET["addType"]);
-    if ($addType==0){
+    if ($addType >=0 && $addType<=3) {
         echo '<h3 class="purple addForm">Vložiť manuálne:</h3><form class="form addForm">                   
-                    <input type="hidden" id="addType" name="addType" value = "'.$addType.'">
-                    <div class="form-group">
+                    <input type="hidden" id="addType" name="addType" value = "' . $addType . '">';
+        //slová
+        if ($addType == 0) {
+            echo '<div class="form-group">
                         <label for="japWord">Japonské slovo:</label>
                         <input type="text" class="form-control" name= "japWord" id="japWord" placeholder="Zadajte japonské slovo" maxlength="64" required>
                         <label for="svkWord">Preklad:</label>
@@ -23,18 +25,66 @@ if ((isset($_GET["addType"]))) {
                         <select class="form-control" name = "nounType" id="nounType">
                        
                     ';
-        $result=selectNounTypes($conn);
-        if ($result){
-            while ($nounType=mysqli_fetch_assoc($result)){
-                $subType=$nounType["type_name"];
-                $id=$nounType["id"];
-                echo "<option value=$id>$subType</option>";
+            $result = selectNounTypes($conn);
+            if ($result) {
+                while ($nounType = mysqli_fetch_assoc($result)) {
+                    $subType = $nounType["type_name"];
+                    $id = $nounType["id"];
+                    echo "<option value=$id>$subType</option>";
+                }
             }
-        }
-
-        echo '</select></div>
+            echo '</select></div>
                     <button type="submit" class="btn btn-primary">Vložiť slovo</button>
                 </form>';
+
+        }
+        //grammar
+        else if ($addType == 1) {
+            echo '<div class="form-group">
+                        <label for="grammarTitle">Názov gramatiky:</label>
+                        <input type="text" class="form-control" name= "grammarTitle" id="grammarTitle" placeholder="Zadajte názov gramatiky" maxlength="64" required>
+                        <label for="grammarDescription">Popis gramatiky:</label>
+                        <input type="text" class="form-control" name= "grammarDescription" id="grammarDescription" placeholder="Zadajte popis gramatiky" maxlength="128" required> 
+                  </div>
+                  <button type="submit" class="btn btn-primary">Vložiť slovo</button>
+                </form>';
+        }
+        //grammar sentence
+        else if ($addType == 2){
+            echo '<div class="form-group">
+                  <label for="grammarID">Gramatika ku ktorej patrí veta:</label>
+                  <select class="form-control" name = "grammarID" id="grammarID">';
+            $result = selectGrammars($conn);
+            if ($result) {
+                while ($grammar = mysqli_fetch_assoc($result)) {
+                    $grammarTitle = $grammar["grammar_title"];
+                    $grammarID = $grammar["id"];
+                    echo "<option value=$grammarID>$grammarTitle</option>";
+                }
+            }
+            echo '</select><label for="grammarJapSentence">Veta po japonsky:</label>
+                  <input type="textarea" class="form-control" name= "grammarJapSentence" id="grammarJapSentence" placeholder="Zadajte vetu ku gramatike po japonsky:" maxlength="128" required>
+                  <label for="grammarSvkSentence">Veta po slovensky:</label>
+                  <input type="textarea" class="form-control" name= "grammarSvkSentence" id="grammarSvkSentence" placeholder="Zadajte vetu ku gramatike po slovensky:" maxlength="128" required>                
+                  </div>
+                  <button type="submit" class="btn btn-primary">Vložiť slovo</button>
+                  </form>';
+        }
+        //kanji
+        else if ($addType == 3) {
+            echo '<div class="form-group">
+                        <label for="kanji">Znak kanji:</label>
+                        <input type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16" required>
+                        <label for="kunyoumi">Zadajte kunyoumi (tvar ku kane):</label>
+                        <input type="text" class="form-control" name= "kunyoumi" id="kunyoumi" placeholder="Zadajte kunyoumi" maxlength="32" required>
+                        <label for="grammarDescription">Zadajte onyoumi (tvar ku ostatným kanji):</label>
+                        <input type="text" class="form-control" name= "onyoumi" id="onyoumi" placeholder="Zadajte onyoumi" maxlength="32" required>  
+                        <label for="grammarDescription">Význam po slovensky:</label>
+                        <input type="text" class="form-control" name= "slovak" id="slovak" placeholder="Zadajte význam kanji po slovensky" maxlength="32" required>  
+                  </div>
+                  <button type="submit" class="btn btn-primary">Vložiť slovo</button>
+                </form>';
+        }
         echo '<h3 class="csvImporth purple">Vložiť z .csv súboru:</h3>
                 <form class="form addFormCSV" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="type" name="addType" value = "'.$addType.'">
@@ -44,9 +94,6 @@ if ((isset($_GET["addType"]))) {
                 </div>
                         <button type="submit" class="btn btn-primary">Vložiť zo súboru</button>
                 </form>';
-    }
-    else if ($addType==1){
-
     }
     else http_response_code(400);
 }

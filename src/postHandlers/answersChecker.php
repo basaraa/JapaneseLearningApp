@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset ($_POST["language"])){
         $answer_string="question".$x;
         $questionId_string="question".$x."_id";
         if (isset($_POST[$questionId_string]) && isset($answer_string)){
-            $id=$_POST[$questionId_string];
+            $id=intval($_POST[$questionId_string]);
             $answer=$_POST [$answer_string];
             $result = checkAnswer($conn,$id,$language);
             if ($result){

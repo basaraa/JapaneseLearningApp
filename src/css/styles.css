@@ -240,6 +240,21 @@ input[type=radio]{
 .nodec{
     cursor: pointer;
 }
+.black{
+    color: black;
+}
+.sentence{
+    font-size: 17px;
+}
+.grammar_description{
+    font-size: 17px;
+}
+h2,h4{
+    font-weight: bold;
+}
+.odkaz{
+    cursor:pointer;
+}
 
 
 
