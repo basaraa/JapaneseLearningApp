@@ -5,7 +5,7 @@ include "databaseQueries/databaseQueries.php";
 if ((isset($_GET["addType"]))) {
     $addType=intval($_GET["addType"]);
     if ($addType >=0 && $addType<=3) {
-        echo '<h3 class="purple addForm">Vložiť manuálne:</h3><form class="form addForm">                   
+        echo '<h3 class="purple">Vložiť manuálne:</h3><form class="form addForm">                   
                     <input type="hidden" id="addType" name="addType" value = "' . $addType . '">';
         //slová
         if ($addType == 0) {
@@ -21,7 +21,7 @@ if ((isset($_GET["addType"]))) {
                             <option value="sloveso" >Sloveso</option>
                             <option value="ostatne" >Ostatné</option>
                         </select>
-                        <label id="nounTypeLabel" for="nounType">Typ slova:</label>
+                        <label id="nounTypeLabel" for="nounType">Podtyp slova:</label>
                         <select class="form-control" name = "nounType" id="nounType">
                        
                     ';
@@ -46,7 +46,7 @@ if ((isset($_GET["addType"]))) {
                         <label for="grammarDescription">Popis gramatiky:</label>
                         <input type="text" class="form-control" name= "grammarDescription" id="grammarDescription" placeholder="Zadajte popis gramatiky" maxlength="128" required> 
                   </div>
-                  <button type="submit" class="btn btn-primary">Vložiť slovo</button>
+                  <button type="submit" class="btn btn-primary">Vložiť gramatiku</button>
                 </form>';
         }
         //grammar sentence
@@ -63,11 +63,11 @@ if ((isset($_GET["addType"]))) {
                 }
             }
             echo '</select><label for="grammarJapSentence">Veta po japonsky:</label>
-                  <input type="textarea" class="form-control" name= "grammarJapSentence" id="grammarJapSentence" placeholder="Zadajte vetu ku gramatike po japonsky:" maxlength="128" required>
+                  <input type="text" class="form-control" name= "grammarJapSentence" id="grammarJapSentence" placeholder="Zadajte vetu ku gramatike po japonsky:" maxlength="128" required>
                   <label for="grammarSvkSentence">Veta po slovensky:</label>
-                  <input type="textarea" class="form-control" name= "grammarSvkSentence" id="grammarSvkSentence" placeholder="Zadajte vetu ku gramatike po slovensky:" maxlength="128" required>                
+                  <input type="text" class="form-control" name= "grammarSvkSentence" id="grammarSvkSentence" placeholder="Zadajte vetu ku gramatike po slovensky:" maxlength="128" required>                
                   </div>
-                  <button type="submit" class="btn btn-primary">Vložiť slovo</button>
+                  <button type="submit" class="btn btn-primary">Vložiť vetu</button>
                   </form>';
         }
         //kanji
@@ -82,7 +82,7 @@ if ((isset($_GET["addType"]))) {
                         <label for="grammarDescription">Význam po slovensky:</label>
                         <input type="text" class="form-control" name= "slovak" id="slovak" placeholder="Zadajte význam kanji po slovensky" maxlength="32" required>  
                   </div>
-                  <button type="submit" class="btn btn-primary">Vložiť slovo</button>
+                  <button type="submit" class="btn btn-primary">Vložiť kanji</button>
                 </form>';
         }
         echo '<h3 class="csvImporth purple">Vložiť z .csv súboru:</h3>

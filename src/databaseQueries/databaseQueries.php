@@ -27,6 +27,17 @@ function selectWordByName($conn,$word){
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
+function selectWordByNameCheckDuplicate($conn,$word,$id){
+    $sql="SELECT * FROM words where jap_word='".$word."' and id != '".$id."'";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function selectWordByID($conn,$id){
+    $sql="SELECT words.id,jap_word,svk_word,word_type,word_subtype_id FROM words 
+    where words.id='".$id."' limit 1";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
 function selectGrammarByTitle($conn,$grammarTitle){
     $sql="SELECT * FROM grammar where grammar_title='".$grammarTitle."' limit 1";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
@@ -49,6 +60,11 @@ function selectSentencesByGrammarID($conn,$grammarID){
 }
 function selectNounTypes($conn){
     $sql = "SELECT * FROM nounTypes";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function selectNounTypeByID($conn,$id){
+    $sql = "SELECT * FROM nounTypes where id='.$id.' limit 1";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
@@ -137,6 +153,16 @@ function insertGrammarSentence($conn,$grammarID,$grammarJapSentence,$grammarSvkS
 function insertKanji($conn,$kanji,$kunyoumi,$onyoumi,$slovak){
     $sql="INSERT INTO kanji (kanji_char,kunyoumi,onyoumi,slovak) VALUES ('$kanji','$kunyoumi','$onyoumi','$slovak')";
     $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+
+//update queries
+function updateWord ($conn,$id, $japWord, $svkWord, $type, $nounType){
+    $subject = "UPDATE words
+                SET jap_word='".$japWord."',svk_word='".$svkWord."', word_type='".$type."',
+                word_subtype_id = NULLIF('$nounType','')           
+                WHERE id='".$id."'";
+    $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
     return $result;
 }
 

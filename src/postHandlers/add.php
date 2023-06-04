@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["japWord"]) && isset($_POST["svkWord"]) && isset($_POST["type"]) && isset($_POST["nounType"])) {
                 $japWord = mb_escape($_POST["japWord"]);
                 $svkWord = mb_escape($_POST["svkWord"]);
-                $type = $_POST["type"];
+                $type = mb_escape($_POST["type"]);
                 $nounType = $type=="podstatne meno" ? intval($_POST["nounType"]) : '';
                 $type=mb_escape($type);
                 $checkJapWord = selectWordByName($conn, $japWord);

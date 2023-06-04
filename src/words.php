@@ -54,9 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                         echo '<td>' . $row["type_name"] . '</td>';
                     }
                     echo '<td>' . date("d.m.Y", strtotime($row["day_of_addition"])) . '</td>';
-                    echo '<td><a class="nodec editWord" id = "' . $row["id"] . '">
+                    $rowID=$row["id"];
+                    $functionEditForm="'$rowID',0";
+                    echo '<td><a class="nodec editWord" onclick= "generateEditForm('.$functionEditForm.')">
                         <i class = "bi bi-pencil-square"></i></a>
-                        <a class="nodec deleteWord" id = "' . $row["id"] . '">
+                        <a class="nodec deleteWord" id = "' . $rowID . '">
                         <i class = "bi bi-trash"></i></a></td>';
                     echo '</tr>';
                 }
@@ -109,20 +111,31 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
 else http_response_code(400);
 
 ?>
-<div id="modal_background2"></div>
-<div class="modal_div2">
-    <div id="modal_vrstva2">
-        <div id="modal_text2"></div>
-        <button class="btn btn-primary" onclick="window.location.href='index.php'">Späť na hlavnú stránku</button>
+    <div id="modal_background"></div>
+    <div class="modal_div">
+        <div id="modal_vrstva">
+            <form class="form editForm">
+                <div id="modal_text">
+                </div>
+            </form>
+            <button class="btn btn-primary" onclick="go_back();">Vrátiť sa späť</button>
+        </div>
     </div>
-</div>
-<div id="modal_background"></div>
-<div class="modal_div">
-    <div id="modal_vrstva">
-        <div id="modal_text"></div>
-        <button class="btn btn-primary" onclick="go_back();">Vrátiť sa späť</button>
+    <div id="modal_background2"></div>
+    <div class="modal_div2">
+        <div id="modal_vrstva2">
+            <h1 id="result"></h1>
+            <button class="btn btn-primary" onclick="window.location.reload()">Vrátiť sa späť</button>
+        </div>
     </div>
-</div>
+    <div id="modal_background3"></div>
+    <div class="modal_div3">
+        <div id="modal_vrstva3">
+            <div id="modal_text3">
+            </div>
+            <button class="btn btn-primary" onclick="go_back2();">Vrátiť sa späť</button>
+        </div>
+    </div>
 <?php
 include ("partials/footer.php");
 ?>

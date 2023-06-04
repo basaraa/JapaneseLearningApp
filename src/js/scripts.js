@@ -167,7 +167,7 @@ $(function () {
                     if(result.scs===true){
                         document.getElementById("modal_background2").style.display="block";
                         document.getElementsByClassName("modal_div2")[0].style.display="flex";
-                        document.getElementById("modal_text2").innerHTML=result.msg;
+                        document.getElementById("result").innerHTML=result.msg;
                     }
                     else{
                         document.getElementById("modal_background").style.display="block";
@@ -185,6 +185,73 @@ $(function () {
         });
     })
 });
+
+//edit subject
+$(function () {
+    $('.editForm').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'postHandlers/edit.php',
+            data: $('.editForm').serialize(),
+            success: function (data) {
+                try {
+                    let result = JSON.parse(data)
+                    if(result.scs===false){
+                        document.getElementById("modal_background3").style.display="block";
+                        document.getElementsByClassName("modal_div3")[0].style.display="flex";
+                        document.getElementById("modal_text3").innerHTML=result.msg;
+                    }
+                    else{
+                        document.getElementById("modal_background").style.display="none";
+                        document.getElementsByClassName("modal_div")[0].style.display="none";
+                        document.getElementById("modal_background2").style.display="block";
+                        document.getElementsByClassName("modal_div2")[0].style.display="flex";
+                        document.getElementById("result").innerHTML=result.msg;
+                    }
+                }
+                catch{
+                    document.getElementById("modal_background3").style.display="block";
+                    document.getElementsByClassName("modal_div3")[0].style.display="flex";
+                    document.getElementById("modal_text3").innerHTML=data;
+                }
+            },
+            error: function (){
+                alert ("Nastala chyba skúste to znova")
+            }
+        });
+    })
+});
+
+//generate edit word form
+function generateEditForm(id,type){
+    $.ajax({
+        type: 'post',
+        url: 'postHandlers/editForm.php',
+        data: {id : id,type:type},
+        success: function (data) {
+            document.getElementById("modal_background").style.display="block";
+            document.getElementsByClassName("modal_div")[0].style.display="flex";
+            document.getElementById("modal_text").innerHTML=data
+            $(".wordType").change(function(){
+                let index = $(".wordType option:selected").index();
+                let nounType=document.getElementById("nounType");
+                let nounTypeLabel=document.getElementById("nounTypeLabel");
+                if (index===0){
+                    nounType.style.display="block";
+                    nounTypeLabel.style.display="block";
+                }
+                else{
+                    nounType.style.display="none";
+                    nounTypeLabel.style.display="none";
+                }
+            })
+        },
+        error: function (){
+            alert ("Nastala chyba skúste to znova")
+        }
+    });
+}
 
 function go_back(){
     document.getElementById("modal_background").style.display="none";

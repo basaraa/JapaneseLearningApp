@@ -3,7 +3,7 @@ require_once("../config/config.php");
 include "../databaseQueries/databaseQueries.php";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (isset ($_POST["id"])){
-        $id=$_POST["id"];
+        $id=intval($_POST["id"]);
         $result = deleteWord($conn,$id);
         if($result)
         {

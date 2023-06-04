@@ -59,6 +59,7 @@ header{
 #modal_vrstva,#modal_vrstva2,#modal_vrstva3{
     position: fixed;
     background-color: lightblue;
+    min-width: 40%;
     padding: 20px;
     text-align: center;
 }
@@ -254,6 +255,9 @@ h2,h4{
 }
 .odkaz{
     cursor:pointer;
+}
+.editForm{
+    width: 100%;
 }
 
 
