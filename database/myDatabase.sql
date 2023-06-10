@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Sun 04.Jún 2023, 11:06
+-- Čas generovania: So 10.Jún 2023, 15:19
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -45,7 +45,37 @@ INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
 (5, 'Výber lepšieho z možností', 'Slovné spojenie \"X no hou ga Y yori\" alebo \"X wa Y yori Z desu\" vyjadruje výber toho lepšieho z možností v niečom (Z).'),
 (6, 'Otázka najlepšie z možností', 'Slovné spojenie \"X to Y to W no naka de nani ga ichiban Z desu ka\" vyjadruje ktoré z možností je najlepšie v niečom (Z).'),
 (7, 'Výber najlepšieho z možností', 'Spojenie \"X to Y to W no naka de X/Y/W ga ichiban Z desu\" vyjadruje ktoré z možností je najlepšie v niečom (Z).'),
-(8, 'Priebehový čas', 'Slovné spojenie -te iru na konci vety popisuje aktivitu ktorá momentálne prebieha.');
+(8, 'Priebehový čas', 'Slovné spojenie -te iru na konci vety popisuje aktivitu ktorá momentálne prebieha.'),
+(9, 'Stať sa', 'Slovné spojenie \"ni naru\" na konci vety popisuje čím/kým sa niekto/niečo stal.'),
+(10, 'Nestať sa', 'Slovné spojenie \"ni narimasen\" na konci vety popisuje čím/kým sa niekto/niečo nestal.'),
+(11, 'Niekto niečo povedal', 'Slovné spojenie \"to itte imasu\" vyjadruje že niekto niečo povedal.'),
+(12, 'Niečo si myslím', 'Slovným spojením \"to omotte imasu\" vyjadríme že si niečo myslíme.'),
+(13, 'Niekedy vykonaná aktivita', 'Slovné spojenie \"ta koto ga arimasu\" vyjadríme to že sa nejaká aktivita už niekedy stala.'),
+(14, 'Nikdy nevykonaná aktivita', 'Spojením \"ta koto ga arimasen\" vyjadríme že sa nejaká aktivita ešte nikdy nestala'),
+(15, 'Príliš veľa vykonávania', 'Slovné spojenie \"základ slovesa sugiru\" vyjadríme že nejakú aktivitu vykonávame príliš často.'),
+(16, 'Radšej niečo urobiť', 'Keď spojíme na \"ta hou ga ii desu yo\" tak vyjadríme že sa malo radšej niečo urobiť napr. nejaká rada do života.'),
+(17, 'Netreba niečo urobiť', 'Spojením \"nakute mo ii desu\" alebo \"hitsuyou ga arimasen\" vyjadríme že nejakú aktivitu nie je nutné vykonať.'),
+(18, 'Treba niečo vykonať', 'Spojením \"kute mo ii desu\" alebo \"hitsuyou ga arimasu\" vyjadríme že nejakú aktivitu je potrebné vykonať.'),
+(19, 'Neúplný zoznam aktivít/okjektov', 'Použitím \"ya\" medzi nejakými objektmi vymenúvavame zoznam objektov a použitím \"tari\" zoznam aktivít. '),
+(20, 'Môcť/Dokázať', 'Spojením \"e masu\" alebo \"koto ga dekimasu\"vyjadríme že môžeme vykonať nejakú aktivitu.'),
+(21, 'Nemôcť/Nedokázať', 'Spojením \"e masen\" alebo \"koto ga dekimasen\" vyjadríme že nemôžeme vykonať nejakú aktivitu.'),
+(22, 'Zdá sa/Vyzerá', 'Spojením \"sou desu\" vyjadríme že niečo vyzerá byť nejako alebo tiež hlásenie že niečo sa stalo.'),
+(23, 'Skúsiť nejakú aktivitu', 'Spojením \"te mimasu\" vyjadríme že chceme skúsiť danú aktivitu.'),
+(24, 'Vtedy a len vtedy', ' Použitím \"A nara\" zväčša pred podstatným menom vyjadríme že niečo platí len pre A.'),
+(25, 'Rada/Odporúčanie', 'Použitím \"tara dou desu ka\" vyjadríme nejakú radu alebo odporúčanie niekomu.'),
+(26, 'Vopred vykonaná aktivita', 'Ak použijeme \"te oku\" vyjadríme tým že sme niečo spravili vopred.'),
+(27, 'Žiadosť', 'Spojenie \"te kurenai/kuremasen/itadakemasen ka\" vyjadruje žiadosť o niečo.'),
+(28, 'Dufanie pre seba', 'Spojením \"to ii n desu ga\" alebo \"to ii n dakedo\" vyjadrujeme že dúfame v niečo pre seba.'),
+(29, 'Dúfanie pre iného', 'Spojením \"to ii desu ne\" alebo \"to ii ne\" vyjadríme že dúfame v niečo pre niekoho iného.'),
+(30, 'Podľa niekoho tvrdenia', 'Spojením \"ni yoruto\" sa odvolávame na niekoho tvrdenie.'),
+(31, 'Vyzerá byť (looks like)', 'Spojením \"mitai desu\" vyjadríme že niečo/niekto vyzerá byť nejak.'),
+(32, 'Vykonať pred niečím', 'Spojením \"A mae ni B\" pred nejakou vetou vyjadríme že pred vetou A je nutné vykonať vetu B.'),
+(34, 'Vykonávanie aktivít súčasne', 'Spojením \"A nagara B\" vravíme o aktivitách (A B) ktoré vykonávame súčasne.'),
+(35, 'Ľútosť o nespravení aktivity', 'Slovným spojením \"ba yokkata desu\" vyjadríme ľútosť nad tým že sme nevykonali aktivitu ktorú sme mali.'),
+(36, 'Ľútosť o spravení aktivity', 'Slovným spojením \"nakereba yokkata desu\" vyjadríme ľútosť nad tým že sme vykonali aktivitu ktorú sme nemali.'),
+(37, 'Radosť o spravení aktivity', 'Slovným spojením \"te yokkata desu\" vyjadríme radosť nad tým že sme vykonali nejakú aktivitu.'),
+(38, 'Radosť o nespravení aktivity', 'Slovným spojením \"nakute yokkata desu\" vyjadríme radosť nad tým že sme nevykonali aktivitu.'),
+(39, 'Vyjadrenie aktivity namiesto inej', 'Slovným spojením \"nai de\" vyjadríme aktivitu ktorú sme neurobili ale namiesto toho sme urobili niečo iné.');
 
 -- --------------------------------------------------------
 
@@ -75,7 +105,35 @@ INSERT INTO `grammar_sentences` (`id`, `grammar_id`, `jap_sentence`, `svk_senten
 (10, 5, 'Tokyou no hou ga Bratislava yori ookii desu', 'Tokyo je väčšie ako Bratislava.'),
 (11, 6, 'Kuruma to naifu to kusuri no naka de nani ga ichiban takai desu ka', 'Ktoré z možností auto'),
 (12, 7, 'Gyunyuu to wain to biiru no naka de gyunyuu ga ichiban oishii desu.', 'Z možností mlieko,víno a pivo je mlieko najchutnejšie.'),
-(13, 8, 'Fuku o erabete iru.', 'Vyberá si šaty.');
+(13, 8, 'Fuku o erabete iru.', 'Vyberá si šaty.'),
+(14, 10, 'Natsu ni mada narimasen.', 'Leto ešte neprišlo.'),
+(15, 9, 'Watashi wa segatakai ni narimasu.', 'Stal som sa vysoký/Som vysoký.'),
+(16, 11, 'Kanojo wa eiga o mitai to itte imasu.', 'Ona vraví že chce vidieť film.'),
+(17, 12, 'Kingudamu wa totemo subarashii anime desu to omotte imasu.', 'Ja si myslím že Kingdom je veľmi super anime.'),
+(18, 13, 'Watashi wa kono eiga o mita koto ga arimasu.', 'Tento film som už niekedy videl.'),
+(19, 15, 'Watashi wa kinou terebi o mi sugimashita.', 'Včera som príliš veľa pozeral telku.'),
+(20, 16, 'Anata wa biyoin ni itta hou ga ii desu yo.', 'Mal si radšej ísť do nemocnice.'),
+(21, 17, 'Watashi wa ashita shukudai o shinakute mo ii desu.', 'Zajtra nemusím robiť domácu úlohu.'),
+(22, 14, 'Watashi wa Chuugoku ni itta koto ga arimasen.', 'Ešte nikdy som nebol v Číne.'),
+(23, 20, 'Watashi wa ima Hangarii ni ikemasu.', 'Ja môžem ísť teraz do Maďarska.'),
+(24, 21, 'Watashi wa Doitsugo ga hanasemasen.', 'Ja nemôžem/nedokážem rozprávať po Nemecky.'),
+(25, 22, 'Kono keeki ga oishi sou desu.', 'Tento koláč vyzerá chutne.'),
+(26, 23, 'Watashi mo ano karate no sensei ni oshiete mimasu.', 'Tiež sa skúsim spýtať toho učiteľa karate.'),
+(27, 24, 'Watashi no shumi nara nanimo dekimasu.', 'Ak sa jedná o moje koníčký zvládnem hocičo.'),
+(28, 25, 'Motoo benkyou shitara dou desu ka?', 'Čo keby si sa viac učil?'),
+(29, 27, 'Okane o kashite kurenai ka?', 'Požičal by si mi peniaze?'),
+(30, 28, 'Rainen Chuugoku ni ikemasu to ii n desu ga.', 'Dúfam že budem môcť ísť do Číny ďalší rok.'),
+(31, 29, 'Tomodachi wa ashita matsuri ni ikimasu.Ame ga futte inai to ii desu ne.', 'Kamarát ide zajtra na fesitval.Dúfam že nebude pršať.'),
+(32, 30, 'Watashi no okaa san no tomodachi tachi ni yoruto ie de tsumaranai sou desu.', 'Podľa kamarátiek mojej mami je doma nuda.'),
+(33, 18, 'Paatii ni tabemono o motte kute mo ii desu.', 'Na párty je potrebné doniesť si jedlo.'),
+(34, 31, 'Anata wa watashi no okaa san mitai desu.', 'Vyzeráš ako moja mama.'),
+(35, 32, 'Nihonjin wa tabemono o tabe hajimeru mae ni itadakimasu to iwanakya.', 'Japonci pred začatím jedla musia povedať itadakimasu.'),
+(37, 34, 'Terebi o mi nagara shukudai o shimashita.', 'Počas sledovania telky som si spravil domácu úlohu.'),
+(38, 35, 'Tomodachi ni denwa o sureba yokatta desu.', 'Mal som kamarátovi zavolať.'),
+(39, 36, 'Kamera o kawanakereba yokatta desu.', 'Nemal som kupovať tú kameru.'),
+(40, 37, 'Kingudamu no anime o mite yokatta desu.', 'Som rád že som videl anime Kingdom.'),
+(41, 38, 'Densha ni nori o kure nakute yokatta desu.', 'Som rád že som nezmeškal vlak.'),
+(42, 39, 'Kinou no yoru wanenai de benkyou shimashita.', 'Včera v noci som sa učil namiesto toho aby som sa vyspal.');
 
 -- --------------------------------------------------------
 
@@ -855,13 +913,13 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT pre tabuľku `grammar`
 --
 ALTER TABLE `grammar`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT pre tabuľku `grammar_sentences`
 --
 ALTER TABLE `grammar_sentences`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT pre tabuľku `kana`

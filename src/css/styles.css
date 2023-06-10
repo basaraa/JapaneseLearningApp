@@ -259,6 +259,26 @@ h2,h4{
 .editForm{
     width: 100%;
 }
+.indexText{
+    font-size: 18px;
+    font-family: arial;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    color: black;
+}
+.ulIndex {
+    list-style: none;
+    text-align:left;
+}
+.ulIndex li::before {
+    content: "•";
+    color: red;
+    font-weight: bold;
+    display: inline-block;
+    width: 15px;
+    margin-left: 10px;
+}
 
 
 
