@@ -1,8 +1,9 @@
 <?php
-include "partials/header.php";
-require_once("config/config.php");
-include "databaseQueries/databaseQueries.php";
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET["showType"])){
+    include "partials/header.php";
+    require_once("config/config.php");
+    include "databaseQueries/databaseQueries.php";
+    include "helper/helpFunctions.php";
     $type=intval($_GET["type"]);
     $showType=intval($_GET["showType"]);
     $types=["podstatne meno","pridavne meno","sloveso","ostatne","all"];
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
         }
         //kartičky
         else if ($showType == 1 && isset($_GET["frontLanguage"])){
-            $frontLanguage=$_GET["frontLanguage"];
+            $frontLanguage=mb_escape($_GET["frontLanguage"]);
             if (isset($result) && $result) {
                 echo '<div class="flexdiv">';
                 if ($frontLanguage == "JP") {
@@ -96,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                 while ($row=mysqli_fetch_assoc($result)){
                     $nounTypeName=$row["type_name"];
                     $nounTypeId=$row["id"];
-                    echo '<div class="inflexdiv" onclick="location.href=\'nounTypeWords.php?subType='.$nounTypeId.'\'">                            
+                    echo '<div class="inflexdiv" onclick="location.href=\'nounTypeWords.php?subType='.$nounTypeId.'&showType=0\'">                            
                             <img src="img/nounTypes/'.$row["image_name"].'" class="imgx" alt="x">
                             <h2>'.$nounTypeName.'</h2>
                           </div>';

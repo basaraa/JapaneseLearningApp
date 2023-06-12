@@ -51,6 +51,7 @@ function zoradenie(stlpec,typ,typ_hodnoty) {
     }
 }
 //check answers of exam
+
 $(function (){
     $('.exam').submit (function (e){
         e.preventDefault();
@@ -59,9 +60,29 @@ $(function (){
             url: 'postHandlers/answersChecker.php',
             data:$('.exam').serialize(),
             success: function (data){
-                document.getElementById("modal_background").style.display="block";
-                document.getElementsByClassName("modal_div")[0].style.display="flex";
-                document.getElementById("modal_text").innerHTML=data;
+                try {
+                    let result = JSON.parse(data)
+                    let i,j;
+                    for (i=1;i<=10;i++){
+                        let answerString="question".concat(i);
+                        let rightAnswer=result[answerString];
+                        let label=answerString.concat("_label");
+                        let x = document.getElementsByClassName(label);
+                        for (j=0;j<4;j++){
+                            let answer = x[j].innerText;
+                            if (answer.replace(/\s/g, '')===rightAnswer.replace(/\s/g, ''))
+                                x[j].style.color="green";
+                            else
+                                x[j].style.color="red";
+                        }
+                    }
+                    document.getElementById("countAnswer").style.display="block";
+                    document.getElementById("countValue").innerText=result.rightAnswers;
+                }
+                catch{
+                    alert (data)
+                    document.getElementById("countAnswer").style.display="none";
+                }
             },
             error: function (){
                 alert ("Nastala chyba skúste to znova")

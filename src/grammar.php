@@ -1,9 +1,9 @@
 <?php
-include "partials/header.php";
-require_once("config/config.php");
-include "databaseQueries/databaseQueries.php";
-include "helper/helpFunctions.php";
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset ($_GET["showType"])){
+    include "partials/header.php";
+    require_once("config/config.php");
+    include "databaseQueries/databaseQueries.php";
+    include "helper/helpFunctions.php";
     $showType=$_GET["showType"];
     if ($showType == 0){
         $result=selectGrammars($conn);

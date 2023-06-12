@@ -7,9 +7,9 @@ Tento projekt vznikol pre vlastnú potrebu pre memorizovanie a učenie japončin
 ### Popis možností stránky:
 - Pridávať kanji, slovíčka, gramatiku a ich príslušné vety manuálne alebo z .csv súboru.
 - Zobrazovať abecedu vo forme tabuľky.
-- Zobrazovať slovíčka vo forme tabuľky alebo vo forme flip cards podľa kategórii, podkategórii alebo aj všetky súčasne(pri podkategóriach len tabuľka, možno neskôr aj flip cards).
+- Zobrazovať slovíčka vo forme tabuľky alebo vo forme flip cards podľa kategórii, podkategórii alebo aj všetky súčasne.
 - Zobrazovať gramatiku a ich príslušné vety.
-- Vykonať test zo slovíčok či už zo všetkých alebo podľa hlavných kategórii (neskôr možno aj podkategórii).
+- Vykonať test zo slovíčok či už zo všetkých alebo podľa hlavných kategórii.
 
 ## English
 This projekt was created for memoring and learning japanese from words/grammar that I've written in notepad during self-learning
@@ -22,4 +22,4 @@ This projekt was created for memoring and learning japanese from words/grammar t
 - You can see alphabet in table view.
 - You can see words in table view and also in flip card view by categories or subcategories or also all of them (in subcategories only in table view).
 - You can also see grammar and grammar sentences.
-- You can also take an exam from all words or by word categories (maybe later also from subcategories).
+- You can also take an exam from all words or by word categories.
