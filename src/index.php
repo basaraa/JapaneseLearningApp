@@ -12,9 +12,9 @@ include "partials/header.php";
 	<ul class="ulIndex">
 		<li>Pridávať kanji, slovíčka, gramatiku a ich príslušné vety manuálne alebo z .csv súboru.</li>
 		<li>Zobrazovať abecedu vo forme tabuľky.</li>
-		<li>Zobrazovať slovíčka vo forme tabuľky alebo vo forme flip cards podľa kategórii, podkategórii alebo aj všetky súčasne(pri podkategóriach len tabuľka, možno neskôr aj flip cards).</li>
+		<li>Zobrazovať slovíčka vo forme tabuľky alebo vo forme flip cards podľa kategórii, podkategórii alebo aj všetky súčasne.</li>
 		<li>Zobrazovať gramatiku a ich príslušné vety.</li>
-		<li>Vykonať test zo slovíčok či už zo všetkých alebo podľa hlavných kategórii (neskôr možno aj podkategórii).</li>		
+		<li>Vykonať test zo slovíčok či už zo všetkých alebo podľa kategórii/podkategórii.</li>		
 	</ul>
 </div>
 <?php
