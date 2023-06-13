@@ -287,7 +287,7 @@ h2,h4{
 .exam{
     width:70%;
 }
-label{
+.exam>.form-group>div>label{
     margin-left: 70px;
 }
 

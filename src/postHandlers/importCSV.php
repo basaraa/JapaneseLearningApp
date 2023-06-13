@@ -49,8 +49,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 else if ($addType == 1){
                     $file_name = $_FILES["fileCSV"]["tmp_name"];
                     $opened_file = fopen($file_name, "r");
-                    while ($line = fgetcsv($opened_file, 256)) {
-                        if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 128)){
+                    while ($line = fgetcsv($opened_file, 328)) {
+                        if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 256)){
                             $grammarTitle = mb_escape($line[0]);
                             $grammarDescription = mb_escape($line[1]);
                             $checkGrammar = selectGrammarByTitle($conn, $grammarTitle);
