@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Út 13.Jún 2023, 06:46
+-- Čas generovania: Po 19.Jún 2023, 11:11
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -70,7 +70,7 @@ INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
 (30, 'Podľa niekoho tvrdenia', 'Spojením \"ni yoruto\" sa odvolávame na niekoho tvrdenie.'),
 (31, 'Vyzerá byť (looks like)', 'Spojením \"mitai desu\" vyjadríme že niečo/niekto vyzerá byť nejak.'),
 (32, 'Vykonať pred niečím', 'Spojením \"A mae ni B\" pred nejakou vetou vyjadríme že pred vetou A je nutné vykonať vetu B.'),
-(34, 'Vykonávanie aktivít súčasne', 'Spojením \"A nagara B\" vravíme o aktivitách (A B) ktoré vykonávame súčasne.'),
+(34, 'Vykonávanie aktivít súčasne', 'Spojením \"A nagara B\" alebo \"A aida ni B\" vravíme o aktivitách (A B) ktoré vykonávame súčasne kde \"nagara\" je o 1 osobe a \"aida ni\" o viacerých.'),
 (35, 'Ľútosť o nespravení aktivity', 'Slovným spojením \"ba yokkata desu\" vyjadríme ľútosť nad tým že sme nevykonali aktivitu ktorú sme mali.'),
 (36, 'Ľútosť o spravení aktivity', 'Slovným spojením \"nakereba yokkata desu\" vyjadríme ľútosť nad tým že sme vykonali aktivitu ktorú sme nemali.'),
 (37, 'Radosť o spravení aktivity', 'Slovným spojením \"te yokkata desu\" vyjadríme radosť nad tým že sme vykonali nejakú aktivitu.'),
@@ -79,7 +79,16 @@ INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
 (40, 'Pomenovanie', 'Použitím  \"A to iu B\" kde pomenúvame vec alebo osobu kde A je meno a B je vec/osoba.'),
 (41, 'Jednoduchá aktivita', 'Vyjadrením základu slovesa spolu s \"yasui desu\" vyjadríme že nejaká aktivitu je/bolo ľahké vykonať. '),
 (42, 'Zložitá aktivita', 'Vyjadrením základu slovesa spolu s \"nikui desu\" vyjadríme že nejaká aktivitu je/bolo ťažké vykonať.'),
-(43, 'Vyjadrenie nespokojnosti', 'Spojením slovesa s \"mareru/maremasu\" v prítomnosti alebo \"mareta/maremashita\" minulosti alebo \"marete\" pre te formu či \"marenai/maremasen\" a \"marenakatta/maremasendeshita\" pre zápor vyjadríme nespokojnosť/našťvanosť nad nejakou aktivitou.');
+(43, 'Vyjadrenie nespokojnosti', 'Spojením slovesa s \"mareru/maremasu\" v prítomnosti alebo \"mareta/maremashita\" minulosti alebo \"marete\" pre te formu či \"marenai/maremasen\" a \"marenakatta/maremasendeshita\" pre zápor vyjadríme nespokojnosť/našťvanosť nad nejakou aktivitou.'),
+(44, 'Chcieť', 'Pridaním ku základu slovesa \"tai desu\" alebo ku neurčitku \"-te hoshii desu\" hovoríme o aktivite/veci ktorú chceme popr. minulý čas \"takatta desu\" alebo \"-te hoshi katta desu\".'),
+(45, 'Nechcieť', 'Pridaním ku základu slovesa \"taku nai desu\" alebo ku neurčitku \"-te hoshiku arimasen\" hovoríme o aktivite/veci ktorú nechceme popr. minulý čas \"taku nakatta desu\" alebo \"-te hoshiku arimasen deshita\".'),
+(46, 'Musieť', 'Pridaním ku základu slovesa \"nakya/nakereba/nakucha +/- ikemasen\" tak hovoríme o aktivite/veci ktorú musíme spraviť popr. minulý čas ešte pridať \"deshita\".'),
+(47, 'Napríklad', 'Použitím \"toka\" pri nejakej aktivite/veci vyjadríme nejaký príklad niečoho (v podstate napr.).'),
+(48, 'Nechať niečo urobiť', 'Použitím \"ra/a/ka+seru\" kde pri napr. ru-slovesách sa ešte pred to dáva \"sa\" pri u-slovesách iba \"a\" a pri ku \"ka\" atď. vyjadríme že niekoho necháme/dovolíme/donútime niečo urobiť.'),
+(49, 'Príkaz', 'Použitím základu slovesa spolu s \"nasai\" vyjadríme príkaz väčšinou na základe skúsenosti vyššieho veku alebo postavenia napr. rodičia prikazujú deťom.'),
+(50, 'Podmienka', 'Spojením \"A -eba/-ba B\" vyjadríme podmienku že ak platí/neplatí A tak bude platiť/neplatiť aj B kde \"eba/ba\" pridávame ku tvaru slovesa.'),
+(51, 'Keďže/Pretože', 'Spojením \"A kara/node B\" vyjadríme výraz keďže/pretože platí A tak platí B dá sa tiež chápať ako B lebo A.'),
+(52, 'Pravdepodobnosť/Asi', 'Spojením \"kamo shiremasen\" alebo spojením slovesa spolu s \"shou\" na konci nejakej vety vyjadríme pravdepodobnosť niečoho.');
 
 -- --------------------------------------------------------
 
@@ -141,7 +150,23 @@ INSERT INTO `grammar_sentences` (`id`, `grammar_id`, `jap_sentence`, `svk_senten
 (44, 40, 'Saikin Soodo Aato Onrain to iu hon o yomimashita.', 'Nedávno som čítal knihu s názvom Sword Art Online.'),
 (45, 41, 'Yami sensei wa yasashii kara soudan shi yasui desu.', 'Učiteľ Yami je milý a preto sa s ním dá ľahko konzultovať.'),
 (46, 42, 'Kono uta wa oto ga takai node utai nikui desu.', 'Táto pesnička má vysoké tóny a preto sa ťažko spieva.'),
-(47, 43, 'Watashi wa tonari no hito ni tabako o suwaremashita.', 'Bol som našťvaný keď vedľa mňa niekto fajčil.');
+(47, 43, 'Watashi wa tonari no hito ni tabako o suwaremashita.', 'Bol som našťvaný keď vedľa mňa niekto fajčil.'),
+(48, 44, 'Motto anshin ni shitai desu.', 'Chcem byť viac oddýchnutý.'),
+(49, 44, 'Kono eiga o mite hoshii desu.', 'Chcem vidieť ten film.'),
+(50, 44, 'Kodomo no toki boukensha ni naritakatta desu.', 'Keď som bol malý chcel som byť dobrodruh.'),
+(51, 45, 'Burokolii o tabetaku nai desu.', 'Nechcem jesť brokolicu.'),
+(52, 45, 'Kodomo no toki gyunyuu o nonde hoshiku arimasen deshita.', 'Keď som bol malý nechcel som piť mlieko.'),
+(53, 46, 'Benkyou ga isogashii kunatta node shigoto o yamenakya.', 'Som príliť zaneprázdnený učením tak musím prestať s prácou.'),
+(54, 46, 'Kinou wa shawaa ni ikanakya deshita.', 'Včera som musel ísť do sprchy.'),
+(55, 47, 'Mainichi shigoto toka kaigi toka de totemo isogashii desu.', 'Každý deň som zaneprázdnený napr. prácou a mítingami.'),
+(56, 48, 'Okaa san wa kodomo ni niku o tabesaseru.', 'Matka dovolí dieťaťu jesť mäso.'),
+(57, 49, 'Ryoushin ni mainichi denwa o shinasai.', 'Každý deň volaj rodičom.'),
+(58, 50, 'Hayaku nereba nemui shimasen.', 'Ak pôjdeš skôr spať tak nemusíš zaspatý.'),
+(59, 50, 'Watashi tachi yoyaku shite okereba anshin shimasu.', 'Ak spravíme vopred rezerváciu budeme pokojný.'),
+(60, 51, 'Nihongo o benkyou shitakatta node nihon ni ikimashita.', 'Keďže som sa chcel učiť japončinu tak som šiel do Japonska.'),
+(61, 51, 'Puroguramingu sukida kara puroguramingu no daigaku ni ikimashita.', 'Keďže som mal rád programovanie tak som šiel na programátorskú školu.'),
+(62, 52, 'Toukyou wa ashita kumori kamo shiremasen.', 'V Tokiu asi bude zajtra zamračené.'),
+(63, 52, 'Atsui ofuro ni haitte hayaku nemashou to omotte imasu.', 'Myslím si že by si mal ísť rýchlo do horúcej vane.');
 
 -- --------------------------------------------------------
 
@@ -913,7 +938,61 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (592, 'Kinoko', 'Huba', 'podstatne meno', 7, '2023-06-13'),
 (593, 'Gyuuniku', 'Hovädzie mäso', 'podstatne meno', 7, '2023-06-13'),
 (594, 'Toriniku', 'Kuracie mäso', 'podstatne meno', 7, '2023-06-13'),
-(595, 'Cha', 'Čaj', 'podstatne meno', 13, '2023-06-13');
+(595, 'Cha', 'Čaj', 'podstatne meno', 13, '2023-06-13'),
+(596, 'Anshin', 'Oddýchnutý', 'pridavne meno', NULL, '2023-06-19'),
+(597, 'Yuuro', 'Euro', 'podstatne meno', 2, '2023-06-19'),
+(598, 'Youroppa', 'Európa', 'podstatne meno', 8, '2023-06-19'),
+(599, 'Iu', 'Povedať', 'sloveso', NULL, '2023-06-19'),
+(600, 'Kizutsukeru', 'Zraniť sa', 'sloveso', NULL, '2023-06-19'),
+(601, 'Ruumu meito', 'Spolubývajúci', 'podstatne meno', 11, '2023-06-19'),
+(602, 'Shachou', 'Majiteľ firmy', 'podstatne meno', 11, '2023-06-19'),
+(603, 'Tomodachi', 'Kamarát', 'podstatne meno', 11, '2023-06-19'),
+(604, 'Aite', 'Oponent/Protihráč (napr. v športe)', 'podstatne meno', 11, '2023-06-19'),
+(605, 'Nakama', 'Spoluhráč/Niekto so spoločným cieľom', 'podstatne meno', 11, '2023-06-19'),
+(606, 'Uketsuke', 'Recepcia', 'podstatne meno', 6, '2023-06-19'),
+(607, 'Hitori gurashi', 'Bývať sám', 'podstatne meno', 5, '2023-06-19'),
+(608, 'Buka', 'Podriadený (hodnosťou/v práci)', 'podstatne meno', 11, '2023-06-19'),
+(609, 'Urusai', 'Hlučný', 'pridavne meno', NULL, '2023-06-19'),
+(610, 'Shinpai(na)', 'Mať starosť', 'pridavne meno', NULL, '2023-06-19'),
+(611, 'Hen(na)', 'Zvláštne', 'pridavne meno', NULL, '2023-06-19'),
+(612, 'Binbou', 'Chudobný', 'pridavne meno', NULL, '2023-06-19'),
+(613, 'Katsu', 'Vyhrať', 'sloveso', NULL, '2023-06-19'),
+(614, 'Hashiru', 'Behať', 'sloveso', NULL, '2023-06-19'),
+(615, 'Hakobu', 'Nosiť (niečo)', 'sloveso', NULL, '2023-06-19'),
+(616, 'Maniau', 'Prísť včas', 'sloveso', NULL, '2023-06-19'),
+(617, 'Houtte oku', 'Nechať tak/Opustiť (niekoho/niečo)', 'sloveso', NULL, '2023-06-19'),
+(618, 'Sodateru', 'Vychovať (dieťa)', 'sloveso', NULL, '2023-06-19'),
+(619, 'Sansei suru', 'Súhlasiť', 'sloveso', NULL, '2023-06-19'),
+(620, 'Kuruma o unten suru', 'Šoférovať auto', 'podstatne meno', 2, '2023-06-19'),
+(621, 'Goi', 'Slovná zásoba', 'podstatne meno', 12, '2023-06-19'),
+(622, 'Joutai', 'Situácia', 'podstatne meno', 12, '2023-06-19'),
+(623, 'Tsuchi', 'Zem', 'podstatne meno', 14, '2023-06-19'),
+(624, 'Kaminari', 'Blesk', 'podstatne meno', 14, '2023-06-19'),
+(625, 'Hi', 'Oheň', 'podstatne meno', 14, '2023-06-19'),
+(626, 'Hikari', 'Svetlo', 'podstatne meno', 14, '2023-06-19'),
+(627, 'Kage', 'Tieň', 'podstatne meno', 14, '2023-06-19'),
+(628, 'Taiyou', 'Slnko', 'podstatne meno', 14, '2023-06-19'),
+(629, 'Kami', 'Boh/Vlasy/Papier', 'podstatne meno', 14, '2023-06-19'),
+(630, 'Ki', 'Strom', 'podstatne meno', 12, '2023-06-19'),
+(631, 'Jiyuu', 'Sloboda', 'podstatne meno', 12, '2023-06-19'),
+(632, 'Purojekuto', 'Projekt', 'podstatne meno', 12, '2023-06-19'),
+(633, 'Mudazukai', 'Plýtvanie (peniazmi)', 'podstatne meno', 12, '2023-06-19'),
+(634, 'Kaze ga fuku', 'Fukot vetra', 'podstatne meno', 14, '2023-06-19'),
+(635, 'Sansei', 'Súhlas', 'podstatne meno', 12, '2023-06-19'),
+(636, 'Konna fuu', 'Takto (napr. urob to takto)', 'podstatne meno', 12, '2023-06-19'),
+(637, 'Zutto', 'Celý čas (napr. som niečo chcel)', 'podstatne meno', 12, '2023-06-19'),
+(638, 'Zettai ni', 'Určite', 'podstatne meno', 12, '2023-06-19'),
+(639, 'Nandomo', 'Veľa krát', 'podstatne meno', 12, '2023-06-19'),
+(640, 'Chigai', 'Rozdiel', 'podstatne meno', 12, '2023-06-19'),
+(641, 'Purezenteishon', 'Prezentácia', 'podstatne meno', 12, '2023-06-19'),
+(642, 'Kotoba', 'Slovo', 'podstatne meno', 12, '2023-06-19'),
+(643, 'Ka', 'Komár', 'podstatne meno', 16, '2023-06-19'),
+(644, 'Shumi', 'Hobby', 'podstatne meno', 12, '2023-06-19'),
+(645, 'Sensu', 'Ventilátor', 'podstatne meno', 5, '2023-06-19'),
+(646, 'Seikaku', 'Povaha', 'podstatne meno', 12, '2023-06-19'),
+(647, 'Bunka', 'Kultúra', 'podstatne meno', 12, '2023-06-19'),
+(648, 'Machigai', 'Chyba', 'podstatne meno', 12, '2023-06-19'),
+(649, 'Monku', 'Sťažnosť', 'podstatne meno', 12, '2023-06-19');
 
 --
 -- Kľúče pre exportované tabuľky
@@ -965,13 +1044,13 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT pre tabuľku `grammar`
 --
 ALTER TABLE `grammar`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT pre tabuľku `grammar_sentences`
 --
 ALTER TABLE `grammar_sentences`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT pre tabuľku `kana`
@@ -995,7 +1074,7 @@ ALTER TABLE `nounTypes`
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=596;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=650;
 
 --
 -- Obmedzenie pre exportované tabuľky

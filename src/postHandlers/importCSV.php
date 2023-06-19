@@ -7,6 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $addType=intval($_POST["addType"]);
         if ($addType >= 0 && $addType <= 2) {
             $msg = '';
+			$count=0;
             if (isset ($_FILES["fileCSV"]["tmp_name"])) {
                 //slová
                 if ($addType == 0) {
@@ -38,8 +39,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $checkJapWord = selectWordByName($conn, $japWord);
                                 if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
                                     $result = insertWord($conn, $japWord, $svkWord, $type, $nounType);
-                                    if ($result)
+                                    if ($result){
                                         $msg .= $line[0] . ', ';
+										$count+=1;
+									}
                                 }
                             }
                         }
@@ -56,8 +59,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $checkGrammar = selectGrammarByTitle($conn, $grammarTitle);
                             if ($checkGrammar && ($checkGrammar->num_rows) === 0) {
                                 $result = insertGrammar($conn, $grammarTitle,$grammarDescription);
-                                if ($result)
+                                if ($result){
                                     $msg .= $line[0] . ', ';
+									$count+=1;
+								}
                             }
                         }
                     }
@@ -75,8 +80,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $checkGrammar = selectGrammarByTitle($conn, $grammarTitle);
                             if ($checkGrammar && ($checkGrammar->num_rows) !== 0) {
                                 $result = insertGrammarSentence($conn, mysqli_fetch_assoc($checkGrammar)["id"],$grammarJapSentence,$grammarSvkSentence);
-                                if ($result)
+                                if ($result){
                                     $msg .= $line[1] . ', ';
+									$count+=1;
+								}
                             }
                         }
                     }
@@ -93,19 +100,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $onyoumi = mb_escape($line[2]);
                             $slovak = mb_escape($line[3]);
                             $result = insertKanji($conn, $kanji, $kunyoumi, $onyoumi, $slovak);
-                            if ($result)
+                            if ($result){
                                 $msg .= $line[0] . ', ';
+								$count+=1;
+							}
                         }
                     }
                 }
                 if (!empty($msg)){
-                    $msg = "<h2 class='blue'>Úspešne pridané: ".$msg."</h2>";
+                    $msg = "<h2 class='blue'>Úspešne pridané (".$count."): ".$msg."</h2>";
                     echo json_encode(["scs" => true,"msg" => $msg]);
                 }
                 else
                     echo json_encode(["scs" => false,"msg" => "<h2 class='red'>Súbor nie je csv, má nesprávnu štruktúru, je prázdny alebo obsahuje len duplikáty</h2>"]);
             }
-
         }
         else http_response_code(400);
     }
