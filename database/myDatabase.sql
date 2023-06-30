@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Po 19.Jún 2023, 11:11
+-- Čas generovania: Pi 30.Jún 2023, 04:57
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -88,7 +88,13 @@ INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
 (49, 'Príkaz', 'Použitím základu slovesa spolu s \"nasai\" vyjadríme príkaz väčšinou na základe skúsenosti vyššieho veku alebo postavenia napr. rodičia prikazujú deťom.'),
 (50, 'Podmienka', 'Spojením \"A -eba/-ba B\" vyjadríme podmienku že ak platí/neplatí A tak bude platiť/neplatiť aj B kde \"eba/ba\" pridávame ku tvaru slovesa.'),
 (51, 'Keďže/Pretože', 'Spojením \"A kara/node B\" vyjadríme výraz keďže/pretože platí A tak platí B dá sa tiež chápať ako B lebo A.'),
-(52, 'Pravdepodobnosť/Asi', 'Spojením \"kamo shiremasen\" alebo spojením slovesa spolu s \"shou\" na konci nejakej vety vyjadríme pravdepodobnosť niečoho.');
+(52, 'Pravdepodobnosť/Asi', 'Spojením \"kamo shiremasen\" alebo spojením slovesa spolu s \"shou\" na konci nejakej vety vyjadríme pravdepodobnosť niečoho.'),
+(53, 'Podmienka pre zápor', 'Použitím \"A noni B\" hovoríme že aj keď platí A tak neplatí/nerobí B.'),
+(54, 'Podmienka B platí vždy', 'Použitím \"A -te mo B\" vraví o tom že B platí aj napriek tomu že platí/neplatí A.'),
+(55, 'Similarita v kvalite/vzhľade', 'Použitím \"A no youna B\" používame vtedy keď chceme povedať že B je rovnaké/podobné v kvalite či vzhľade ako A alebo tiež že A je príkladom B.'),
+(56, 'Similarita v charakteristike', 'Použitím \"A no youni B\" vyjadríme že je niekto/niečo rovnaké porovnateľné rovnaké ako niekto/niečo (A) v niečom (B).  '),
+(57, 'Rozhodnutie', 'Kombináciou prítomného času a \"koto ni suru\" vyjadríme že sme sa pre niečo rozhodli v prípade \"koto ni shite iru\" čo sme sa rozhodli robiť pravidelne.'),
+(58, 'Ako niečo robiť', 'Kombináciou základu slova+\"kata\" alebo \"dou yatte\"+slovo vyjadríme ako niečo vykonať/robiť (pri podst mena+slovesa ešte pridať \"no\" pred podst meno pri \"kata\").');
 
 -- --------------------------------------------------------
 
@@ -166,7 +172,18 @@ INSERT INTO `grammar_sentences` (`id`, `grammar_id`, `jap_sentence`, `svk_senten
 (60, 51, 'Nihongo o benkyou shitakatta node nihon ni ikimashita.', 'Keďže som sa chcel učiť japončinu tak som šiel do Japonska.'),
 (61, 51, 'Puroguramingu sukida kara puroguramingu no daigaku ni ikimashita.', 'Keďže som mal rád programovanie tak som šiel na programátorskú školu.'),
 (62, 52, 'Toukyou wa ashita kumori kamo shiremasen.', 'V Tokiu asi bude zajtra zamračené.'),
-(63, 52, 'Atsui ofuro ni haitte hayaku nemashou to omotte imasu.', 'Myslím si že by si mal ísť rýchlo do horúcej vane.');
+(63, 52, 'Atsui ofuro ni haitte hayaku nemashou to omotte imasu.', 'Myslím si že by si mal ísť rýchlo do horúcej vane.'),
+(64, 53, 'Mainichi renshuu shita noni makete shimaimashita.', 'Aj keď som cvičil každý deň tak som prehral.'),
+(65, 53, 'Kyou wa saishuu no shiken ga aru noni mada benkyou shimasen deshita.', 'Aj keď mám dnes finálny test tak som sa ešte neučil.'),
+(66, 55, 'Watashi wa Kingudamu no youna eiga ga suki desu.', 'Mám rád filmy ako Kingdom.'),
+(67, 56, 'Kare wa sakana no youni jouzu ni oyogemasu.', 'On pláve veľmi dobre ako ryba.'),
+(68, 56, 'Kono hito wa shuwa chan no youni tsuyoi desu.', 'Ten človek je silný jak Schwarzenegger.'),
+(69, 54, 'Ame ga futte mo pikunikku ni ikimasu.', 'Aj keď vonku prší tak pôjdem na piknik.'),
+(70, 54, 'Atsu kutemo eakon o tsukemasen.', 'Aj keď je horúco tak nezapnem klímu.'),
+(71, 57, 'Watashi wa kuruma o kau koto ni shimashita.', 'Rozhodol som sa kúpiť si auto.'),
+(72, 57, 'Ame ga yanda node', ' shokuryouhin mise ni iku koto ni shimashita.'),
+(73, 58, 'Watashi ni karada o renshuu shikata o oshiemasu ka.', 'Naučíš ma ako cvičiť telo?'),
+(74, 58, 'Watashi wa nihongo no benkyou no shikata o shiritai desu.', 'Chcem vedieť ako sa učiť japončinu.');
 
 -- --------------------------------------------------------
 
@@ -332,7 +349,8 @@ INSERT INTO `nounTypes` (`id`, `type_name`, `image_name`) VALUES
 (14, 'počasie', 'pocasie.jpg'),
 (15, 'šport', 'sport.jpg'),
 (16, 'zvieratá', 'zvierata.jpg'),
-(17, 'ludske_telo', 'ludske_telo.jpg');
+(17, 'ludske_telo', 'ludske_telo.jpg'),
+(18, 'rodina', 'family.jpg');
 
 -- --------------------------------------------------------
 
@@ -449,7 +467,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (93, 'Yobu', 'Volať (na niekoho)', 'sloveso', NULL, '2023-05-10'),
 (94, 'Denwa suru', 'Volať (mobilom niekomu)', 'sloveso', NULL, '2023-05-10'),
 (95, 'ha o migaku/migaiteimasu', 'Čistiť si zuby', 'sloveso', NULL, '2023-05-10'),
-(96, 'Karada no undou shimasu', 'Cvičiť (telo)', 'sloveso', NULL, '2023-05-10'),
+(96, 'Karada o undou/renshuu suru', 'Cvičiť (telo)', 'sloveso', NULL, '2023-05-10'),
 (97, 'Hiku', 'Hrať na strunový nástroj', 'sloveso', NULL, '2023-05-10'),
 (98, 'Kyomi ga nai', 'Nemáť záujem o niekoho/niečo', 'sloveso', NULL, '2023-05-10'),
 (99, 'Hitsuyou desu', 'Potrebujem', 'sloveso', NULL, '2023-05-10'),
@@ -992,7 +1010,28 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (646, 'Seikaku', 'Povaha', 'podstatne meno', 12, '2023-06-19'),
 (647, 'Bunka', 'Kultúra', 'podstatne meno', 12, '2023-06-19'),
 (648, 'Machigai', 'Chyba', 'podstatne meno', 12, '2023-06-19'),
-(649, 'Monku', 'Sťažnosť', 'podstatne meno', 12, '2023-06-19');
+(649, 'Monku', 'Sťažnosť', 'podstatne meno', 12, '2023-06-19'),
+(650, 'Saisho', 'Prvotná (napr. fáza)', 'podstatne meno', 12, '2023-06-30'),
+(651, 'Saishuu', 'Finálna (napr. fáza)', 'podstatne meno', 12, '2023-06-30'),
+(652, 'Karada', 'Telo', 'podstatne meno', 10, '2023-06-30'),
+(653, 'Sofuto', 'Softvér', 'podstatne meno', 12, '2023-06-30'),
+(654, 'Basho', 'Miesto', 'podstatne meno', 2, '2023-06-30'),
+(655, 'Risou', 'Ideál', 'podstatne meno', 12, '2023-06-30'),
+(656, 'Osewa ni naru', 'Byť v niekoho opatere', 'podstatne meno', 12, '2023-06-30'),
+(657, 'Onaka o kowasu', 'Bolesť brucha', 'podstatne meno', 9, '2023-06-30'),
+(658, 'Sorosoro', 'Je pomaly čas na...', 'podstatne meno', 12, '2023-06-30'),
+(659, 'Kazoku', 'Rodina', 'podstatne meno', 18, '2023-06-30'),
+(660, 'Ryoushin', 'Rodičia', 'podstatne meno', 18, '2023-06-30'),
+(661, 'Okaa(san)/Haha', 'Matka', 'podstatne meno', 18, '2023-06-30'),
+(662, 'Otou(san)/Chichi', 'Otec', 'podstatne meno', 18, '2023-06-30'),
+(663, 'Onii(san)/Aniki', 'Starší brat', 'podstatne meno', 18, '2023-06-30'),
+(664, 'Onee(san)/Ane', 'Staršia sestra', 'podstatne meno', 18, '2023-06-30'),
+(665, 'Otouto', 'Mladší brat', 'podstatne meno', 18, '2023-06-30'),
+(666, 'Imouto', 'Mladšia sestra', 'podstatne meno', 18, '2023-06-30'),
+(667, 'Obaa(san)/Sobo', 'Babka', 'podstatne meno', 18, '2023-06-30'),
+(668, 'Ojii(san)/Sofu', 'Dedko', 'podstatne meno', 18, '2023-06-30'),
+(669, 'Oku(san)/Tsuma', 'Manželka', 'podstatne meno', 18, '2023-06-30'),
+(670, 'Otto', 'Manžel', 'podstatne meno', 18, '2023-06-30');
 
 --
 -- Kľúče pre exportované tabuľky
@@ -1044,13 +1083,13 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT pre tabuľku `grammar`
 --
 ALTER TABLE `grammar`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT pre tabuľku `grammar_sentences`
 --
 ALTER TABLE `grammar_sentences`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT pre tabuľku `kana`
@@ -1068,13 +1107,13 @@ ALTER TABLE `kanji`
 -- AUTO_INCREMENT pre tabuľku `nounTypes`
 --
 ALTER TABLE `nounTypes`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=650;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=671;
 
 --
 -- Obmedzenie pre exportované tabuľky

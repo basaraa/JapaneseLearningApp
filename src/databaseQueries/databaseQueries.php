@@ -59,7 +59,7 @@ function selectSentencesByGrammarID($conn,$grammarID){
     return $result;
 }
 function selectNounTypes($conn){
-    $sql = "SELECT * FROM nounTypes";
+    $sql = "SELECT * FROM nounTypes ORDER by type_name";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
