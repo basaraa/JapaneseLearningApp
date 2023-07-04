@@ -48,7 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             if (isset($result) && $result) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<tr>';
-                    echo '<td>' . $row["jap_word"] . '</td>';
+                    if ($type==2)
+                        echo '<td><a onclick="window.location.href=\'verbForms.php?verb='.$row["jap_word"].'&getVerbForms=8\'">' . $row["jap_word"] . '</a></td>';
+                    else
+                        echo '<td>' . $row["jap_word"] . '</td>';
                     echo '<td>' . $row["svk_word"] . '</td>';
                     echo '<td>' . $row["word_type"] . '</td>';
                     if ($type === 0) {

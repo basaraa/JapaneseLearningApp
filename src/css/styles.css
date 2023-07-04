@@ -290,6 +290,12 @@ h2,h4{
 .exam>.form-group>div>label{
     margin-left: 70px;
 }
+.half{
+    width:60%;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 

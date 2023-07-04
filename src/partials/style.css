@@ -96,6 +96,7 @@ body {
     position:absolute;
     bottom:-100px;
     width: 100%;
+    left:0;
 
 }
 .footer_main>p{
