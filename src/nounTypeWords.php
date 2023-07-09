@@ -58,16 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
                 echo '<div class="flexdiv">';
                 if ($frontLanguage == "JP") {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front">';
-                        echo ''.$row ["jap_word"].'</div><div class="flip-card-back">';
-                        echo ''.$row["svk_word"].'</div></div></div>';
+                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front"><div class="centered">';
+                        echo ''.$row ["jap_word"].'</div></div><div class="flip-card-back"><div class="centered">';
+                        echo ''.$row["svk_word"].'</div></div></div></div>';
                     }
                 }
                 else{
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front">';
-                        echo ''.$row ["svk_word"].'</div><div class="flip-card-back">';
-                        echo ''.$row["jap_word"].'</div></div></div>';
+                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front"><div class="centered">';
+                        echo ''.$row ["svk_word"].'</div></div><div class="flip-card-back"><div class="centered">';
+                        echo ''.$row["jap_word"].'</div></div></div></div>';
                     }
                 }
                 echo '</div>';

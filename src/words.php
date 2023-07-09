@@ -6,10 +6,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
     include "helper/helpFunctions.php";
     $type=intval($_GET["type"]);
     $showType=intval($_GET["showType"]);
-    $types=["podstatne meno","pridavne meno","sloveso","ostatne","all"];
+    $types=["podstatne meno","pridavne meno","sloveso","all"];
     if ($type>=0 && $type<=4) {
+        $orderColumns=["jap_word","svk_word","word_type","word_subtype_id","day_of_addition"];
+        $orders=["ASC","DESC"];
+        $orderColumn=(isset($_GET["orderColumn"])&&in_array($_GET["orderColumn"],$orderColumns)) ? mb_escape($_GET["orderColumn"]) : "jap_word";
+        $order=(isset($_GET["order"])&&in_array($_GET["order"],$orders)) ? mb_escape($_GET["order"]) : "ASC";
         if ($showType!=2)
-            $result = selectWords($conn, $types[$type]);
+            $result = selectWords($conn, $types[$type],$orderColumn,$order);
         //zoznam
         if ($showType == 0) {
             $x = 3;
@@ -17,28 +21,28 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                     <thead>
                         <tr>
                             <th>Japonsky
-                                <span class="cursor" onclick="zoradenie(0,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(0,true,0)">(y)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=jap_word&order=ASC\'"> (x)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=jap_word&order=DESC\'"> (x)</span>
                             </th>
                             <th>Slovensky
-                                <span class="cursor" onclick="zoradenie(1,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(1,true,0)">(y)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=svk_word&order=ASC\'"> (x)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=svk_word&order=DESC\'"> (x)</span>
                             </th>
                             <th>Typ
-                                <span class="cursor" onclick="zoradenie(2,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(2,true,0)">(y)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_type&order=ASC\'"> (x)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_type&order=DESC\'"> (x)</span>
                             </th>
                             ';
             if ($type === 0) {
                 echo '          <th>Podtyp
-                                <span class="cursor" onclick="zoradenie(3,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(3,true,0)">(y)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_subtype_id&order=ASC\'"> (x)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_subtype_id&order=DESC\'"> (x)</span>
                             </th>';
                 $x = 4;
             }
             echo '                <th>Dátum pridania
-                                <span class="cursor" onclick="zoradenie(' . $x . ',false,1)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(' . $x . ',true,1)">(y)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=day_of_addition&order=ASC\'"> (x)</span>
+                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=day_of_addition&order=DESC\'"> (x)</span>
                               </th>
                               <th></th>
                          </tr>
@@ -48,8 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             if (isset($result) && $result) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<tr>';
-                    if ($type==2)
-                        echo '<td><a onclick="window.location.href=\'verbForms.php?verb='.$row["jap_word"].'&getVerbForms=8\'">' . $row["jap_word"] . '</a></td>';
+                    if ($type==2 && !(str_contains($row["jap_word"], ' ')))
+                        echo '<td><a class="cursor" onclick="window.location.href=\'verbForms.php?verb='.$row["jap_word"].'&getVerbForms=8\'">' . $row["jap_word"] . '</a></td>';
                     else
                         echo '<td>' . $row["jap_word"] . '</td>';
                     echo '<td>' . $row["svk_word"] . '</td>';
@@ -76,16 +80,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                 echo '<div class="flexdiv">';
                 if ($frontLanguage == "JP") {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front">';
-                        echo ''.$row ["jap_word"].'</div><div class="flip-card-back">';
-                        echo ''.$row["svk_word"].'</div></div></div>';
+                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front"><div class="centered">';
+                        echo ''.$row ["jap_word"].'</div></div><div class="flip-card-back"><div class="centered">';
+                        echo ''.$row["svk_word"].'</div></div></div></div>';
                     }
                 }
                 else{
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front">';
-                        echo ''.$row ["svk_word"].'</div><div class="flip-card-back">';
-                        echo ''.$row["jap_word"].'</div></div></div>';
+                        echo '<div class="flip-card inflexdiv-cards"><div class="flip-card-inner"><div class="flip-card-front"><div class="centered">';
+                        echo ''.$row ["svk_word"].'</div></div><div class="flip-card-back">';
+                        echo ''.$row["jap_word"].'</div></div></div></div>';
                     }
                 }
                 echo '</div>';

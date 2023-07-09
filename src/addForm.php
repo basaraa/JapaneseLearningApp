@@ -19,7 +19,6 @@ if ((isset($_GET["addType"]))) {
                             <option value="podstatne meno" >Podstatné meno</option>
                             <option value="pridavne meno" >Prídavné meno</option>
                             <option value="sloveso" >Sloveso</option>
-                            <option value="ostatne" >Ostatné</option>
                         </select>
                         <label id="nounTypeLabel" for="nounType">Podtyp slova:</label>
                         <select class="form-control" name = "nounType" id="nounType">

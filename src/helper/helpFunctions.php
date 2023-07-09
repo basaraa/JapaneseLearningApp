@@ -1,7 +1,7 @@
 <?php
 function mb_escape($string)
 {
-    return preg_replace('~[\x00\x0A\x0D\x1A\x22\x25\x27\x5C\x5F]~u', '\\\$0', $string);
+    return preg_replace('~[\x00\x0A\x0D\x1A\x22\x25\x27\x5C]~u', '\\\$0', $string);
 }
 function echo_grammar($conn,$grammar){
     $grammarID=$grammar["id"];

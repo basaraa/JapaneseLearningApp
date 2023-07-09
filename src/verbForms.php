@@ -4,9 +4,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset ($_GET["verb"]) && isset ($_GET
     $x=intval($_GET["getVerbForms"]);
     if ($x==8){
         $getVerb=$_GET["verb"];
-        preg_match('/^[a-zA-Z0-9]+/', strtolower($getVerb), $verb);
-        $home = file_get_contents('https://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb='.$getVerb.'&VerbClass=1');
-        if (strpos($home, "alert-danger") !== false){
+        $verb=preg_replace('!\(([^)]+)\)!',"", $getVerb);
+        $home = file_get_contents('https://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb='.strtolower($verb).'&VerbClass=1');
+        if (str_contains($home, "alert-danger")){
             preg_match('~<table class="table table-bordered"(.*?)</table>~Usi',$home,$home);
             $home=preg_replace('%(<div class="modal-body">.*?</div>)%sim',"",$home[0]);
             $home=preg_replace('%(<div.*?id="PassiveModal".*?>.*?</div>)%sim',"",$home);

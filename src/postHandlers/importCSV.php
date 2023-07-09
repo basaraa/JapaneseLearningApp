@@ -7,6 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $addType=intval($_POST["addType"]);
         if ($addType >= 0 && $addType <= 2) {
             $msg = '';
+            $errorWords='';
 			$count=0;
             if (isset ($_FILES["fileCSV"]["tmp_name"])) {
                 //slová
@@ -15,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $subtypesId = [];
                     $file_name = $_FILES["fileCSV"]["tmp_name"];
                     $opened_file = fopen($file_name, "r");
-                    $types = ["podstatne meno", "pridavne meno", "sloveso", "ostatne"];
+                    $types = ["podstatne meno", "pridavne meno", "sloveso"];
                     $nounTypesRows = 0;
                     $result = selectNounTypes($conn);
                     if ($result) {
@@ -41,9 +42,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     $result = insertWord($conn, $japWord, $svkWord, $type, $nounType);
                                     if ($result){
                                         $msg .= $line[0] . ', ';
-										$count+=1;
+										$count += 1;
 									}
                                 }
+                                else
+                                    $errorWords .= $line[0] . ', ';
                             }
                         }
                     }
@@ -61,9 +64,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $result = insertGrammar($conn, $grammarTitle,$grammarDescription);
                                 if ($result){
                                     $msg .= $line[0] . ', ';
-									$count+=1;
+									$count += 1;
 								}
                             }
+                            else
+                                $errorWords .= $line[0] . ', ';
                         }
                     }
                 }
@@ -82,9 +87,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $result = insertGrammarSentence($conn, mysqli_fetch_assoc($checkGrammar)["id"],$grammarJapSentence,$grammarSvkSentence);
                                 if ($result){
                                     $msg .= $line[1] . ', ';
-									$count+=1;
+									$count += 1;
 								}
                             }
+                            else
+                                $errorWords .= $line[1] . ', ';
                         }
                     }
                 }
@@ -102,13 +109,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $result = insertKanji($conn, $kanji, $kunyoumi, $onyoumi, $slovak);
                             if ($result){
                                 $msg .= $line[0] . ', ';
-								$count+=1;
+								$count += 1;
 							}
                         }
                     }
                 }
                 if (!empty($msg)){
                     $msg = "<h2 class='blue'>Úspešne pridané (".$count."): ".$msg."</h2>";
+                    if (!empty($errorWords))
+                        $msg .= "<h3 class='red'>Neúspešne pokusy: ".$errorWords."</h3>";
                     echo json_encode(["scs" => true,"msg" => $msg]);
                 }
                 else
