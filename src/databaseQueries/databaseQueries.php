@@ -117,7 +117,7 @@ function selectExamAnswers ($conn,$type,$subType,$language,$id){
             $sql="SELECT DISTINCT svk_word as 'word',jap_word as 'translate' FROM words 
                     JOIN nounTypes ON nounTypes.id=words.word_subtype_id
                     WHERE word_type='".$type."' AND nounTypes.id = '".$subType."' and words.id != '".$id."' ORDER BY RAND () LIMIT 3";
-        if ($language=="JAP")
+        if ($language=="JP")
             $sql="SELECT DISTINCT jap_word as 'word',svk_word as 'translate' FROM words 
                     JOIN nounTypes ON nounTypes.id=words.word_subtype_id
                     WHERE word_type='".$type."' AND nounTypes.id = '".$subType."' and words.id != '".$id."' ORDER BY RAND () LIMIT 3";
