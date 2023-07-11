@@ -1,11 +1,11 @@
 <?php
+include "partials/header.php";
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_GET["showType"]))){
-    include "partials/header.php";
     require_once("config/config.php");
     include "databaseQueries/databaseQueries.php";
     include "helper/helpFunctions.php";
     $subType=intval($_GET["subType"]);
-    if (($subType >=1 && $subType<19) && $subType!=17) {
+    if (($subType >=1 && $subType<21) && $subType!=17) {
         $showType=$_GET["showType"];
         echo '<div>
 <button class="btn btn-primary" onclick="window.location.href=\'nounTypeWords.php?showType=1&frontLanguage=SVK&subType='.$subType.'\'" >Kartičky SVK->JP</button>
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
                     $functionEditForm="'$rowID',0";
                     echo '<td><a class="nodec editWord" onclick= "generateEditForm('.$functionEditForm.')">
                         <i class = "bi bi-pencil-square"></i></a>
-                        <a class="nodec deleteWord" id = "' . $rowID . '">
+                        <a class="nodec deleteX word" id = "' . $rowID . '">
                         <i class = "bi bi-trash"></i></a></td>';
                     echo '</tr>';
                 }

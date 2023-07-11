@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Sun 09.Júl 2023, 09:31
+-- Čas generovania: Út 11.Júl 2023, 10:46
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -344,13 +344,15 @@ INSERT INTO `nounTypes` (`id`, `type_name`, `image_name`) VALUES
 (9, 'medicína', 'medicina.jpg'),
 (10, 'oblečenie', 'oblecenie.png'),
 (11, 'osoby', 'osoby.png'),
-(12, 'ostatné', 'ostatne.jpg'),
+(12, 'ostatné', 'ostatne.png'),
 (13, 'pitie', 'pitie.jpg'),
 (14, 'počasie', 'pocasie.jpg'),
 (15, 'šport', 'sport.jpg'),
 (16, 'zvieratá', 'zvierata.jpg'),
 (17, 'ludske_telo', 'ludske_telo.jpg'),
-(18, 'rodina', 'family.jpg');
+(18, 'rodina', 'family.jpg'),
+(19, 'pozícia', 'pozicia.jpg'),
+(20, 'otázky', 'otazky.jpg');
 
 -- --------------------------------------------------------
 
@@ -720,7 +722,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (349, 'Soto', 'Vonku', 'podstatne meno', 12, '2023-05-10'),
 (350, 'Katachi', 'Tvar(niečoho)', 'podstatne meno', 12, '2023-05-10'),
 (351, 'Mokuteki', 'Cieľ', 'podstatne meno', 12, '2023-05-10'),
-(352, 'Shitsumon', 'Otázka', 'podstatne meno', 12, '2023-05-10'),
+(352, 'Shitsumon', 'Otázka', 'podstatne meno', 20, '2023-05-10'),
 (353, 'Sumi', 'Roh(napr. stola)', 'podstatne meno', 12, '2023-05-10'),
 (354, 'Shiken', 'Skúška', 'podstatne meno', 12, '2023-05-10'),
 (355, 'Seiseki', 'Známky (v škole)', 'podstatne meno', 12, '2023-05-10'),
@@ -730,11 +732,11 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (359, 'Gakki/Kongakki', 'Semester/Tento semester', 'podstatne meno', 12, '2023-05-10'),
 (360, 'Shourai', 'Budúcnosť', 'podstatne meno', 12, '2023-05-10'),
 (361, 'Yama', 'Hora', 'podstatne meno', 12, '2023-05-10'),
-(362, 'Yasumi', 'Práz4ny', 'podstatne meno', 12, '2023-05-10'),
+(362, 'Yasumi', 'Prázdniny', 'podstatne meno', 12, '2023-05-10'),
 (363, 'Shigoto', 'Práca', 'podstatne meno', 12, '2023-05-10'),
 (364, 'Uso', 'Klamstvo', 'podstatne meno', 12, '2023-05-10'),
 (365, 'Kyuujitsu', 'Voľný deň/dovolenka', 'podstatne meno', 12, '2023-05-10'),
-(366, 'Basho/Tokoro', 'Miesto (konkrétne/všeobecné)', 'podstatne meno', 12, '2023-05-10'),
+(366, 'Basho/Tokoro', 'Miesto (konkrétne/všeobecné)', 'podstatne meno', 19, '2023-05-10'),
 (367, 'Gaikokugo', 'Cudzí jazyk', 'podstatne meno', 12, '2023-05-10'),
 (368, 'Gakki', 'Hudobný nástroj', 'podstatne meno', 12, '2023-05-10'),
 (369, 'Yakusoku', 'Sľub', 'podstatne meno', 12, '2023-05-10'),
@@ -761,7 +763,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (390, 'Koukou', 'Stredná škola', 'podstatne meno', 12, '2023-05-10'),
 (391, 'Daigakkou', 'Vysoká škola', 'podstatne meno', 12, '2023-05-10'),
 (392, 'Shougakkin', 'Štipendium', 'podstatne meno', 12, '2023-05-10'),
-(393, 'Okurimono', 'Darček', 'podstatne meno', 12, '2023-05-10'),
+(393, 'Okurimono/Puresento', 'Darček', 'podstatne meno', 12, '2023-05-10'),
 (394, 'Oyu', 'Horúca voda', 'podstatne meno', 12, '2023-05-10'),
 (395, 'Himitsu', 'Tajomtsvo', 'podstatne meno', 12, '2023-05-10'),
 (396, 'Hige', 'Brada', 'podstatne meno', 12, '2023-05-10'),
@@ -812,19 +814,19 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (441, 'Inu', 'Pes', 'podstatne meno', 16, '2023-05-10'),
 (442, 'Kara', 'Od/lebo', 'podstatne meno', 12, '2023-05-10'),
 (443, 'Made', 'Do', 'podstatne meno', 12, '2023-05-10'),
-(444, 'Aida', 'Medzi', 'podstatne meno', 12, '2023-05-10'),
+(444, 'Aida', 'Medzi', 'podstatne meno', 19, '2023-05-10'),
 (445, 'Mada', 'Ešte', 'podstatne meno', 12, '2023-05-10'),
 (446, 'Mou', 'Už', 'podstatne meno', 12, '2023-05-10'),
 (447, 'Tokorode', 'Inak/btw', 'podstatne meno', 12, '2023-05-10'),
-(448, 'Dore/Dochi/Dochira', 'Ktorý/Ktoré', 'podstatne meno', 12, '2023-05-10'),
-(449, 'Dare', 'Kto', 'podstatne meno', 12, '2023-05-10'),
-(450, 'Doko', 'Kde', 'podstatne meno', 12, '2023-05-10'),
-(451, 'Dono gurai', 'Ako dlho', 'podstatne meno', 12, '2023-05-10'),
-(452, 'Ikura', 'Koľko', 'podstatne meno', 12, '2023-05-10'),
-(453, 'Itsu', 'Kedy', 'podstatne meno', 12, '2023-05-10'),
-(454, 'Doushite/Nande', 'Prečo', 'podstatne meno', 12, '2023-05-10'),
-(455, 'Donna', 'Aký/Aké', 'podstatne meno', 12, '2023-05-10'),
-(456, 'Nani', 'Čo', 'podstatne meno', 12, '2023-05-10'),
+(448, 'Dore/Dochi/Dochira', 'Ktorý/Ktoré', 'podstatne meno', 20, '2023-05-10'),
+(449, 'Dare', 'Kto', 'podstatne meno', 20, '2023-05-10'),
+(450, 'Doko', 'Kde', 'podstatne meno', 19, '2023-05-10'),
+(451, 'Dono gurai', 'Ako dlho', 'podstatne meno', 20, '2023-05-10'),
+(452, 'Ikura', 'Koľko', 'podstatne meno', 20, '2023-05-10'),
+(453, 'Itsu', 'Kedy', 'podstatne meno', 20, '2023-05-10'),
+(454, 'Doushite/Nande', 'Prečo', 'podstatne meno', 20, '2023-05-10'),
+(455, 'Donna', 'Aký/Aké', 'podstatne meno', 20, '2023-05-10'),
+(456, 'Nani', 'Čo', 'podstatne meno', 20, '2023-05-10'),
 (457, 'Kore/Sore/Are', 'Toto/Tento/Tamto', 'podstatne meno', 12, '2023-05-10'),
 (458, 'Koko/Soko', 'Tu/Tam', 'podstatne meno', 12, '2023-05-10'),
 (459, 'Gurai', 'Približne/okolo', 'podstatne meno', 12, '2023-05-10'),
@@ -842,7 +844,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (471, 'Akemashite omedetou gozaimasu', 'Štastný nový rok ti prajem', 'podstatne meno', 12, '2023-05-10'),
 (472, 'X kai', 'X krát/poschodie (napr. 5 krát - go kai)', 'podstatne meno', 12, '2023-05-10'),
 (473, 'X dake', 'Robil som len X (hral len hry - geiumu dake o shimashita)', 'podstatne meno', 12, '2023-05-10'),
-(475, 'Korekara', 'odteraz', 'podstatne meno', 12, '2023-05-10'),
+(475, 'Kore kara', 'Odteraz', 'podstatne meno', 12, '2023-05-10'),
 (476, 'Jibunde', '(niečo spraviť) sám', 'podstatne meno', 12, '2023-05-10'),
 (477, 'Tatoeba', 'Napríklad', 'podstatne meno', 12, '2023-05-10'),
 (478, 'Yappari', 'Nakoniec/predsalen', 'podstatne meno', 12, '2023-05-10'),
@@ -908,8 +910,8 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (543, 'Ka dou ka', 'Či', 'podstatne meno', 12, '2023-06-04'),
 (544, 'Kakaru', 'To zaberie (napr. ako dlho to zaberie dostať sa na letisko)', 'podstatne meno', 12, '2023-06-04'),
 (545, 'Wain', 'Víno', 'podstatne meno', 13, '2023-06-04'),
-(548, 'Nanika shimashita ka', 'Robil si niečo?', 'podstatne meno', 12, '2023-06-04'),
-(549, 'O ikutsu desu ka', 'Koľko máš rokov?', 'podstatne meno', 12, '2023-06-04'),
+(548, 'Nanika shimashita ka', 'Robil si niečo?', 'podstatne meno', 20, '2023-06-04'),
+(549, 'O ikutsu desu ka', 'Koľko máš rokov?', 'podstatne meno', 20, '2023-06-04'),
 (550, 'X to iimasu', 'Volám sa X', 'podstatne meno', 12, '2023-06-04'),
 (551, 'Soudan suru', 'Konzultovať', 'sloveso', NULL, '2023-06-13'),
 (552, 'Shuuden', 'Posledný vlak', 'podstatne meno', 2, '2023-06-13'),
@@ -1052,11 +1054,11 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (689, 'Isha/Sensei', 'Doktor', 'podstatne meno', 9, '2023-07-09'),
 (690, 'Sensei', 'Učiteľ', 'podstatne meno', 11, '2023-07-09'),
 (691, 'Imi', 'Význam', 'podstatne meno', 12, '2023-07-09'),
-(692, 'Ue', 'Hore', 'podstatne meno', 12, '2023-07-09'),
-(693, 'Shita', 'Dole', 'podstatne meno', 12, '2023-07-09'),
-(694, 'Ushiro', 'Vzadu', 'podstatne meno', 12, '2023-07-09'),
-(695, 'Hidari', 'Vľavo', 'podstatne meno', 12, '2023-07-09'),
-(696, 'Migi', 'Vpravo', 'podstatne meno', 12, '2023-07-09'),
+(692, 'Ue', 'Hore', 'podstatne meno', 19, '2023-07-09'),
+(693, 'Shita', 'Dole', 'podstatne meno', 19, '2023-07-09'),
+(694, 'Ushiro', 'Vzadu', 'podstatne meno', 19, '2023-07-09'),
+(695, 'Hidari', 'Vľavo', 'podstatne meno', 19, '2023-07-09'),
+(696, 'Migi', 'Vpravo', 'podstatne meno', 19, '2023-07-09'),
 (697, 'Uta', 'Pesnička', 'podstatne meno', 12, '2023-07-09'),
 (698, 'Umi', 'More', 'podstatne meno', 2, '2023-07-09'),
 (699, 'Eiga', 'Film', 'podstatne meno', 12, '2023-07-09'),
@@ -1147,7 +1149,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (783, 'Seikatsu', 'Život', 'podstatne meno', 12, '2023-07-09'),
 (784, 'Setsumei', 'Vysvetlenie', 'podstatne meno', 12, '2023-07-09'),
 (785, 'Sensou', 'Vojna', 'podstatne meno', 12, '2023-07-09'),
-(786, 'Chi', 'Krv', 'podstatne meno', 12, '2023-07-09'),
+(786, 'Chi', 'Krv', 'podstatne meno', 9, '2023-07-09'),
 (787, 'Chikara', 'Sila', 'podstatne meno', 12, '2023-07-09'),
 (788, 'Tsuki', 'Mesiac', 'podstatne meno', 14, '2023-07-09'),
 (789, 'Aisuhokkei', 'Hokej', 'podstatne meno', 15, '2023-07-09'),
@@ -1163,7 +1165,31 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (799, 'Mori', 'Les', 'podstatne meno', 1, '2023-07-09'),
 (800, 'Rekishi', 'História', 'podstatne meno', 12, '2023-07-09'),
 (801, 'Renraku', 'Kontakt', 'podstatne meno', 12, '2023-07-09'),
-(802, 'Wasuremono', 'Zabudnútá vec', 'podstatne meno', 12, '2023-07-09');
+(802, 'Wasuremono', 'Zabudnútá vec', 'podstatne meno', 12, '2023-07-09'),
+(803, 'Higashi', 'Východ', 'podstatne meno', 19, '2023-07-11'),
+(804, 'Nishi', 'Západ', 'podstatne meno', 19, '2023-07-11'),
+(805, 'Kita', 'Sever', 'podstatne meno', 19, '2023-07-11'),
+(806, 'Minami', 'Juh', 'podstatne meno', 19, '2023-07-11'),
+(807, 'Ajia', 'Ázia', 'podstatne meno', 8, '2023-07-11'),
+(808, 'Afurika', 'Afrika', 'podstatne meno', 8, '2023-07-11'),
+(809, 'Ishi', 'Kameň', 'podstatne meno', 12, '2023-07-11'),
+(810, 'Inoru', 'Modliť sa', 'sloveso', NULL, '2023-07-11'),
+(811, 'Utsukushi', 'Krásna', 'pridavne meno', NULL, '2023-07-11'),
+(812, 'Matsuri', 'Festival', 'podstatne meno', 12, '2023-07-11'),
+(813, 'Gasu', 'Plyn', 'podstatne meno', 12, '2023-07-11'),
+(814, 'Gijutsu', 'Umenie', 'podstatne meno', 12, '2023-07-11'),
+(815, 'Kisoku', 'Zákon/pravidlo', 'podstatne meno', 12, '2023-07-11'),
+(816, 'Kesshite', 'Nikdy', 'podstatne meno', 12, '2023-07-11'),
+(817, 'Shoutai', 'Pozvánka', 'podstatne meno', 12, '2023-07-11'),
+(818, 'Sekai', 'Svet', 'podstatne meno', 12, '2023-07-11'),
+(819, 'Naoru', 'Byť opravený', 'sloveso', NULL, '2023-07-11'),
+(820, 'Gitaa', 'Gitara', 'podstatne meno', 12, '2023-07-11'),
+(821, 'Tenkeyohou', 'Predpoveď počasia', 'podstatne meno', 14, '2023-07-11'),
+(822, 'Piano', 'Klavír', 'podstatne meno', 12, '2023-07-11'),
+(823, 'Hoshi', 'Hviezda', 'podstatne meno', 12, '2023-07-11'),
+(824, 'Minato', 'Prístav', 'podstatne meno', 1, '2023-07-11'),
+(825, 'Yunyuu suru', 'Importovať', 'sloveso', NULL, '2023-07-11'),
+(826, 'Yushutsu suru', 'Exportovať', 'sloveso', NULL, '2023-07-11');
 
 --
 -- Kľúče pre exportované tabuľky
@@ -1215,13 +1241,13 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT pre tabuľku `grammar`
 --
 ALTER TABLE `grammar`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT pre tabuľku `grammar_sentences`
 --
 ALTER TABLE `grammar_sentences`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT pre tabuľku `kana`
@@ -1239,13 +1265,13 @@ ALTER TABLE `kanji`
 -- AUTO_INCREMENT pre tabuľku `nounTypes`
 --
 ALTER TABLE `nounTypes`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=803;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=827;
 
 --
 -- Obmedzenie pre exportované tabuľky

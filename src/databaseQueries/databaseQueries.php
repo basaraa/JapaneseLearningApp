@@ -54,11 +54,17 @@ function selectGrammars($conn){
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
+function selectGrammarByTitleCheckDuplicate($conn,$title,$id){
+    $sql="SELECT * FROM grammar where grammar_title='".$title."' and id != '".$id."'";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
 function selectSentencesByGrammarID($conn,$grammarID){
     $sql="SELECT * FROM grammar_sentences where grammar_id='".$grammarID."'";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
+
 function selectNounTypes($conn){
     $sql = "SELECT * FROM nounTypes ORDER by type_name";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
@@ -134,6 +140,15 @@ function deleteWord($conn,$id){
     $result = $conn->query($sql) or die("Chyba pri vykonaní query: " . $conn->error);
     return $result;
 }
+function deleteGrammar($conn,$id){
+    $sql = "DELETE FROM grammar where id = '".$id."'";
+    $result = $conn->query($sql) or die("Chyba pri vykonaní query: " . $conn->error);
+    return $result;
+}
+function deleteGrammarSentences($conn,$grammarID,$sentences){
+    $sql= "DELETE FROM grammar_sentences where grammar_id='".$grammarID."' and id not in (".implode(',', array_map('intval', $sentences)).")" ;
+    $result = $conn->query($sql) or die("Chyba pri vykonaní query: " . $conn->error);
+}
 
 //insert queries
 function insertWord($conn,$japWord,$svkWord,$type,$nounType){
@@ -162,6 +177,13 @@ function updateWord ($conn,$id, $japWord, $svkWord, $type, $nounType){
     $subject = "UPDATE words
                 SET jap_word='".$japWord."',svk_word='".$svkWord."', word_type='".$type."',
                 word_subtype_id = NULLIF('$nounType','')           
+                WHERE id='".$id."'";
+    $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
+    return $result;
+}
+function updateGrammar ($conn,$id,$grammarTitle,$grammarDescription){
+    $subject = "UPDATE grammar
+                SET grammar_title='".$grammarTitle."',grammar_description='".$grammarDescription."'           
                 WHERE id='".$id."'";
     $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
     return $result;

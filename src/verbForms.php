@@ -1,6 +1,6 @@
 <?php
+include "partials/header.php";
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset ($_GET["verb"]) && isset ($_GET["getVerbForms"])){
-    include "partials/header.php";
     $x=intval($_GET["getVerbForms"]);
     if ($x==8){
         $getVerb=$_GET["verb"];

@@ -1,8 +1,9 @@
 <?php
 include "partials/header.php";
-require_once("config/config.php");
-include "databaseQueries/databaseQueries.php";
+
 if ((isset($_GET["addType"]))) {
+    require_once("config/config.php");
+    include "databaseQueries/databaseQueries.php";
     $addType=intval($_GET["addType"]);
     if ($addType >=0 && $addType<=3) {
         echo '<h3 class="purple">Vložiť manuálne:</h3><form class="form addForm">                   

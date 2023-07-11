@@ -59,8 +59,38 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
                 </form>';
         } else echo '<h2 class="red">Slovo sa nenašlo</h2>';
     }
+	//grammar
     else if ($type==1){
-
+		$result = selectGrammarByID($conn,$id);
+        if ($result){
+            $grammar=mysqli_fetch_assoc($result);
+            $grammarID=$grammar["id"];
+			$grammarTitle=$grammar["grammar_title"];
+			$grammarDescription=$grammar["grammar_description"];
+            echo '<form class="form editForm"><div class="form-group">
+                        <input type="hidden" id="editType" name="editType" value = "' . $type . '">
+                        <input type="hidden" id="grammarID" name="grammarID" value = "' . $id . '">
+                        <label for="japWord">Názov gramatiky:</label>
+                        <input type="text" class="form-control" name= "grammarTitle" id="grammarTitle" placeholder="Zadajte názov gramatiky" 
+                         value="'.$grammarTitle.'" maxlength="64" required>
+                        <label for="svkWord">Preklad:</label>
+                        <input type="text" class="form-control" name= "grammarDescription" id="grammarDescription" placeholder="Zadajte popis gramatiky"
+                         value="'.$grammarDescription.'" maxlength="256" required>
+                        <label>Zoznam viet:</label>                                                 
+                    ';
+            $resultSentences=selectSentencesByGrammarID($conn,$grammarID);
+            if ($resultSentences && $resultSentences->num_rows>0) {
+                while ($sentence = mysqli_fetch_assoc($resultSentences)) {
+                    $sentenceID=$sentence["id"];
+                    $japSentence=$sentence["jap_sentence"];
+                    $svkSentence=$sentence["svk_sentence"];
+                    echo '<div><label for="'.$id.'" class="purple"><input type="checkbox" name="sentences[]" value="'.$sentenceID.'" id="'.$sentenceID.'" checked> '.$japSentence.' - '.$svkSentence.'</input></label></div>';
+                }
+            }
+            echo '</select></div>
+                    <button type="submit" class="btn btn-primary">Upraviť slovo</button>
+                </form>';
+        } else echo '<h2 class="red">Gramatika sa nenašla</h2>';
     }
     else if ($type==2){
 

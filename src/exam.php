@@ -1,6 +1,6 @@
 <?php
+include "partials/header.php";
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET["subType"]) && isset($_GET["questionLanguage"])){
-    include "partials/header.php";
     require_once("config/config.php");
     include "databaseQueries/databaseQueries.php";
     $type=$_GET["type"];

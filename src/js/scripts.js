@@ -176,12 +176,17 @@ $(function () {
 
 //delete
 $(function () {
-    $('.deleteWord').on('click', function (e) {
+    $('.deleteX').on('click', function (e) {
         e.preventDefault();
+        let type;
+        if (this.classList.contains('word'))
+            type=0;
+        else
+            type=1
         $.ajax({
             type: 'post',
             url: 'postHandlers/delete.php',
-            data: {id:this.id},
+            data: {id:this.id,type:type},
             success: function (data) {
                 try {
                     let result = JSON.parse(data)
@@ -207,7 +212,7 @@ $(function () {
     })
 });
 
-//edit subject
+//edit
 $(function () {
     $('.editForm').on('submit', function (e) {
         e.preventDefault();

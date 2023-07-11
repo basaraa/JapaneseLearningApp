@@ -25,5 +25,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo json_encode(["scs" => false, "msg" => '<h2 class="red">Slovo: ' . $japWord . ' existuje</h2>']);
             } else http_response_code(400);
         }
+        else if ($editType == 1){
+            if (isset($_POST["grammarID"]) && isset($_POST["grammarTitle"]) && isset($_POST["grammarDescription"])
+                && isset($_POST["sentences"])) {
+                $grammarTitle = mb_escape($_POST["grammarTitle"]);
+                $grammarDescription = mb_escape($_POST["grammarDescription"]);
+                $grammarID= intval($_POST["grammarID"]);
+                $sentences=$_POST["sentences"];
+                $checkgrammar = selectGrammarByTitleCheckDuplicate($conn, $grammarTitle,$grammarID);
+                if ($checkgrammar && ($checkgrammar->num_rows) === 0) {
+                    $result = updateGrammar($conn,$grammarID,$grammarTitle,$grammarDescription);
+                    if ($result) {
+                        if (!empty($sentences))
+                            deleteGrammarSentences($conn, $grammarID, $sentences);
+                        echo json_encode(["scs" => true, "msg" => '<h2 class="blue">Úspešne upravená gramatika: ' . $grammarTitle . '</h2>']);
+                    } else echo json_encode(["scs" => false, "msg" => '<h2 class="red">' . $conn->error . '</h2>']);
+                } else
+                    echo json_encode(["scs" => false, "msg" => '<h2 class="red">Gramatika s názvom: ' . $grammarTitle . ' existuje</h2>']);
+            } else http_response_code(400);
+        }
     } else echo http_response_code(400);
 } else echo http_response_code(400);

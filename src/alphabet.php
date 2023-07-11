@@ -1,8 +1,8 @@
 <?php
 include "partials/header.php";
-require_once("config/config.php");
-include "databaseQueries/databaseQueries.php";
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"])){
+    require_once("config/config.php");
+    include "databaseQueries/databaseQueries.php";
     $type=$_GET["type"];
     if ($type==="hiragana" || $type==="katakana"){
         echo '<table class="tabulka tabfix" id="tabulka"><thead>

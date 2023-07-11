@@ -1,4 +1,3 @@
-
 <footer class="footer_main">
     <p>&copy; Martin Pač - Všetky práva vyhradené</p>
 </footer>
