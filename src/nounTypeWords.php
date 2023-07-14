@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
     include "databaseQueries/databaseQueries.php";
     include "helper/helpFunctions.php";
     $subType=intval($_GET["subType"]);
-    if (($subType >=1 && $subType<21) && $subType!=17) {
+    if (($subType >=1 && $subType<24) && $subType!=17) {
         $showType=$_GET["showType"];
         echo '<div>
 <button class="btn btn-primary" onclick="window.location.href=\'nounTypeWords.php?showType=1&frontLanguage=SVK&subType='.$subType.'\'" >Kartičky SVK->JP</button>
