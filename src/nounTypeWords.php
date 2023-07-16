@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
     include "databaseQueries/databaseQueries.php";
     include "helper/helpFunctions.php";
     $subType=intval($_GET["subType"]);
-    if (($subType >=1 && $subType<24) && $subType!=17) {
+    if (($subType >=1 && $subType<50) && $subType!=17) {
         $showType=$_GET["showType"];
         echo '<div>
 <button class="btn btn-primary" onclick="window.location.href=\'nounTypeWords.php?showType=1&frontLanguage=SVK&subType='.$subType.'\'" >Kartičky SVK->JP</button>
@@ -14,7 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
 <button class="btn btn-primary" onclick="window.location.href=\'exam.php?type=0&subType='.$subType.'&questionLanguage=SVK\'">Test SVK->JP</button>
 </div>';
         $result = selectSubTypeWords($conn,$subType);
+		//zoznam
         if ($showType==0) {
+			echo '<label class="purple">Vyhľadaj slovo:</label><input type="text" class="form-control" id="searchBar">';
             echo '<table class="tabulka tabfix" id="tabulka">
                     <thead>
                         <tr>
@@ -38,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
             if ($result) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<tr>';
-                    echo '<td>' . $row["jap_word"] . '</td>';
-                    echo '<td>' . $row["svk_word"] . '</td>';
+                    echo '<td class="searchedValue">' . $row["jap_word"] . '</td>';
+                    echo '<td class="searchedValue">' . $row["svk_word"] . '</td>';
                     echo '<td>' . date("d.m.Y", strtotime($row["day_of_addition"])) . '</td>';
                     $rowID=$row["id"];
                     $functionEditForm="'$rowID',0";

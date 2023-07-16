@@ -305,6 +305,9 @@ h2,h4{
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+#searchBar{
+	width:25%;
+}
 
 
 

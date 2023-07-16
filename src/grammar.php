@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset ($_GET["showType"])){
         }
     }
     if ($showType == 1){
+		echo '<label class="purple">Vyhľadaj gramatiku:</label><input type="text" class="form-control" id="searchBar">';
         echo '<table class="tabulka tabfix" id="tabulka">
                     <thead>
                         <tr>
@@ -34,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset ($_GET["showType"])){
                 $grammarID=$grammar["id"];
 				$functionEditForm="'$grammarID',1";
                 echo '<tr >';
-                echo '<td class="odkaz" onclick="window.location.href=\'grammar.php?showType=2&grammarID='.$grammarID.' \'">' . $grammar["grammar_title"] . '</td>';
-                echo '<td class="odkaz" onclick="window.location.href=\'grammar.php?showType=2&grammarID='.$grammarID.' \'">' . $grammar["grammar_description"] . '</td>';
+                echo '<td class="odkaz searchedValue" onclick="window.location.href=\'grammar.php?showType=2&grammarID='.$grammarID.' \'">' . $grammar["grammar_title"] . '</td>';
+                echo '<td class="odkaz searchedValue" onclick="window.location.href=\'grammar.php?showType=2&grammarID='.$grammarID.' \'">' . $grammar["grammar_description"] . '</td>';
                 echo '<td><a class="nodec editWord" onclick= "generateEditForm('.$functionEditForm.')">
                         <i class = "bi bi-pencil-square"></i></a>
                         <a class="nodec deleteX grammar" id = "' . $grammarID . '">

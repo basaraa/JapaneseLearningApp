@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             $result = selectWords($conn, $types[$type],$orderColumn,$order);
         //zoznam
         if ($showType == 0) {
+			echo '<label class="purple">Vyhľadaj slovo:</label><input type="text" class="form-control" id="searchBar">';
             $x = 3;
             echo '<table class="tabulka tabfix" id="tabulka">
                     <thead>
@@ -53,10 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<tr>';
                     if ($type==2 && !(str_contains($row["jap_word"], ' ')))
-                        echo '<td><a class="cursor" onclick="window.location.href=\'verbForms.php?verb='.$row["jap_word"].'&getVerbForms=8\'">' . $row["jap_word"] . '</a></td>';
+                        echo '<td><a class="cursor searchedValue" onclick="window.location.href=\'verbForms.php?verb='.$row["jap_word"].'&getVerbForms=8\'">' . $row["jap_word"] . '</a></td>';
                     else
-                        echo '<td>' . $row["jap_word"] . '</td>';
-                    echo '<td>' . $row["svk_word"] . '</td>';
+                        echo '<td class="searchedValue">' . $row["jap_word"] . '</td>';
+                    echo '<td class="searchedValue">' . $row["svk_word"] . '</td>';
                     echo '<td>' . $row["word_type"] . '</td>';
                     if ($type === 0) {
                         echo '<td>' . $row["type_name"] . '</td>';

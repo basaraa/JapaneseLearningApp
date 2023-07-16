@@ -287,3 +287,8 @@ function go_back2(){
     document.getElementById("modal_background3").style.display="none";
     document.getElementsByClassName("modal_div3")[0].style.display="none";
 }
+$('input#searchBar').quicksearch('table#tabulka tbody tr',{
+		selector: '.searchedValue',
+		delay: 200
+	}
+);
