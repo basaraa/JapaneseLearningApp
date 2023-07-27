@@ -62,7 +62,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Gramatika</a>
                             <div class="dropdown-content">
-                                <a class="nav-link" href="grammar.php?showType=0">Všetky gramatiky</a>
+                                <a class="nav-link" href="grammar.php?showType=0">Popis s príkladmi</a>
                                 <a class="nav-link" href="grammar.php?showType=1">Zoznam gramatík</a>
                             </div>
                         </li>

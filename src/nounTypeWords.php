@@ -4,8 +4,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
     require_once("config/config.php");
     include "databaseQueries/databaseQueries.php";
     include "helper/helpFunctions.php";
-    $subType=intval($_GET["subType"]);
-    if (($subType >=1 && $subType<50) && $subType!=17) {
+    $subType=intval($_GET["subType"]);	
+    if ($subType >=1 && $subType<50) {
         $showType=$_GET["showType"];
         echo '<div>
 <button class="btn btn-primary" onclick="window.location.href=\'nounTypeWords.php?showType=1&frontLanguage=SVK&subType='.$subType.'\'" >Kartičky SVK->JP</button>
@@ -13,6 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
 <button class="btn btn-primary" onclick="window.location.href=\'exam.php?type=0&subType='.$subType.'&questionLanguage=JP\'">Test JP->SVK</button>
 <button class="btn btn-primary" onclick="window.location.href=\'exam.php?type=0&subType='.$subType.'&questionLanguage=SVK\'">Test SVK->JP</button>
 </div>';
+		if ($subType==17){
+			echo '<div class="midd">
+					  <h2>Ľudské telo:</h2>
+					  <img src="/img/postava.png" alt="x">
+				</div>';
+		}
         $result = selectSubTypeWords($conn,$subType);
 		//zoznam
         if ($showType==0) {
@@ -77,13 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
             else http_response_code(400);
         }
         else http_response_code(400);
-    }
-    else if ($subType==17){
-        echo '<div class="midd">
-                  <h2>Ľudské telo:</h2>
-                  <img src="/img/postava.png" alt="x">
-            </div>';
-    }
+    }    
 }
 else http_response_code(400);
 ?>
