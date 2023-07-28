@@ -50,8 +50,8 @@ function zoradenie(stlpec,typ,typ_hodnoty) {
         }
     }
 }
-//check answers of exam
 
+//check answers of exam
 $(function (){
     $('.exam').submit (function (e){
         e.preventDefault();
@@ -90,6 +90,7 @@ $(function (){
         });
     })
 });
+
 //generate noun option
 $(function () {
     $(".wordType").change(function(){
@@ -106,6 +107,7 @@ $(function () {
         }
     })
 });
+
 //add new words manual
 $(function () {
     $('.addForm').submit( function (e) {
@@ -138,6 +140,7 @@ $(function () {
         });
     })
 });
+
 //add new words from csv
 $(function () {
     $('.addFormCSV').submit( function (e) {
@@ -292,3 +295,10 @@ $('input#searchBar').quicksearch('table#tabulka tbody tr',{
 		delay: 200
 	}
 );
+$(function () {
+    $('.verbFormTableHideLi').on('click', function (e) {
+        let id=(this.id).split("_", 1)[0];
+        $('.verbFormTableDiv').css("display" , "none");
+        $('#'+id).css("display" , "block");
+    });
+});

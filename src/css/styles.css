@@ -308,6 +308,26 @@ h2,h4{
 #searchBar{
 	width:25%;
 }
+.verbFormTableHide{
+    list-style:none;
+    display:flex;
+}
+.verbFormTableHide > li{
+    width:110px;
+    margin-left: 10px;
+    border:4px solid #e0543e;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color:#e0543e;
+    cursor: pointer;
+    background-color: transparent;
+    text-align: center;
+}
+.verbFormTableHide > li:hover{
+    background-color: deepskyblue;
+}
+
 
 
 

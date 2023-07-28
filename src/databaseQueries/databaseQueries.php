@@ -71,7 +71,7 @@ function selectNounTypes($conn){
     return $result;
 }
 function selectNounTypeByID($conn,$id){
-    $sql = "SELECT * FROM nounTypes where id='.$id.' limit 1";
+    $sql = "SELECT * FROM nounTypes where id='".$id."' limit 1";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
@@ -83,6 +83,19 @@ function selectSubTypeWords($conn,$type){
     return $result;
 
 }
+function selectVerbFormOrigins($conn){
+    $sql = "SELECT DISTINCT origin FROM verbFormSuffixes";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+function selectVerbFormByOrigins($conn,$origin){
+    $sql = "SELECT form_suffix,form_name FROM verbFormSuffixes 
+                JOIN verbFormTypes ON verbFormTypes.id = verbFormSuffixes.form_id
+                WHERE origin = '".$origin."'";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
+
 //exam
 function selectExamQuestions ($conn,$type,$subType,$language){
     if ($subType==0){

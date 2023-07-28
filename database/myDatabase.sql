@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Št 27.Júl 2023, 12:50
+-- Čas generovania: Pi 28.Júl 2023, 06:52
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `grammar` (
   `id` int UNSIGNED NOT NULL,
-  `grammar_title` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `grammar_description` varchar(256) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `grammar_title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `grammar_description` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -105,8 +105,8 @@ INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
 CREATE TABLE `grammar_sentences` (
   `id` int UNSIGNED NOT NULL,
   `grammar_id` int UNSIGNED NOT NULL,
-  `jap_sentence` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `svk_sentence` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `jap_sentence` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `svk_sentence` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `kana` (
   `id` int UNSIGNED NOT NULL,
   `hiragana` varchar(16) CHARACTER SET eucjpms COLLATE eucjpms_japanese_ci NOT NULL,
   `katakana` varchar(16) CHARACTER SET eucjpms COLLATE eucjpms_japanese_ci NOT NULL,
-  `romaji` varchar(16) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `romaji` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -258,9 +258,9 @@ INSERT INTO `kana` (`id`, `hiragana`, `katakana`, `romaji`) VALUES
 CREATE TABLE `kanji` (
   `id` int UNSIGNED NOT NULL,
   `kanji_char` varchar(16) CHARACTER SET eucjpms COLLATE eucjpms_japanese_ci NOT NULL,
-  `kunyoumi` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `onyoumi` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `slovak` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `kunyoumi` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `onyoumi` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `slovak` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -359,6 +359,231 @@ INSERT INTO `nounTypes` (`id`, `type_name`, `image_name`) VALUES
 (24, 'materiál', 'material.jpg'),
 (25, 'škola', 'school.jpg'),
 (26, 'frázy', 'frazy.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Štruktúra tabuľky pre tabuľku `verbFormSuffixes`
+--
+
+CREATE TABLE `verbFormSuffixes` (
+  `id` int UNSIGNED NOT NULL,
+  `form_id` int UNSIGNED NOT NULL,
+  `origin` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `form_suffix` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Sťahujem dáta pre tabuľku `verbFormSuffixes`
+--
+
+INSERT INTO `verbFormSuffixes` (`id`, `form_id`, `origin`, `form_suffix`) VALUES
+(1, 1, 'ru', NULL),
+(2, 2, 'ru', 'te'),
+(3, 3, 'ru', NULL),
+(4, 4, 'ru', 'ru/masu'),
+(5, 5, 'ru', 'nai/masen'),
+(6, 6, 'ru', 'ta/mashita'),
+(7, 7, 'ru', 'nakatta/masen deshita'),
+(8, 8, 'ru', 'te iru/te imasu'),
+(9, 9, 'ru', 'te inai/te imasen'),
+(10, 10, 'ru', 'te ita/tabete imashita'),
+(11, 11, 'ru', 'te inakatta/te imasen deshita'),
+(12, 12, 'ru', 'reba'),
+(13, 13, 'ru', 'nakereba'),
+(14, 14, 'ru', 'tara/mashitara'),
+(15, 15, 'ru', 'nakattara/masen deshitara'),
+(16, 16, 'ru', 'rareru/raremasu'),
+(17, 17, 'ru', 'rarenai/raremasen'),
+(18, 18, 'ru', 'saseru/sasemasu'),
+(19, 19, 'ru', 'sasenai/sasemasen'),
+(20, 20, 'ru', 'rareru/raremasu'),
+(21, 21, 'ru', 'rarenai/raremasen'),
+(22, 1, 'u', NULL),
+(23, 2, 'u', 'tte'),
+(24, 3, 'u', 'i'),
+(25, 4, 'u', 'u/imasu'),
+(26, 5, 'u', 'wanai/imasen '),
+(27, 6, 'u', 'tta/imashita'),
+(28, 7, 'u', 'wanakatta/imasen deshita'),
+(29, 8, 'u', 'tte iru/tte imasu'),
+(30, 9, 'u', 'tte inai/tte imasen'),
+(31, 10, 'u', 'tte ita/tte imashita'),
+(32, 11, 'u', 'tte inakatta/tte imasen deshita'),
+(33, 12, 'u', 'eba'),
+(34, 13, 'u', 'wanakereba'),
+(35, 14, 'u', 'ttara/imashitara'),
+(36, 15, 'u', 'wanakattara/imasen deshitara'),
+(37, 16, 'u', 'eru/emasu'),
+(38, 17, 'u', 'enai/emasen'),
+(39, 18, 'u', 'waseru/wasemasu'),
+(40, 19, 'u', 'wasenai/wasemasen'),
+(41, 20, 'u', 'wareru/waremasu'),
+(42, 21, 'u', 'warenai/waremasen'),
+(43, 1, 'bu', 'b'),
+(44, 2, 'bu', 'nde'),
+(45, 3, 'bu', 'bi'),
+(46, 4, 'bu', 'bu/bimasu'),
+(47, 5, 'bu', 'banai/bimasen '),
+(48, 6, 'bu', 'nda/bimashita'),
+(49, 7, 'bu', 'banakatta/bimasen deshita'),
+(50, 8, 'bu', 'nde iru/nde imasu'),
+(51, 9, 'bu', 'nde inai/nde imasen'),
+(52, 10, 'bu', 'nde ita/nde imashita'),
+(53, 11, 'bu', 'nde inakatta/nde imasen deshita'),
+(54, 12, 'bu', 'beba'),
+(55, 13, 'bu', 'banakereba'),
+(56, 14, 'bu', 'ndara/bimashitara'),
+(57, 15, 'bu', 'banakattara/bimasen deshitara'),
+(58, 16, 'bu', 'beru/bemasu'),
+(59, 17, 'bu', 'benai/bemasen'),
+(60, 18, 'bu', 'baseru/basemasu'),
+(61, 19, 'bu', 'basenai/basemasen'),
+(62, 20, 'bu', 'bareru/baremasu'),
+(63, 21, 'bu', 'barenai/baremasen'),
+(64, 1, 'gu', 'g'),
+(65, 2, 'gu', 'ide'),
+(66, 3, 'gu', 'gi'),
+(67, 4, 'gu', 'gu/gimasu'),
+(68, 5, 'gu', 'ganai/gimasen '),
+(69, 6, 'gu', 'ida/gimashita'),
+(70, 7, 'gu', 'ganakatta/gimasen deshita'),
+(71, 8, 'gu', 'ide iru/ide imasu'),
+(72, 9, 'gu', 'ide inai/ide imasen'),
+(73, 10, 'gu', 'ide ita/ide imashita'),
+(74, 11, 'gu', 'ide inakatta/ide imasen deshita'),
+(75, 12, 'gu', 'geba'),
+(76, 13, 'gu', 'ganakereba'),
+(77, 14, 'gu', 'getara/gimashitara'),
+(78, 15, 'gu', 'ganakattara/gimasen deshitara'),
+(79, 16, 'gu', 'geru/gemasu'),
+(80, 17, 'gu', 'genai/gemasen'),
+(81, 18, 'gu', 'gaseru/gasemasu'),
+(82, 19, 'gu', 'gasenai/gasemasen'),
+(83, 20, 'gu', 'gareru/garemasu'),
+(84, 21, 'gu', 'garenai/garemasen'),
+(85, 1, 'ku', 'k'),
+(86, 2, 'ku', 'ite'),
+(87, 3, 'ku', 'ki'),
+(88, 4, 'ku', 'ku/kimasu'),
+(89, 5, 'ku', 'kanai/kimasen '),
+(90, 6, 'ku', 'ita/kimashita'),
+(91, 7, 'ku', 'kanakatta/kimasen deshita'),
+(92, 8, 'ku', 'ite iru/ite imasu'),
+(93, 9, 'ku', 'ite inai/ite imasen'),
+(94, 10, 'ku', 'ite ita/ite imashita'),
+(95, 11, 'ku', 'ite inakatta/ite imasen deshita'),
+(96, 12, 'ku', 'keba'),
+(97, 13, 'ku', 'kanakereba'),
+(98, 14, 'ku', 'ketara/kimashitara'),
+(99, 15, 'ku', 'kanakattara/kimasen deshitara'),
+(100, 16, 'ku', 'keru/kemasu'),
+(101, 17, 'ku', 'kenai/kemasen'),
+(102, 18, 'ku', 'kaseru/kasemasu'),
+(103, 19, 'ku', 'kasenai/kasemasen'),
+(104, 20, 'ku', 'kareru/karemasu'),
+(105, 21, 'ku', 'karenai/karemasen'),
+(106, 1, 'mu', 'm'),
+(107, 2, 'mu', 'nde'),
+(108, 3, 'mu', 'mi'),
+(109, 4, 'mu', 'mu/mimasu'),
+(110, 5, 'mu', 'manai/mimasen '),
+(111, 6, 'mu', 'nda/mimashita'),
+(112, 7, 'mu', 'manakatta/mimasen deshita'),
+(113, 8, 'mu', 'nde iru/nde imasu'),
+(114, 9, 'mu', 'nde inai/nde imasen'),
+(115, 10, 'mu', 'nde ita/nde imashita'),
+(116, 11, 'mu', 'nde inakatta/nde imasen deshita'),
+(117, 12, 'mu', 'meba'),
+(118, 13, 'mu', 'manakereba'),
+(119, 14, 'mu', 'ndara/mimashitara'),
+(120, 15, 'mu', 'manakattara/mimasen deshitara'),
+(121, 16, 'mu', 'meru/memasu'),
+(122, 17, 'mu', 'menai/memasen'),
+(123, 18, 'mu', 'maseru/masemasu'),
+(124, 19, 'mu', 'masenai/masemasen'),
+(125, 20, 'mu', 'mareru/maremasu'),
+(126, 21, 'mu', 'marenai/maremasen'),
+(127, 1, 'nu', 'n'),
+(128, 2, 'nu', 'nde'),
+(129, 3, 'nu', 'ni'),
+(130, 4, 'nu', 'nu/nimasu'),
+(131, 5, 'nu', 'nanai/nimasen '),
+(132, 6, 'nu', 'nda/nimashita'),
+(133, 7, 'nu', 'nanakatta/nimasen deshita'),
+(134, 8, 'nu', 'nde iru/nde imasu'),
+(135, 9, 'nu', 'nde inai/nde imasen'),
+(136, 10, 'nu', 'nde ita/nde imashita'),
+(137, 11, 'nu', 'nde inakatta/nde imasen deshita'),
+(138, 12, 'nu', 'neba'),
+(139, 13, 'nu', 'nanakereba'),
+(140, 14, 'nu', 'ndara/nimashitara'),
+(141, 15, 'nu', 'nanakattara/nimasen deshitara'),
+(142, 16, 'nu', 'neru/nemasu'),
+(143, 17, 'nu', 'nenai/nemasen'),
+(144, 18, 'nu', 'naseru/nasemasu'),
+(145, 19, 'nu', 'nasenai/nasemasen'),
+(146, 20, 'nu', 'nareru/naremasu'),
+(147, 21, 'nu', 'narenai/naremasen'),
+(148, 1, 'su', 's/sh'),
+(149, 2, 'su', 'shite'),
+(150, 3, 'su', 'shi'),
+(151, 4, 'su', 'su/shimasu'),
+(152, 5, 'su', 'sanai/shimasen '),
+(153, 6, 'su', 'shita/shimashita'),
+(154, 7, 'su', 'sanakatta/shimasen deshita'),
+(155, 8, 'su', 'shite iru/shite imasu'),
+(156, 9, 'su', 'shite inai/shite imasen'),
+(157, 10, 'su', 'shite ita/shite imashita'),
+(158, 11, 'su', 'shite inakatta/shite imasen deshita'),
+(159, 12, 'su', 'seba'),
+(160, 13, 'su', 'sanakereba'),
+(161, 14, 'su', 'shitara/shimashitara'),
+(162, 15, 'su', 'sanakattara/shimasen deshitara'),
+(163, 16, 'su', 'seru/semasu'),
+(164, 17, 'su', 'kenai/kemasen'),
+(165, 18, 'su', 'saseru/sasemasu'),
+(166, 19, 'su', 'sasenai/sasemasen'),
+(167, 20, 'su', 'sareru/saremasu'),
+(168, 21, 'su', 'sarenai/saremasen');
+
+-- --------------------------------------------------------
+
+--
+-- Štruktúra tabuľky pre tabuľku `verbFormTypes`
+--
+
+CREATE TABLE `verbFormTypes` (
+  `id` int UNSIGNED NOT NULL,
+  `form_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Sťahujem dáta pre tabuľku `verbFormTypes`
+--
+
+INSERT INTO `verbFormTypes` (`id`, `form_name`) VALUES
+(1, 'základ slova'),
+(2, 'neurčitok-te forma'),
+(3, 'infinitív'),
+(4, 'prítomný čas'),
+(5, 'prítomný čas zápor'),
+(6, 'minulý čas'),
+(7, 'minulý čas zápor'),
+(8, 'pritomný priebehový čas'),
+(9, 'pritomný priebehový čas zápor'),
+(10, 'minulý priebehový čas'),
+(11, 'minulý priebehový čas zápor'),
+(12, 'eba form pre podmienku'),
+(13, 'eba forma pre podmienku zápor'),
+(14, 'tara forma pre podmienku'),
+(15, 'tara forma pre podmienku zápor'),
+(16, 'potenciálny tvar dokázať'),
+(17, 'potenciálny tvar nedokázať'),
+(18, 'kauzatívný tvar nechať niečo urobiť'),
+(19, 'kauzatívny tvar zápor'),
+(20, 'passive forma niečo sa urobilo'),
+(21, 'passive forma zápor');
 
 -- --------------------------------------------------------
 
@@ -1521,6 +1746,19 @@ ALTER TABLE `nounTypes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexy pre tabuľku `verbFormSuffixes`
+--
+ALTER TABLE `verbFormSuffixes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `form_id` (`form_id`);
+
+--
+-- Indexy pre tabuľku `verbFormTypes`
+--
+ALTER TABLE `verbFormTypes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexy pre tabuľku `words`
 --
 ALTER TABLE `words`
@@ -1562,6 +1800,18 @@ ALTER TABLE `nounTypes`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT pre tabuľku `verbFormSuffixes`
+--
+ALTER TABLE `verbFormSuffixes`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+
+--
+-- AUTO_INCREMENT pre tabuľku `verbFormTypes`
+--
+ALTER TABLE `verbFormTypes`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
@@ -1576,6 +1826,12 @@ ALTER TABLE `words`
 --
 ALTER TABLE `grammar_sentences`
   ADD CONSTRAINT `grammar_sentences_ibfk_1` FOREIGN KEY (`grammar_id`) REFERENCES `grammar` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Obmedzenie pre tabuľku `verbFormSuffixes`
+--
+ALTER TABLE `verbFormSuffixes`
+  ADD CONSTRAINT `verbFormSuffixes_ibfk_1` FOREIGN KEY (`form_id`) REFERENCES `verbFormTypes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Obmedzenie pre tabuľku `words`

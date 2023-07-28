@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
             }
             echo '</tbody></table>';
         }
+        //kartičky
         else if ($showType==1 && isset($_GET["frontLanguage"])){
             $frontLanguage=mb_escape($_GET["frontLanguage"]);
             if ($result) {

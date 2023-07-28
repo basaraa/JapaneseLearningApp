@@ -64,6 +64,7 @@
                             <div class="dropdown-content">
                                 <a class="nav-link" href="grammar.php?showType=0">Popis s príkladmi</a>
                                 <a class="nav-link" href="grammar.php?showType=1">Zoznam gramatík</a>
+                                <a class="nav-link" href="verbFormsInGeneral.php?showType=0">Časovanie slovies</a>
                             </div>
                         </li>
                         <li class="nav-item">
