@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             array_push($subtypesId, $subtype["id"]);
                         }
                     }
-                    while ($line = fgetcsv($opened_file, 256)) {
+                    while ($line = fgetcsv($opened_file, 256,";")) {
                         $result = null;
                         if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 128)
                             && (isset ($line[2]) && in_array($line[2], $types)) && isset ($line[3])) {
@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 else if ($addType == 1){
                     $file_name = $_FILES["fileCSV"]["tmp_name"];
                     $opened_file = fopen($file_name, "r");
-                    while ($line = fgetcsv($opened_file, 328)) {
+                    while ($line = fgetcsv($opened_file, 328,";")) {
                         if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 256)){
                             $grammarTitle = mb_escape($line[0]);
                             $grammarDescription = mb_escape($line[1]);
@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 else if ($addType == 2){
                     $file_name = $_FILES["fileCSV"]["tmp_name"];
                     $opened_file = fopen($file_name, "r");
-                    while ($line = fgetcsv($opened_file, 256)) {
+                    while ($line = fgetcsv($opened_file, 256,";")) {
                         if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 128)
                             && (isset ($line[2]) && strlen($line[2]) <= 128)){
                             $grammarTitle = mb_escape($line[0]);
@@ -99,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 else if ($addType==3){
                     $file_name = $_FILES["fileCSV"]["tmp_name"];
                     $opened_file = fopen($file_name, "r");
-                    while ($line = fgetcsv($opened_file, 256)) {
+                    while ($line = fgetcsv($opened_file, 256,";")) {
                         if ((isset ($line[0]) && strlen($line[0]) <= 16) && (isset ($line[1]) && strlen($line[1]) <= 32)
                             && (isset ($line[2]) && strlen($line[2]) <= 32) && (isset ($line[3]) && strlen($line[3]) <= 32)) {
                             $kanji = mb_escape($line[0]);

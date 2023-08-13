@@ -327,6 +327,9 @@ h2,h4{
 .verbFormTableHide > li:hover{
     background-color: deepskyblue;
 }
+#modal_text > .form-group > .form-control  {
+    width: 80%;
+}
 
 
 

@@ -2,6 +2,7 @@
 if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["type"])){
     require_once("../config/config.php");
     include "../databaseQueries/databaseQueries.php";
+    include "../helper/helpFunctions.php";
     $type=$_POST["type"];
     $id=intval($_POST["id"]);
     //word
@@ -9,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
         $result = selectWordByID($conn,$id);
         if ($result){
             $wordRow=mysqli_fetch_assoc($result);
-            $japWord=$wordRow["jap_word"];
-            $svkWord=$wordRow["svk_word"];
+            $japWord=htmlspecialchars($wordRow["jap_word"]);
+            $svkWord=htmlspecialchars($wordRow["svk_word"]);
             $wordType=$wordRow["word_type"];
             $types=["podstatne meno","pridavne meno","sloveso","ostatne"];
             $typesString=["Podstatné meno","Prídavné meno","Sloveso","Ostatné"];
@@ -64,9 +65,8 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
 		$result = selectGrammarByID($conn,$id);
         if ($result){
             $grammar=mysqli_fetch_assoc($result);
-            $grammarID=$grammar["id"];
-			$grammarTitle=$grammar["grammar_title"];
-			$grammarDescription=$grammar["grammar_description"];
+			$grammarTitle=htmlspecialchars($grammar["grammar_title"]);
+			$grammarDescription=htmlspecialchars($grammar["grammar_description"]);
             echo '<form class="form editForm"><div class="form-group">
                         <input type="hidden" id="editType" name="editType" value = "' . $type . '">
                         <input type="hidden" id="grammarID" name="grammarID" value = "' . $id . '">
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
                          value="'.$grammarDescription.'" maxlength="256" required>
                         <label>Zoznam viet:</label>                                                 
                     ';
-            $resultSentences=selectSentencesByGrammarID($conn,$grammarID);
+            $resultSentences=selectSentencesByGrammarID($conn,$id);
             if ($resultSentences && $resultSentences->num_rows>0) {
                 while ($sentence = mysqli_fetch_assoc($resultSentences)) {
                     $sentenceID=$sentence["id"];
@@ -92,8 +92,27 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
                 </form>';
         } else echo '<h2 class="red">Gramatika sa nenašla</h2>';
     }
+    //grammar sentence
     else if ($type==2){
-
+        $result = selectGrammarSentenceByID($conn,$id);
+        if ($result){
+            $sentence=mysqli_fetch_assoc($result);
+            $sentenceJap=htmlspecialchars($sentence["jap_sentence"]);
+            $sentenceSvk=htmlspecialchars($sentence["svk_sentence"]);
+            echo '<form class="form editForm"><div class="form-group">
+                        <input type="hidden" id="editType" name="editType" value = "' . $type . '">
+                        <input type="hidden" id="sentenceID" name="sentenceID" value = "' . $id . '">
+                        <label for="japWord">Veta po japonsky:</label>
+                        <input type="text" class="form-control" name= "sentenceJap" id="sentenceJap" placeholder="Zadajte vetu po japonsky" 
+                         value="'.$sentenceJap.'" maxlength="128" required>
+                        <label for="svkWord">Preklad:</label>
+                        <input type="text" class="form-control" name= "sentenceSvk" id="sentenceSvk" placeholder="Zadajte vetu po slovensky"
+                         value="'.$sentenceSvk.'" maxlength="128" required>                                                 
+                    ';
+            echo '</div>
+                    <button type="submit" class="btn btn-primary">Upraviť slovo</button>
+                </form>';
+        } else echo '<h2 class="red">Veta ku gramatike sa nenašla</h2>';
     }
     else echo http_response_code(400);
 }

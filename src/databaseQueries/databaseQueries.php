@@ -64,7 +64,11 @@ function selectSentencesByGrammarID($conn,$grammarID){
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
-
+function selectGrammarSentenceByID($conn,$sentenceID){
+    $sql="SELECT * FROM grammar_sentences where id='".$sentenceID."'";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
 function selectNounTypes($conn){
     $sql = "SELECT * FROM nounTypes ORDER by type_name";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
@@ -162,6 +166,11 @@ function deleteGrammarSentences($conn,$grammarID,$sentences){
     $sql= "DELETE FROM grammar_sentences where grammar_id='".$grammarID."' and id not in (".implode(',', array_map('intval', $sentences)).")" ;
     $result = $conn->query($sql) or die("Chyba pri vykonaní query: " . $conn->error);
 }
+function deleteSingleGrammarSentences($conn,$sentenceID){
+    $sql= "DELETE FROM grammar_sentences where id='".$sentenceID."' " ;
+    $result = $conn->query($sql) or die("Chyba pri vykonaní query: " . $conn->error);
+    return $result;
+}
 
 //insert queries
 function insertWord($conn,$japWord,$svkWord,$type,$nounType){
@@ -197,6 +206,13 @@ function updateWord ($conn,$id, $japWord, $svkWord, $type, $nounType){
 function updateGrammar ($conn,$id,$grammarTitle,$grammarDescription){
     $subject = "UPDATE grammar
                 SET grammar_title='".$grammarTitle."',grammar_description='".$grammarDescription."'           
+                WHERE id='".$id."'";
+    $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
+    return $result;
+}
+function updateSentence ($conn,$id,$sentenceJap,$sentenceSvk){
+    $subject = "UPDATE grammar_sentences
+                SET jap_sentence='".$sentenceJap."',svk_sentence='".$sentenceSvk."'           
                 WHERE id='".$id."'";
     $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
     return $result;
