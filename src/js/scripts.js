@@ -295,9 +295,13 @@ $('input#searchBar').quicksearch('table#tabulka tbody tr',{
 		delay: 200
 	}
 );
+//skrytie a odkrytie contentu pre všeobecné formy slovies
 $(function () {
     $('.verbFormTableHideLi').on('click', function (e) {
         let id=(this.id).split("_", 1)[0];
+        $('.verbFormTableHideLi').css("background-color","transparent")
+        $('#'+this.id).css("background-color","deepskyblue")
+
         $('.verbFormTableDiv').css("display" , "none");
         $('#'+id).css("display" , "block");
     });

@@ -330,6 +330,16 @@ h2,h4{
 #modal_text > .form-group > .form-control  {
     width: 80%;
 }
+.sixteenFont{
+    font-size: 16px;
+}
+.boldFont{
+    font-size: 16px;
+    font-weight: bold;
+}
+.white {
+    color: white;
+}
 
 
 

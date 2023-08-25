@@ -87,6 +87,20 @@ function selectSubTypeWords($conn,$type){
     return $result;
 
 }
+function selectVerbWordsByOrigin($conn,$origin,$origins){
+    if (strlen($origin)!=1)
+        $sql = "SELECT jap_word FROM words 
+                WHERE word_type = 'sloveso' AND jap_word LIKE '%".$origin."' 
+                AND SUBSTR(jap_word,-4) NOT IN ('suru') 
+                ORDER BY jap_word";
+    else
+        $sql = "SELECT jap_word FROM words 
+                WHERE word_type = 'sloveso' AND jap_word LIKE '%".$origin."' 
+                AND SUBSTR(jap_word,-2) NOT IN ('".implode("','",$origins)."') AND SUBSTR(jap_word,-4) NOT IN ('suru')
+                ORDER by jap_word";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+}
 function selectVerbFormOrigins($conn){
     $sql = "SELECT DISTINCT origin FROM verbFormSuffixes";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);

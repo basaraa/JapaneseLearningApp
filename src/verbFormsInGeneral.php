@@ -19,13 +19,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_GET["showType"]))){
             }
             echo '</ul>';
             foreach ($origins as $origin){
+                $selectedVerbs=selectVerbWordsByOrigin($conn,$origin,$origins);
                 if ($i===0){
                     echo '<div class="verbFormTableDiv" id = '.$origin.' style="display:block"><h4 class="purple h4Place">Forma pre slovesa končiace s príponou "'.$origin.'" sa nahradia za nasledovné prípony z tabuľky:</h4>';
+                    echo '<p><span class="boldFont green">Zoznam slovies pre ktoré to platí:</span> <span class="sixteenFont white">';
                     $i=1;
                 }
-                else
+                else{
                     echo '<div class="verbFormTableDiv" id = '.$origin.' style="display:none"><h4 class="purple h4Place">Forma pre slovesa končiace s príponou "'.$origin.'" sa nahradia za nasledovné prípony z tabuľky:</h4>';
-
+                    echo '<p ><span class="boldFont green">Zoznam slovies pre ktoré to platí:</span> <span class="sixteenFont white">';
+                }
+                if ($selectedVerbs){
+                    foreach ($selectedVerbs as $selectedVerb){
+                        echo ''.$selectedVerb["jap_word"].', ';
+                    }
+                    echo '</span></p>';
+                }
                 echo '<table class="tabulka tabfix verbFormsInGeneral">
                     <thead>
                         <tr>
