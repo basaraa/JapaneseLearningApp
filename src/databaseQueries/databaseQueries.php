@@ -88,11 +88,15 @@ function selectSubTypeWords($conn,$type){
 
 }
 function selectVerbWordsByOrigin($conn,$origin,$origins){
-    if (strlen($origin)!=1)
+    if (strlen($origin)!=1 && $origin != "suru")
         $sql = "SELECT jap_word FROM words 
                 WHERE word_type = 'sloveso' AND jap_word LIKE '%".$origin."' 
                 AND SUBSTR(jap_word,-4) NOT IN ('suru') 
                 ORDER BY jap_word";
+	else if ($origin=="suru")
+        $sql = "SELECT jap_word FROM words 
+                WHERE word_type = 'sloveso' AND jap_word LIKE '%" .$origin."'           
+                ORDER by jap_word";			
     else
         $sql = "SELECT jap_word FROM words 
                 WHERE word_type = 'sloveso' AND jap_word LIKE '%".$origin."' 

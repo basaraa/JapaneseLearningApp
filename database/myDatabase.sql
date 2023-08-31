@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Sun 13.Aug 2023, 07:05
+-- Čas generovania: Št 31.Aug 2023, 11:36
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -38,7 +38,7 @@ CREATE TABLE `grammar` (
 --
 
 INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
-(1, 'Vyjadrenie ukončenia aktivity', 'Slovné spojenie -te shimau na konci vety popisuje aktivitu ktorá už skončila.'),
+(1, 'Vyjadrenie ukončenia aktivity', 'Spojením \"-te\" formy slovies s \"shimau/shimaimasu\" na konci vety popisuje aktivitu ktorá už skončila.'),
 (2, 'Vyjadrenie frekvencie opakovania', 'Slovne spojenie \"X ni Y\" popisuje koľko krát(Y) sa opakuje do nejakej časovej doby (X).'),
 (3, 'Vyjadrenie vďaky niekomu', 'Slovné spojenie \"X no okage de\" vyjadruje komu/čomu(X) ďakujeme za niečo.'),
 (4, 'Otázka lepšieho z možností', 'Slovné spojenie \"X to Y wa dochira no hou ga Z desu ka\" popisuje otázku ktorá z X a Y je lepšie v Z.'),
@@ -88,7 +88,7 @@ INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
 (49, 'Príkaz', 'Použitím základu slovesa spolu s \"nasai\" vyjadríme príkaz väčšinou na základe skúsenosti vyššieho veku alebo postavenia napr. rodičia prikazujú deťom.'),
 (50, 'Podmienka', 'Spojením \"A -eba/-ba B\" vyjadríme podmienku že ak platí/neplatí A tak bude platiť/neplatiť aj B kde \"eba/ba\" pridávame ku tvaru slovesa.'),
 (51, 'Keďže/Pretože', 'Spojením \"A kara/node B\" vyjadríme výraz keďže/pretože platí A tak platí B dá sa tiež chápať ako B lebo A.'),
-(52, 'Pravdepodobnosť/Asi', 'Spojením \"kamo shiremasen\" alebo spojením slovesa spolu s \"shou\" na konci nejakej vety vyjadríme pravdepodobnosť niečoho.'),
+(52, 'Pravdepodobnosť/Asi', 'Spojením \"kamo shiremasen\" alebo len \"kamo\" alebo spojením základu slovesa spolu s \"shou\" na konci nejakej vety vyjadríme pravdepodobnosť niečoho.'),
 (53, 'Podmienka pre zápor', 'Použitím \"A noni B\" hovoríme že aj keď platí A tak neplatí/nerobí B.'),
 (54, 'Podmienka B platí vždy', 'Použitím \"A -te mo B\" vraví o tom že B platí aj napriek tomu že platí/neplatí A.'),
 (55, 'Similarita v kvalite/vzhľade', 'Použitím \"A no youna B\" používame vtedy keď chceme povedať že B je rovnaké/podobné v kvalite či vzhľade ako A alebo tiež že A je príkladom B.'),
@@ -376,7 +376,8 @@ INSERT INTO `nounTypes` (`id`, `type_name`, `image_name`) VALUES
 (23, 'reštaurácia', 'restauracia.jpg'),
 (24, 'materiál', 'material.jpg'),
 (25, 'škola', 'school.jpg'),
-(26, 'frázy', 'frazy.jpg');
+(26, 'frázy', 'frazy.jpg'),
+(27, 'technológie', 'technology.jpg');
 
 -- --------------------------------------------------------
 
@@ -387,7 +388,7 @@ INSERT INTO `nounTypes` (`id`, `type_name`, `image_name`) VALUES
 CREATE TABLE `verbFormSuffixes` (
   `id` int UNSIGNED NOT NULL,
   `form_id` int UNSIGNED NOT NULL,
-  `origin` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `origin` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `form_suffix` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -563,7 +564,28 @@ INSERT INTO `verbFormSuffixes` (`id`, `form_id`, `origin`, `form_suffix`) VALUES
 (165, 18, 'su', 'saseru/sasemasu'),
 (166, 19, 'su', 'sasenai/sasemasen'),
 (167, 20, 'su', 'sareru/saremasu'),
-(168, 21, 'su', 'sarenai/saremasen');
+(168, 21, 'su', 'sarenai/saremasen'),
+(169, 1, 'suru', 'su'),
+(170, 2, 'suru', 'shite'),
+(171, 3, 'suru', NULL),
+(172, 4, 'suru', 'suru/shimasu'),
+(173, 5, 'suru', 'shinai/shimasen'),
+(174, 6, 'suru', 'shita/shimashita'),
+(175, 7, 'suru', 'shinakatta/shimasen deshita'),
+(176, 8, 'suru', 'shite imasu'),
+(177, 9, 'suru', 'shite imasen'),
+(178, 10, 'suru', 'shite imashita'),
+(179, 11, 'suru', 'shite imasen deshita'),
+(180, 12, 'suru', 'sureba/shimaseba'),
+(181, 13, 'suru', 'shinakereba/shimasen nara'),
+(182, 14, 'suru', 'shitara/shimashitara'),
+(183, 15, 'suru', 'shinakattara/shimasen deshitara'),
+(184, 16, 'suru', 'dekiru/dekimasu'),
+(185, 17, 'suru', 'dekinai/dekimasen'),
+(186, 18, 'suru', 'saseru/sasemasen'),
+(187, 19, 'suru', 'sasenai'),
+(188, 20, 'suru', 'sareru'),
+(189, 21, 'suru', 'sarerarenai');
 
 -- --------------------------------------------------------
 
@@ -735,14 +757,14 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (110, 'Sagasu', 'Hľadať', 'sloveso', NULL, '2023-05-10'),
 (111, 'Sasou', 'Pozvať', 'sloveso', NULL, '2023-05-10'),
 (112, 'Kiotsukete', 'Dávať si pozor', 'sloveso', NULL, '2023-05-10'),
-(113, 'Shiraberu', 'Pozrieť sa na niečo (napr. na dokumenty)', 'sloveso', NULL, '2023-05-10'),
+(113, 'Shiraberu', 'Zistiť/Skontrolovať/Pátrať', 'sloveso', NULL, '2023-05-10'),
 (114, 'Yoyaku suru', 'Rezervovať', 'sloveso', NULL, '2023-05-10'),
 (116, 'Orosu', 'Vybrať (peniaze - okane o orosu)', 'sloveso', NULL, '2023-05-10'),
 (117, 'Tomaru', 'Zastaviť', 'sloveso', NULL, '2023-05-10'),
 (118, 'Chuushi suru', 'Zrušiť', 'sloveso', NULL, '2023-05-10'),
 (119, 'Kureru', 'Dať (ten čo hovorí to nedaroval)', 'sloveso', NULL, '2023-05-10'),
 (120, 'Sotsugyou suru', 'Absolvovoať (školu)', 'sloveso', NULL, '2023-05-10'),
-(121, 'Junbi suru', 'Pripraviť sa na niečo', 'sloveso', NULL, '2023-05-10'),
+(121, 'Junbi suru/Youi', 'Pripraviť sa na niečo', 'sloveso', NULL, '2023-05-10'),
 (122, 'Okosu', 'Zobudiť', 'sloveso', NULL, '2023-05-10'),
 (123, 'Tsureteiku', 'Zobrať niekoho zosebou', 'sloveso', NULL, '2023-05-10'),
 (124, 'Naosu', 'Opraviť', 'sloveso', NULL, '2023-05-10'),
@@ -775,7 +797,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (151, 'Rikon suru', 'Rozviesť sa', 'sloveso', NULL, '2023-05-10'),
 (152, 'Omedetou gozaimasu', 'Gratulujem', 'sloveso', NULL, '2023-05-10'),
 (153, 'Sodachi', 'Vychovať', 'sloveso', NULL, '2023-05-10'),
-(154, 'Konzatsu suru', 'Byť preplnený (napr. kino bolo plné ľudí - eigakan wa konzatsu shimashita)', 'sloveso', NULL, '2023-05-10'),
+(154, 'Konzatsu suru', 'Byť preplnený (napr. kino bolo plné ľudí)', 'sloveso', NULL, '2023-05-10'),
 (155, 'Saraarai/Shokki o suru', 'Umyť riad', 'sloveso', NULL, '2023-05-10'),
 (156, 'Kouen', 'Park', 'podstatne meno', 1, '2023-05-10'),
 (157, 'Shizen', 'Príroda', 'podstatne meno', 1, '2023-05-10'),
@@ -845,10 +867,10 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (222, 'Ima', 'Obývačka', 'podstatne meno', 5, '2023-05-10'),
 (223, 'Shinshitsu', 'Spálňa', 'podstatne meno', 5, '2023-05-10'),
 (224, 'Daidokoro', 'Kuchyňa', 'podstatne meno', 5, '2023-05-10'),
-(225, 'Otearai', 'Kúpeľňa', 'podstatne meno', 5, '2023-05-10'),
+(225, 'Otearai/Yokushitsu', 'Kúpeľňa', 'podstatne meno', 5, '2023-05-10'),
 (226, 'Shokudou/Daininguruumu', 'Jedáleň', 'podstatne meno', 5, '2023-05-10'),
 (227, 'Rouka', 'Hala/Chodba', 'podstatne meno', 5, '2023-05-10'),
-(228, 'Barukoni', 'Balkón', 'podstatne meno', 5, '2023-05-10'),
+(228, 'Barukonii', 'Balkón', 'podstatne meno', 5, '2023-05-10'),
 (229, 'Ofuro', 'Kúpeľ', 'podstatne meno', 5, '2023-05-10'),
 (230, 'Shawaa', 'Sprcha', 'podstatne meno', 5, '2023-05-10'),
 (231, 'Sofaa', 'Gauč', 'podstatne meno', 5, '2023-05-10'),
@@ -1291,7 +1313,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (682, 'Gin iro', 'Strieborná farba', 'pridavne meno', NULL, '2023-07-09'),
 (683, 'Asatte', 'Pozajtra', 'podstatne meno', 4, '2023-07-09'),
 (684, 'Atarashii', 'Nové', 'pridavne meno', NULL, '2023-07-09'),
-(685, 'Ii', 'Dobré', 'pridavne meno', NULL, '2023-07-09'),
+(685, 'Ii/Yoi', 'Dobré', 'pridavne meno', NULL, '2023-07-09'),
 (686, 'Ie', 'Domov/Dom', 'podstatne meno', 5, '2023-07-09'),
 (687, 'Iku', 'Ísť', 'sloveso', NULL, '2023-07-09'),
 (688, 'Iru/Aru', 'Byť(živé/neživé)', 'sloveso', NULL, '2023-07-09'),
@@ -1534,7 +1556,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (925, 'Kakusu', 'Skryť sa', 'sloveso', NULL, '2023-07-14'),
 (926, 'Gamu', 'Žuvačka', 'podstatne meno', 7, '2023-07-14'),
 (927, 'Gurasu', 'Sklo', 'podstatne meno', 24, '2023-07-14'),
-(928, 'Naka', 'Vnútri', 'podstatne meno', 19, '2023-07-14'),
+(928, 'Naka/Chuu', 'Vnútri (chuu je v spojení zo slovom)', 'podstatne meno', 19, '2023-07-14'),
 (929, 'Hon', 'Kniha', 'podstatne meno', 12, '2023-07-14'),
 (930, 'Irasshai mase', 'Vitajte', 'podstatne meno', 23, '2023-07-14'),
 (931, 'Nan mei/nin desu ka.', 'Pre koľkých/Koľký ste?', 'podstatne meno', 23, '2023-07-14'),
@@ -1739,15 +1761,15 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (1130, 'Genkin', 'V hotovosti(zaplatiť)', 'podstatne meno', 12, '2023-08-13'),
 (1131, 'Shichaku shitsu', 'Šatňa/Prezliekacia miestnosť', 'podstatne meno', 1, '2023-08-13'),
 (1132, 'Ikaga desu ka.', 'Ako sa ti to páči?/Čo ty na to?.', 'podstatne meno', 26, '2023-08-13'),
-(1133, 'Yawarakai', 'Hladké/Jemné', 'pridavne meno', NULL, '2023-08-13'),
-(1134, 'Katai', 'Drsné', 'pridavne meno', NULL, '2023-08-13'),
+(1133, 'Yawarakai', 'Hladké/Jemné/Flexibilné (napr. telo)', 'pridavne meno', NULL, '2023-08-13'),
+(1134, 'Katai', 'Drsné/Stuhnuté', 'pridavne meno', NULL, '2023-08-13'),
 (1135, 'Saizu', 'Veľkosť', 'podstatne meno', 12, '2023-08-13'),
 (1136, 'Tsutsumi suru', 'Zabaliť', 'sloveso', NULL, '2023-08-13'),
 (1137, 'Uri kiru', 'Vypredať', 'sloveso', NULL, '2023-08-13'),
 (1138, 'Reshipi', 'Recept', 'podstatne meno', 12, '2023-08-13'),
 (1139, 'Ryouri reshipi', 'Recept na varenie', 'podstatne meno', 12, '2023-08-13'),
 (1140, 'Usui', 'Tenké', 'pridavne meno', NULL, '2023-08-13'),
-(1141, 'Ikutsuka', 'Niekoľko', 'podstatne meno', 26, '2023-08-13'),
+(1141, 'Ikutsu ka', 'Niekoľko', 'podstatne meno', 26, '2023-08-13'),
 (1142, 'Fukuro', 'Taška', 'podstatne meno', 12, '2023-08-13'),
 (1143, 'Wasureru', 'Zabudnúť', 'sloveso', NULL, '2023-08-13'),
 (1144, 'Toru', 'Zobrať/Vziať (vec)', 'sloveso', NULL, '2023-08-13'),
@@ -1775,7 +1797,7 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (1166, 'Keireki', 'Vlastná história', 'podstatne meno', 12, '2023-08-13'),
 (1167, 'Hantoshi', 'Polroka', 'podstatne meno', 4, '2023-08-13'),
 (1168, 'X to kurabete', 'V porovnaní s X', 'podstatne meno', 26, '2023-08-13'),
-(1169, 'Koraberu', 'Porovnať', 'sloveso', NULL, '2023-08-13'),
+(1169, 'Kuraberu', 'Porovnať', 'sloveso', NULL, '2023-08-13'),
 (1170, 'Maitoshi', 'Každý rok', 'podstatne meno', 4, '2023-08-13'),
 (1171, 'Hatake', 'Pole(na farme)', 'podstatne meno', 1, '2023-08-13'),
 (1172, 'Fueru', 'Zvýšiť', 'sloveso', NULL, '2023-08-13'),
@@ -1839,7 +1861,101 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (1230, 'Horobiru', 'Byť zničený', 'sloveso', NULL, '2023-08-13'),
 (1231, 'Ochiru', 'Spadnút', 'sloveso', NULL, '2023-08-13'),
 (1232, 'Ugokanaku naru', 'Prestať fungovať', 'sloveso', NULL, '2023-08-13'),
-(1233, 'Shikaku(2o)', 'Kvalifikácia/Certifikácia', 'podstatne meno', 12, '2023-08-13');
+(1233, 'Shikaku(2o)', 'Kvalifikácia/Certifikácia', 'podstatne meno', 12, '2023-08-13'),
+(1234, 'Pasokon o kidou suru', 'Naštartovať počítač', 'podstatne meno', 27, '2023-08-17'),
+(1235, 'Pasokon o saikidou suru', 'Reštartovať počítač', 'podstatne meno', 27, '2023-08-17'),
+(1236, 'Pasokon o shuuryou suru', 'Vypnúť počítač', 'podstatne meno', 27, '2023-08-17'),
+(1237, 'Intaanotto ni setsuzoku suru', 'Pripojiť sa na net', 'podstatne meno', 27, '2023-08-17'),
+(1238, 'Uebusaito ni akusesu suru', 'Navštívit webstránku', 'podstatne meno', 27, '2023-08-17'),
+(1239, 'Meeru', 'Mail', 'podstatne meno', 27, '2023-08-17'),
+(1240, 'Meeru o juushin suru', 'Obdržať mail', 'podstatne meno', 27, '2023-08-17'),
+(1241, 'Meeru o soushin suru', 'Poslať mail', 'podstatne meno', 27, '2023-08-17'),
+(1242, 'Meeru o hozon suru', 'Uložit mail', 'podstatne meno', 27, '2023-08-17'),
+(1243, 'Meeru o sakujo suru', 'Vymazať mail', 'podstatne meno', 27, '2023-08-17'),
+(1244, 'Meeru o insatsu suru', 'Vytlačiť mail', 'podstatne meno', 27, '2023-08-17'),
+(1245, 'Meeru ni fuairu o tenpu suru', 'Pripojiť súbor k mailu', 'podstatne meno', 27, '2023-08-17'),
+(1246, 'Sofuto o insutooru suru', 'Inštalovať softvér', 'podstatne meno', 27, '2023-08-17'),
+(1247, 'Fuairu o daunroodo suru', 'Stiahnuť súbor', 'podstatne meno', 27, '2023-08-17'),
+(1248, 'Deeta', 'Dáta', 'podstatne meno', 27, '2023-08-17'),
+(1249, 'Deeta o nyuuryoku suru', 'Input dát', 'podstatne meno', 27, '2023-08-17'),
+(1250, 'Settei', 'Nastavenia', 'podstatne meno', 27, '2023-08-17'),
+(1251, 'Shoshiki o settei suru', 'Nastaviť formát', 'podstatne meno', 27, '2023-08-17'),
+(1252, 'Fuairu o akeru', 'Otvoriť súbor', 'podstatne meno', 27, '2023-08-17'),
+(1253, 'Uirusu o kansen suru', 'Dostať vírus', 'podstatne meno', 27, '2023-08-17'),
+(1254, 'Pasokon ga furiizu suru', 'Počítač zamrzol', 'podstatne meno', 27, '2023-08-17'),
+(1255, 'Sutoresu', 'Stres', 'podstatne meno', 12, '2023-08-17'),
+(1256, 'Hantai desu', 'Byť proti (napr. návrhu)', 'podstatne meno', 26, '2023-08-17'),
+(1257, 'Takushii noriba', 'Nástupisko pre taxíky', 'podstatne meno', 2, '2023-08-17'),
+(1258, 'Nikki', 'Diár', 'podstatne meno', 12, '2023-08-17'),
+(1259, 'Gawa', 'Strana (napr. na pravej strane je banka)', 'podstatne meno', 12, '2023-08-17'),
+(1260, 'Michi o annai suru', 'Ukázať smer', 'podstatne meno', 2, '2023-08-17'),
+(1261, 'Pasuwoodo', 'Heslo', 'podstatne meno', 27, '2023-08-17'),
+(1262, 'Torihiki', 'Dohoda', 'podstatne meno', 12, '2023-08-17'),
+(1263, 'Jidou(na)', 'Automatické(napr. schody)', 'pridavne meno', NULL, '2023-08-17'),
+(1264, 'Annai ban', 'Informačná tabuľa výskytov (napr. v supermarkete)', 'podstatne meno', 12, '2023-08-17'),
+(1265, 'Raikyaku', 'Návšteva', 'podstatne meno', 12, '2023-08-17'),
+(1266, 'Seifuku', 'Uniforma', 'podstatne meno', 25, '2023-08-17'),
+(1267, 'Noryoku', 'Schopnosť', 'podstatne meno', 12, '2023-08-17'),
+(1268, 'Sangurasu', 'Slnečné okuliare', 'podstatne meno', 2, '2023-08-17'),
+(1269, 'Youbi', 'Deň v týždni', 'podstatne meno', 4, '2023-08-17'),
+(1270, 'Torikesu', 'Zrušiť (napr. dovolenku)', 'sloveso', NULL, '2023-08-17'),
+(1271, 'Sugoi(na)', 'Super', 'pridavne meno', NULL, '2023-08-31'),
+(1272, 'Tadashii', 'Správne (niečo urobiť)', 'pridavne meno', NULL, '2023-08-31'),
+(1273, 'Subarashii', 'Úžasné', 'pridavne meno', NULL, '2023-08-31'),
+(1274, 'Warui', 'Zlé', 'pridavne meno', NULL, '2023-08-31'),
+(1275, 'Hidoi', 'Hrozné', 'pridavne meno', NULL, '2023-08-31'),
+(1276, 'Fukai', 'Ďaleko', 'pridavne meno', NULL, '2023-08-31'),
+(1277, 'Tarinai', 'Nepostačujúce', 'pridavne meno', NULL, '2023-08-31'),
+(1278, 'Juubun(na)', 'Postačujúce', 'pridavne meno', NULL, '2023-08-31'),
+(1279, 'Shinsen(na)', 'Čerstvé', 'pridavne meno', NULL, '2023-08-31'),
+(1280, 'Kusatta', 'Zhnité', 'pridavne meno', NULL, '2023-08-31'),
+(1281, 'Nureta', 'Mokré', 'pridavne meno', NULL, '2023-08-31'),
+(1282, 'Kawaita', 'Suché', 'pridavne meno', NULL, '2023-08-31'),
+(1283, 'Hazu desu', 'Určite', 'podstatne meno', 26, '2023-08-31'),
+(1284, 'Dengon', 'Správa', 'podstatne meno', 12, '2023-08-31'),
+(1285, 'Ryoukan', 'Hostinec', 'podstatne meno', 1, '2023-08-31'),
+(1286, 'Seikou', 'Úspech', 'podstatne meno', 12, '2023-08-31'),
+(1287, 'Seikou suru', 'Uspieť', 'sloveso', NULL, '2023-08-31'),
+(1288, 'Shinpai', 'Starosť', 'podstatne meno', 12, '2023-08-31'),
+(1289, 'Shinpai suru', 'Robiť si starosti', 'sloveso', NULL, '2023-08-31'),
+(1290, 'Kokoro', 'Vnútro/Srdce (človeka)', 'podstatne meno', 17, '2023-08-31'),
+(1291, 'Susumu', 'Postúpiť vpred', 'sloveso', NULL, '2023-08-31'),
+(1292, 'Yasuku suru', 'Zlacnieť/Znížiť cenu', 'sloveso', NULL, '2023-08-31'),
+(1293, 'Yasuku naru', 'Byť zlacnený', 'podstatne meno', 12, '2023-08-31'),
+(1294, 'X biki', 'X zľava (napr. 40\\% zľava)', 'podstatne meno', 12, '2023-08-31'),
+(1295, 'Niau', 'Sluší (napr. niekomu oblečenie)', 'sloveso', NULL, '2023-08-31'),
+(1296, 'Yachin/Heyadai', 'Nájom', 'podstatne meno', 12, '2023-08-31'),
+(1297, 'Chuushi', 'Zrušenie (napr. mítingu)', 'podstatne meno', 12, '2023-08-31'),
+(1298, 'Teian', 'Návrh', 'podstatne meno', 12, '2023-08-31'),
+(1299, 'Teian suru', 'Navrhnúť', 'sloveso', NULL, '2023-08-31'),
+(1300, 'Koshou suru', 'Navrhnúť', 'sloveso', NULL, '2023-08-31'),
+(1301, 'Iten suru', 'Presúvať (napr. kanceláriu do inej budovy)', 'sloveso', NULL, '2023-08-31'),
+(1302, 'Fudou san ya', 'Realiťák', 'podstatne meno', 11, '2023-08-31'),
+(1303, 'Ooya san', 'Vlastník/Majiteľ (napr. bytu)', 'podstatne meno', 11, '2023-08-31'),
+(1304, 'Shikikin', 'Kaucia (pri nájme za príp. škody)', 'podstatne meno', 12, '2023-08-31'),
+(1305, 'Jisoku', 'Rýchlosť za hodinu', 'podstatne meno', 2, '2023-08-31'),
+(1306, 'Ukkari', 'Spontánne/Bez rozmýšľania', 'podstatne meno', 12, '2023-08-31'),
+(1307, 'Shuuten', 'Posledná zastávka (busu, vlaku)', 'podstatne meno', 2, '2023-08-31'),
+(1308, 'Shuusekisha', 'Zúčastnení (napr. prednášky)', 'podstatne meno', 11, '2023-08-31'),
+(1309, 'Ninzuu', 'Počet ľudí', 'podstatne meno', 12, '2023-08-31'),
+(1310, 'Yatte miru/Tamesu', 'Skúsiť', 'sloveso', NULL, '2023-08-31'),
+(1311, 'Chuumon', 'Objednávka', 'podstatne meno', 23, '2023-08-31'),
+(1312, 'Haya sugiru', 'Príliš rýchly', 'podstatne meno', 26, '2023-08-31'),
+(1313, 'Keiyaku', 'Kontrakt/Zmluva', 'podstatne meno', 12, '2023-08-31'),
+(1314, 'Seikyuushou', 'Účet (napr. za jedlo)', 'podstatne meno', 23, '2023-08-31'),
+(1315, 'Hitoyasumi', 'Krátka pauza/voľno', 'podstatne meno', 12, '2023-08-31'),
+(1316, 'Seihai', 'Svätý grál', 'podstatne meno', 21, '2023-08-31'),
+(1317, 'Sei', 'Svätý', 'pridavne meno', NULL, '2023-08-31'),
+(1318, 'Seiken', 'Svätý meč', 'podstatne meno', 21, '2023-08-31'),
+(1319, 'Ekusukalibaa', 'Exkalibur', 'podstatne meno', 21, '2023-08-31'),
+(1320, 'Minotaurosu', 'Minotaurus', 'podstatne meno', 21, '2023-08-31'),
+(1321, 'Hydora', 'Hydra', 'podstatne meno', 21, '2023-08-31'),
+(1322, 'Kimera', 'Chiméra', 'podstatne meno', 21, '2023-08-31'),
+(1323, 'Mantikoa', 'Mantikora', 'podstatne meno', 21, '2023-08-31'),
+(1324, 'Goburin', 'Goblin', 'podstatne meno', 21, '2023-08-31'),
+(1325, 'Hobugoburin', 'Hobgoblin', 'podstatne meno', 21, '2023-08-31'),
+(1326, 'Rizaadoman', 'Jašterý muž', 'podstatne meno', 21, '2023-08-31'),
+(1327, 'Shinkan', 'Kňaz', 'podstatne meno', 11, '2023-08-31');
 
 --
 -- Kľúče pre exportované tabuľky
@@ -1928,13 +2044,13 @@ ALTER TABLE `kanji`
 -- AUTO_INCREMENT pre tabuľku `nounTypes`
 --
 ALTER TABLE `nounTypes`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pre tabuľku `verbFormSuffixes`
 --
 ALTER TABLE `verbFormSuffixes`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 
 --
 -- AUTO_INCREMENT pre tabuľku `verbFormTypes`
@@ -1946,7 +2062,7 @@ ALTER TABLE `verbFormTypes`
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1234;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1328;
 
 --
 -- Obmedzenie pre exportované tabuľky

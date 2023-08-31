@@ -3,8 +3,8 @@
 <html lang="sk">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="partials/style.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Japončina</title>
