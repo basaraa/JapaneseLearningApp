@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
     $subType=intval($_GET["subType"]);
     $questionLanguage=$_GET["questionLanguage"];
     $answerLanguage = $questionLanguage =="SVK" ? "JP" : "SVK";
-    $types=["podstatne meno","pridavne meno","sloveso","ostatne"];
+    $types=["podstatne meno","pridavne meno","sloveso","all"];
     $result = selectExamQuestions($conn,$types[$type],$subType,$questionLanguage);
     if ($result){
         echo '<form class="form exam">';

@@ -28,7 +28,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="words.php?type=3&showType=0">Slová</a>
+                            <a class="nav-link" href="#">Slová</a>
                             <div class="dropdown-content">
                                 <div><a class="nav-link" href="words.php?type=0&showType=0">Podstatné mená</a>
                                 <div class="dropdown-subcontent">
@@ -55,6 +55,9 @@
                                     <a class="nav-link" href="exam.php?type=2&subType=0&questionLanguage=SVK">Test SVK->JP</a>
                                     <a class="nav-link" href="exam.php?type=2&subType=0&questionLanguage=JP">Test JP->SVK</a>
                                 </div></div>
+								<div><a class="nav-link" href="words.php?type=3&showType=0">Zoznam</a></div>
+								<div><a class="nav-link" href="exam.php?type=3&subType=0&questionLanguage=SVK">Test SVK->JP</a>
+								<div><a class="nav-link" href="exam.php?type=3&subType=0&questionLanguage=JP">Test JP->SVK</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -63,6 +66,7 @@
                                 <a class="nav-link" href="grammar.php?showType=0">Popis s príkladmi</a>
                                 <a class="nav-link" href="grammar.php?showType=1">Zoznam gramatík</a>
                                 <a class="nav-link" href="verbFormsInGeneral.php?showType=0">Časovanie slovies</a>
+								<a class="nav-link" href="imgShowerOnly.php?title=poradie_vety_v_japončine">Poradie slov vo vete</a>
                             </div>
                         </li>
                         <li class="nav-item">
