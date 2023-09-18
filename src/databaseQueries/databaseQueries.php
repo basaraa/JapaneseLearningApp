@@ -123,13 +123,13 @@ function selectExamQuestions ($conn,$type,$subType,$language){
     if ($subType==0){
         if ($language=="SVK"){
 			if ($type=="all")
-				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate' FROM words ORDER BY RAND () LIMIT 10";
+				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate',word_type FROM words ORDER BY RAND () LIMIT 10";
 			else
 				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate' FROM words WHERE word_type='".$type."' ORDER BY RAND () LIMIT 10";
 		}
         if ($language=="JP"){
 			if ($type=="all")
-				$sql="SELECT DISTINCT id,jap_word as 'word',svk_word as 'translate' FROM words ORDER BY RAND () LIMIT 10";
+				$sql="SELECT DISTINCT id,jap_word as 'word',svk_word as 'translate',word_type FROM words ORDER BY RAND () LIMIT 10";
 			else
 				$sql="SELECT DISTINCT id,jap_word as 'word',svk_word as 'translate' FROM words WHERE word_type='".$type."' ORDER BY RAND () LIMIT 10";
 		}
@@ -150,18 +150,10 @@ function selectExamQuestions ($conn,$type,$subType,$language){
 }
 function selectExamAnswers ($conn,$type,$subType,$language,$id){
     if ($subType==0){
-        if ($language=="SVK"){
-			if ($type=="all")
-				$sql="SELECT DISTINCT svk_word as 'word',jap_word as 'translate' FROM words WHERE id != '".$id."' ORDER BY RAND () LIMIT 3";
-			else
-				$sql="SELECT DISTINCT svk_word as 'word',jap_word as 'translate' FROM words WHERE word_type='".$type."' and id != '".$id."' ORDER BY RAND () LIMIT 3";
-		}
-        if ($language=="JP"){
-			if ($type=="all")
-				$sql="SELECT DISTINCT jap_word as 'word',svk_word as 'translate' FROM words WHERE id!= '".$id."' ORDER BY RAND () LIMIT 3";
-			else
-				$sql="SELECT DISTINCT jap_word as 'word',svk_word as 'translate' FROM words WHERE word_type='".$type."' and id!= '".$id."' ORDER BY RAND () LIMIT 3";
-		}
+        if ($language=="SVK")
+			$sql="SELECT DISTINCT svk_word as 'word',jap_word as 'translate' FROM words WHERE word_type='".$type."' and id != '".$id."' ORDER BY RAND () LIMIT 3";
+        if ($language=="JP")
+			$sql="SELECT DISTINCT jap_word as 'word',svk_word as 'translate' FROM words WHERE word_type='".$type."' and id != '".$id."' ORDER BY RAND () LIMIT 3";
     }
     else {
         if ($language=="SVK")

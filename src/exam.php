@@ -18,7 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             $word=$question["word"];
             $translatedWord=$question["translate"];
             echo '<div class="form-group"><h2 class="blue" id="question'.$x.'">Otázka č.'.$x.' preložte slovo: '.$word.'</h2>';
-            $subresult=selectExamAnswers($conn,$types[$type],$subType,$answerLanguage,$id);
+            $questionWordType=$types[$type] == "all" ? $question["word_type"] : $types[$type];				
+			$subresult=selectExamAnswers($conn,$questionWordType,$subType,$answerLanguage,$id);
             $words=[];
             array_push($words,$translatedWord);
             if ($subresult)
