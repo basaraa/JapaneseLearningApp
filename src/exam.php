@@ -1,14 +1,23 @@
 <?php
 include "partials/header.php";
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET["subType"]) && isset($_GET["questionLanguage"])){
+//test s otázkami
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["type"]) && isset ($_POST["subType"])
+	&& isset($_POST["questionLanguage"]) && isset($_POST["dateFrom"]) && isset($_POST["dateTo"])){
     require_once("config/config.php");
     include "databaseQueries/databaseQueries.php";
-    $type=$_GET["type"];
-    $subType=intval($_GET["subType"]);
-    $questionLanguage=$_GET["questionLanguage"];
+	$types=["podstatne meno","pridavne meno","sloveso","all"];
+    $type=$_POST["type"];
+    $subType=$types[$type] == "podstatne meno" ? intval($_POST["subType"]) : 0;
+    $questionLanguage=$_POST["questionLanguage"];
     $answerLanguage = $questionLanguage =="SVK" ? "JP" : "SVK";
-    $types=["podstatne meno","pridavne meno","sloveso","all"];
-    $result = selectExamQuestions($conn,$types[$type],$subType,$questionLanguage);
+	$dateFrom = ($_POST["dateFrom"] == NULL | date('Y-m-d', strtotime($_POST["dateFrom"])) != $_POST["dateFrom"]) ? "1111-01-01" : date('Y-m-d', strtotime($_POST["dateFrom"]));
+	$dateTo = ($_POST["dateTo"] == NULL | date('d-m-Y', strtotime($_POST["dateTo"])) != $_POST["dateTo"]) ? "3333-03-03" : date('Y-m-d', strtotime($_POST["dateTo"]));
+	if ($dateFrom > $dateTo){
+		$x=$dateFrom;
+		$dateFrom=$dateTo;
+		$dateTo=$x;
+	}		 
+    $result = selectExamQuestions($conn,$types[$type],$subType,$questionLanguage,$dateFrom,$dateTo);
     if ($result){
         echo '<form class="form exam">';
         $x=1;
@@ -34,12 +43,59 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             $x+=1;
         }
         echo '<button type="submit" class="btn btn-primary">Potvrdiť odpovede</button></div></form>';
+		echo '<div id="countAnswer"><h4 class="purple">Počet správnych odpovedí: <span id="countValue"></span>/<span id="maxValue"></span></h4></div>';
     }
     else http_response_code(400);
 }
-else echo http_response_code(400);
-?>
-<div id="countAnswer"><h4 class="purple">Počet správnych odpovedí: <span id="countValue"></span>/10</h4></div>
+//generovanie formu pre vytvorenie testu
+else if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["getExamForm"]) && $_GET["getExamForm"]==1){
+	require_once("config/config.php");
+    include "databaseQueries/databaseQueries.php";
+	?>
+	<h3 class="purple">Výber informácii pre generáciu testu</h3><form action="./exam.php" method="POST" class="form">
+		<div class="form-group">
+			<div>
+				<label class="marginx green">Vyber jazyk otázok</label><br>
+				<input type="radio" class="form-check-input" name= "questionLanguage" id="JP" value = "JP" required>
+				<label class="form-check-label" for="JP">Japončina</label>
+			</div>
+			<div>
+				<input type="radio" class="form-check-input" name= "questionLanguage" id="SVK" value = "SVK" required>
+			<label for="SVK">Slovenčina</label>
+			</div>
+			<label for="type" class="marginx green">Typ pre výber slov:</label>
+			<select class="form-control wordType" name= "type" id="type" required>			
+				<option value="0" >Podstatné meno</option>
+				<option value="1" >Prídavné meno</option>
+				<option value="2" >Sloveso</option>
+				<option value="3" >Všetky</option>
+			</select>
+			<label id="nounTypeLabel" for="subType" class="marginx green">Podtyp slova:</label>
+			<select class="form-control" name = "subType" id="nounType">
+			<?php
+				$result = selectNounTypes($conn);
+				if ($result) {
+					while ($nounType = mysqli_fetch_assoc($result)) {
+						$subType = $nounType["type_name"];
+						$id = $nounType["id"];
+						echo "<option value=$id>$subType</option>";
+					}
+				}
+			?>	
+			</select>
+			<label class="marginx green">Výber časového limitu pre otázky</label><br>
+			<div>
+				<label for="dateFrom">od
+				<input type="date" class="form-control date" id="dateFrom" name="dateFrom" value="1111-01-01">
+				</label>
+				<label for="dateTo">do
+				<input type="date" class="form-control date" id="dateTo" name="dateTo" value="3333-03-03" ></label>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">Generovať test</button>
+    </form>
 <?php
+} else echo http_response_code(400);
+
 include ("partials/footer.php");
 ?>

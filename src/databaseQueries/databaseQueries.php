@@ -119,30 +119,34 @@ function selectVerbFormByOrigins($conn,$origin){
 }
 
 //exam
-function selectExamQuestions ($conn,$type,$subType,$language){
+function selectExamQuestions ($conn,$type,$subType,$language,$dateFrom,$dateTo){
     if ($subType==0){
         if ($language=="SVK"){
 			if ($type=="all")
-				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate',word_type FROM words ORDER BY RAND () LIMIT 10";
+				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate',word_type FROM words 
+						WHERE !(day_of_addition < '".$dateFrom."' or day_of_addition > '".$dateTo."') ORDER BY RAND () LIMIT 10";
 			else
-				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate' FROM words WHERE word_type='".$type."' ORDER BY RAND () LIMIT 10";
+				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate' FROM words 
+						WHERE word_type='".$type."' and !(day_of_addition < '".$dateFrom."' or day_of_addition > '".$dateTo."') ORDER BY RAND () LIMIT 10";
 		}
         if ($language=="JP"){
 			if ($type=="all")
-				$sql="SELECT DISTINCT id,jap_word as 'word',svk_word as 'translate',word_type FROM words ORDER BY RAND () LIMIT 10";
+				$sql="SELECT DISTINCT id,jap_word as 'word',svk_word as 'translate',word_type FROM words
+						WHERE !(day_of_addition < '".$dateFrom."' or day_of_addition > '".$dateTo."') ORDER BY RAND () LIMIT 10";
 			else
-				$sql="SELECT DISTINCT id,jap_word as 'word',svk_word as 'translate' FROM words WHERE word_type='".$type."' ORDER BY RAND () LIMIT 10";
+				$sql="SELECT DISTINCT id,jap_word as 'word',svk_word as 'translate' FROM words 
+						WHERE word_type='".$type."' and !(day_of_addition < '".$dateFrom."' or day_of_addition > '".$dateTo."') ORDER BY RAND () LIMIT 10";
 		}
     }
     else {
         if ($language=="SVK")
             $sql="SELECT DISTINCT words.id,svk_word as 'word',jap_word as 'translate' FROM words 
                     JOIN nounTypes ON nounTypes.id=words.word_subtype_id
-                    WHERE word_type='".$type."' AND nounTypes.id = '".$subType."' ORDER BY RAND () LIMIT 10";
+                    WHERE word_type='".$type."' AND nounTypes.id = '".$subType."' AND !(day_of_addition < '".$dateFrom."' or day_of_addition > '".$dateTo."') ORDER BY RAND () LIMIT 10";
         if ($language=="JP")
             $sql="SELECT DISTINCT words.id,jap_word as 'word',svk_word as 'translate' FROM words 
                     JOIN nounTypes ON nounTypes.id=words.word_subtype_id
-                    WHERE word_type='".$type."' AND nounTypes.id = '".$subType."' ORDER BY RAND () LIMIT 10";
+                    WHERE word_type='".$type."' AND nounTypes.id = '".$subType."' AND !(day_of_addition < '".$dateFrom."' or day_of_addition > '".$dateTo."') ORDER BY RAND () LIMIT 10";
     }
     $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;

@@ -67,8 +67,14 @@ $(function (){
                         let answerString="question".concat(i);
                         let rightAnswer=result[answerString];
                         let label=answerString.concat("_label");
-                        let x = document.getElementsByClassName(label);
+                        let x = document.getElementsByClassName(label);						
                         for (j=0;j<4;j++){
+							if (x[j]==null){
+								document.getElementById("countAnswer").style.display="block";
+								document.getElementById("countValue").innerText=result.rightAnswers;
+								document.getElementById("maxValue").innerText=i-1;
+								return;
+							}
                             let answer = x[j].innerText;
                             if (answer.replace(/\s/g, '')===rightAnswer.replace(/\s/g, ''))
                                 x[j].style.color="green";
@@ -78,6 +84,7 @@ $(function (){
                     }
                     document.getElementById("countAnswer").style.display="block";
                     document.getElementById("countValue").innerText=result.rightAnswers;
+					document.getElementById("maxValue").innerText=i-1;
                 }
                 catch{
                     alert (data)

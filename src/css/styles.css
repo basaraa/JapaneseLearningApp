@@ -229,6 +229,7 @@ input[type=radio]{
     position:absolute;
     left:40%;
     margin-right: 5px;
+	margin-top: 8px;
     padding: 0;
 }
 .form{
@@ -340,7 +341,19 @@ h2,h4{
 .white {
     color: white;
 }
-
+.marginx{
+	margin-top: 10px;
+}
+.date{
+	width:150px;
+}
+.inline{
+	display:inline-block;
+	white-space: pre-wrap;
+}
+button{
+	margin-bottom:10px;
+}
 
 
 

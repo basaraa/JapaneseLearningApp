@@ -36,28 +36,20 @@
                                     <a class="nav-link" href="words.php?type=0&showType=2">Kategórie</a>                                   
                                     <a class="nav-link" href="words.php?type=0&showType=1&frontLanguage=JP">Karty JP->SVK</a>
                                     <a class="nav-link" href="words.php?type=0&showType=1&frontLanguage=SVK">Karty SVK->JP</a>
-                                    <a class="nav-link" href="exam.php?type=0&subType=&questionLanguage=SVK">Test SVK->JP</a>
-                                    <a class="nav-link" href="exam.php?type=0&subType=&questionLanguage=JP">Test JP->SVK</a>
                                 </div></div>
                                 <div><a class="nav-link" href="#">Prídavné mená</a>
                                 <div class="dropdown-subcontent">
                                     <a class="nav-link" href="words.php?type=1&showType=0">Zoznam</a>
                                     <a class="nav-link" href="words.php?type=1&showType=1&frontLanguage=JP">Karty JP->SVK</a>
                                     <a class="nav-link" href="words.php?type=1&showType=1&frontLanguage=SVK">Karty SVK->JP</a>
-                                    <a class="nav-link" href="exam.php?type=1&subType=&questionLanguage=SVK">Test SVK->JP</a>
-                                    <a class="nav-link" href="exam.php?type=1&subType=&questionLanguage=JP">Test JP->SVK</a>
                                 </div></div>
                                 <div><a class="nav-link" href="#">Slovesá</a>
                                 <div class="dropdown-subcontent">
                                     <a class="nav-link" href="words.php?type=2&showType=0">Zoznam</a>
                                     <a class="nav-link" href="words.php?type=2&showType=1&frontLanguage=JP">Karty JP->SVK</a>
                                     <a class="nav-link" href="words.php?type=2&showType=1&frontLanguage=SVK">Karty SVK->JP</a>
-                                    <a class="nav-link" href="exam.php?type=2&subType=0&questionLanguage=SVK">Test SVK->JP</a>
-                                    <a class="nav-link" href="exam.php?type=2&subType=0&questionLanguage=JP">Test JP->SVK</a>
                                 </div></div>
 								<div><a class="nav-link" href="words.php?type=3&showType=0">Zoznam</a></div>
-								<div><a class="nav-link" href="exam.php?type=3&subType=0&questionLanguage=SVK">Test SVK->JP</a>
-								<div><a class="nav-link" href="exam.php?type=3&subType=0&questionLanguage=JP">Test JP->SVK</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -78,6 +70,10 @@
                                 <a class="nav-link" href="addForm.php?addType=3">Kanji</a>
                             </div>
                         </li>
+						<li class="nav-item">
+                            <a class="nav-link" href="exam.php?getExamForm=1">Test</a>
+                        </li>
+						
                     </ul>
                 </div>
             </nav>

@@ -9,10 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
         $showType=$_GET["showType"];
         echo '<div>
 <button class="btn btn-primary" onclick="window.location.href=\'nounTypeWords.php?showType=1&frontLanguage=SVK&subType='.$subType.'\'" >Kartičky SVK->JP</button>
-<button class="btn btn-primary" onclick="window.location.href=\'nounTypeWords.php?showType=1&frontLanguage=JP&subType='.$subType.'\'">Kartičky JP->SVK</button>
-<button class="btn btn-primary" onclick="window.location.href=\'exam.php?type=0&subType='.$subType.'&questionLanguage=JP\'">Test JP->SVK</button>
-<button class="btn btn-primary" onclick="window.location.href=\'exam.php?type=0&subType='.$subType.'&questionLanguage=SVK\'">Test SVK->JP</button>
-</div>';
+<button class="btn btn-primary" onclick="window.location.href=\'nounTypeWords.php?showType=1&frontLanguage=JP&subType='.$subType.'\'">Kartičky JP->SVK</button></div>';
 		if ($subType==17){
 			echo '<div class="midd">
 					  <h2>Ľudské telo:</h2>
