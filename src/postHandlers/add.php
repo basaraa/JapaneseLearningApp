@@ -7,15 +7,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["addType"])) {
         $addType=intval($_POST["addType"]);
         if ($addType == 0) {
-            if (isset($_POST["japWord"]) && isset($_POST["svkWord"]) && isset($_POST["type"]) && isset($_POST["nounType"])) {
+            if (isset($_POST["japWord"]) && isset($_POST["svkWord"]) && isset($_POST["type"]) && isset($_POST["nounType"]) && isset($_POST["kanji"])) {
                 $japWord = mb_escape($_POST["japWord"]);
                 $svkWord = mb_escape($_POST["svkWord"]);
                 $type = mb_escape($_POST["type"]);
                 $nounType = $type=="podstatne meno" ? intval($_POST["nounType"]) : '';
+				$kanji = $_POST["kanji"] == NULL ? '': mb_escape($_POST["kanji"]);
                 $type=mb_escape($type);
                 $checkJapWord = selectWordByName($conn, $japWord);
                 if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
-                    $result = insertWord($conn, $japWord,$svkWord,$type,$nounType);
+                    $result = insertWord($conn, $japWord,$svkWord,$type,$nounType,$kanji);
                     if ($result) {
                         echo json_encode(["scs" => true, "msg" => '<h2 class="blue">Úspešne pridané slovo: ' . $japWord . '</h2>']);
                     } else echo json_encode(["scs" => false, "msg" => '<h2 class="red">' . $conn->error . '</h2>']);
@@ -50,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else echo json_encode(["scs" => false, "msg" => '<h2 class="red">' . $conn->error . '</h2>']);
             }
         }
-        //grammarSentence
+        //kanji
         else if ($addType == 3) {
             if (isset($_POST["kanji"]) && isset($_POST["kunyoumi"]) && isset($_POST["onyoumi"]) && isset($_POST["slovak"])) {
                 $kanji = mb_escape($_POST["kanji"]);

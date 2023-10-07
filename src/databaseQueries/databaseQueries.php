@@ -11,9 +11,16 @@ function selectAlphabet($conn,$type){
     return $result;
 
 }
+
+function selectKanjiCombinations($conn,$kanji){
+    $sql="SELECT kanji,jap_word,svk_word FROM words WHERE POSITION('".$kanji."' IN kanji) > 0";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
+
+}
 function selectWords($conn,$type,$orderColumn,$order){
     if ($type == "podstatne meno")
-        $sql="SELECT words.id,jap_word,svk_word,word_type,type_name,day_of_addition FROM words JOIN nounTypes ON nounTypes.id=words.word_subtype_id 
+        $sql="SELECT words.id,jap_word,svk_word,word_type,type_name,day_of_addition,kanji FROM words JOIN nounTypes ON nounTypes.id=words.word_subtype_id 
                 WHERE word_type='".$type."' ORDER BY $orderColumn $order";
     else if ($type!="all")
         $sql="SELECT * FROM words WHERE word_type='".$type."' ORDER BY $orderColumn $order";
@@ -34,7 +41,7 @@ function selectWordByNameCheckDuplicate($conn,$word,$id){
     return $result;
 }
 function selectWordByID($conn,$id){
-    $sql="SELECT words.id,jap_word,svk_word,word_type,word_subtype_id FROM words 
+    $sql="SELECT words.id,jap_word,svk_word,word_type,word_subtype_id,kanji FROM words 
     where words.id='".$id."' limit 1";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
@@ -80,7 +87,7 @@ function selectNounTypeByID($conn,$id){
     return $result;
 }
 function selectSubTypeWords($conn,$type){
-    $sql="SELECT words.id,nounTypes.id as 'type_id',jap_word,svk_word,word_type,type_name,day_of_addition FROM words
+    $sql="SELECT words.id,nounTypes.id as 'type_id',jap_word,svk_word,word_type,type_name,day_of_addition,kanji FROM words
             JOIN nounTypes ON nounTypes.id=words.word_subtype_id
             WHERE nounTypes.id='".$type."' ORDER BY words.jap_word";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
@@ -203,8 +210,8 @@ function deleteSingleGrammarSentences($conn,$sentenceID){
 }
 
 //insert queries
-function insertWord($conn,$japWord,$svkWord,$type,$nounType){
-    $sql="INSERT INTO words (jap_word,svk_word,word_type,word_subtype_id,day_of_addition) VALUES ('$japWord','$svkWord','$type',NULLIF('$nounType',''),now())";
+function insertWord($conn,$japWord,$svkWord,$type,$nounType,$kanji){
+    $sql="INSERT INTO words (jap_word,svk_word,word_type,word_subtype_id,day_of_addition,kanji) VALUES ('$japWord','$svkWord','$type',NULLIF('$nounType',''),now(),'$kanji')";
     $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
@@ -225,10 +232,10 @@ function insertKanji($conn,$kanji,$kunyoumi,$onyoumi,$slovak){
 }
 
 //update queries
-function updateWord ($conn,$id, $japWord, $svkWord, $type, $nounType){
+function updateWord ($conn,$id, $japWord, $svkWord, $type, $nounType,$kanji){
     $subject = "UPDATE words
                 SET jap_word='".$japWord."',svk_word='".$svkWord."', word_type='".$type."',
-                word_subtype_id = NULLIF('$nounType','')           
+                word_subtype_id = NULLIF('$nounType',''),kanji='".$kanji."'        
                 WHERE id='".$id."'";
     $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
     return $result;

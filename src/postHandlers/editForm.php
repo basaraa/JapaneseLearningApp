@@ -55,7 +55,9 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
                         echo "<option value=$subTypeID>$subType</option>";
                 }
             }
-            echo '</select></div>
+            echo '</select><label for="kanji">Znak kanji:</label>
+						<input type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16">
+					</div>
                     <button type="submit" class="btn btn-primary">Upraviť slovo</button>
                 </form>';
         } else echo '<h2 class="red">Slovo sa nenašlo</h2>';

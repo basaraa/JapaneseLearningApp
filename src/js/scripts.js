@@ -289,6 +289,23 @@ function generateEditForm(id,type){
     });
 }
 
+//generate kanji combination list
+function generateKanjiCombinations(kanji){
+    $.ajax({
+        type: 'post',
+        url: 'postHandlers/kanjiCombinations.php',
+        data: {kanji : kanji},
+        success: function (data) {
+            document.getElementById("modal_background").style.display="block";
+            document.getElementsByClassName("modal_div")[0].style.display="flex";
+            document.getElementById("kanjiCombinations").innerHTML=data
+        },
+        error: function (){
+            alert ("Nastala chyba skúste to znova")
+        }
+    });
+}
+
 function go_back(){
     document.getElementById("modal_background").style.display="none";
     document.getElementsByClassName("modal_div")[0].style.display="none";

@@ -33,8 +33,11 @@ if ((isset($_GET["addType"]))) {
                     echo "<option value=$id>$subType</option>";
                 }
             }
-            echo '</select></div>
-                    <button type="submit" class="btn btn-primary">Vložiť slovo</button>
+			echo '		</select>
+						<label for="kanji">Znak kanji:</label>
+						<input type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16">
+					</div>
+					<button type="submit" class="btn btn-primary">Vložiť slovo</button>
                 </form>';
 
         }
@@ -77,7 +80,7 @@ if ((isset($_GET["addType"]))) {
                         <input type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16" required>
                         <label for="kunyoumi">Zadajte kunyoumi (tvar ku kane):</label>
                         <input type="text" class="form-control" name= "kunyoumi" id="kunyoumi" placeholder="Zadajte kunyoumi" maxlength="32" required>
-                        <label for="grammarDescription">Zadajte onyoumi (tvar ku ostatným kanji):</label>
+                        <label for="onyoumi">Zadajte onyoumi (tvar ku ostatným kanji):</label>
                         <input type="text" class="form-control" name= "onyoumi" id="onyoumi" placeholder="Zadajte onyoumi" maxlength="32" required>  
                         <label for="grammarDescription">Význam po slovensky:</label>
                         <input type="text" class="form-control" name= "slovak" id="slovak" placeholder="Zadajte význam kanji po slovensky" maxlength="32" required>  

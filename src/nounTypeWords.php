@@ -31,11 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
                                 <span class="cursor" onclick="zoradenie(1,false,0)"> (x)</span>
                                 <span class="cursor" onclick="zoradenie(1,true,0)">(y)</span>
                             </th>
+							<th>Kanji</th>
                             ';
             echo '                <th>Dátum pridania
                                 <span class="cursor" onclick="zoradenie(2,false,1)"> (x)</span>
                                 <span class="cursor" onclick="zoradenie(2,true,1)">(y)</span>
                               </th>
+							  
                               <th></th>
                          </tr>
                     </thead>
@@ -45,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
                     echo '<tr>';
                     echo '<td class="searchedValue">' . $row["jap_word"] . '</td>';
                     echo '<td class="searchedValue">' . $row["svk_word"] . '</td>';
+					$kanji = $row["kanji"] == NULL ? '' : $row["kanji"];
+					echo '<td>' .$kanji. '</td>';
                     echo '<td>' . date("d.m.Y", strtotime($row["day_of_addition"])) . '</td>';
                     $rowID=$row["id"];
                     $functionEditForm="'$rowID',0";

@@ -5,7 +5,7 @@ include "../helper/helpFunctions.php";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (isset($_POST["addType"])){
         $addType=intval($_POST["addType"]);
-        if ($addType >= 0 && $addType <= 2) {
+        if ($addType >= 0 && $addType <= 3) {
             $msg = '';
             $errorWords='';
 			$count=0;
@@ -26,20 +26,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             array_push($subtypesId, $subtype["id"]);
                         }
                     }
-                    while ($line = fgetcsv($opened_file, 256,";")) {
+                    while ($line = fgetcsv($opened_file, 272,";")) {
                         $result = null;
                         if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 128)
-                            && (isset ($line[2]) && in_array($line[2], $types)) && isset ($line[3])) {
+                            && (isset ($line[2]) && in_array($line[2], $types)) && isset ($line[3]) && isset ($line[4])) {
                             if (($line[2] != "podstatne meno") ||
                                 ($line[2] === "podstatne meno" && (in_array($line[3], $subtypes)))) {
                                 $japWord = mb_escape($line[0]);
                                 $svkWord = mb_escape($line[1]);
                                 $type = $line[2];
                                 $nounType = $type == "podstatne meno" ? $subtypesId[array_search($line[3], $subtypes)] : '';
+								$kanji = $type == "NULL" ? '': mb_escape($line[4]);
                                 $type=mb_escape($type);
                                 $checkJapWord = selectWordByName($conn, $japWord);
                                 if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
-                                    $result = insertWord($conn, $japWord, $svkWord, $type, $nounType);
+                                    $result = insertWord($conn, $japWord, $svkWord, $type, $nounType,$kanji);
                                     if ($result){
                                         $msg .= $line[0] . ', ';
 										$count += 1;

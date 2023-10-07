@@ -41,7 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                             </th>';
                 $x = 4;
             }
-            echo '                <th>Dátum pridania
+            echo '                
+							<th>Kanji</th>
+							<th>Dátum pridania
                                 <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=day_of_addition&order=ASC\'"> (x)</span>
                                 <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=day_of_addition&order=DESC\'"> (x)</span>
                               </th>
@@ -62,6 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                     if ($type === 0) {
                         echo '<td>' . $row["type_name"] . '</td>';
                     }
+					$kanji = $row["kanji"] == NULL ? '' : $row["kanji"];
+					echo '<td>' .$kanji. '</td>';
                     echo '<td>' . date("d.m.Y", strtotime($row["day_of_addition"])) . '</td>';
                     $rowID=$row["id"];
                     $functionEditForm="'$rowID',0";

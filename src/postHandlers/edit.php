@@ -8,16 +8,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //word
         if ($editType == 0) {
             if (isset($_POST["wordID"]) && isset($_POST["japWord"])  && isset($_POST["svkWord"])
-                && isset($_POST["type"]) && isset($_POST["nounType"])) {
+                && isset($_POST["type"]) && isset($_POST["nounType"]) && isset($_POST["kanji"])) {
                 $japWord = mb_escape($_POST["japWord"]);
                 $svkWord = mb_escape($_POST["svkWord"]);
                 $wordID= intval($_POST["wordID"]);
                 $type = $_POST["type"];
                 $nounType = $type == "podstatne meno" ? intval($_POST["nounType"]) : '';
+				$kanji = $_POST["kanji"] == NULL ? '': mb_escape($_POST["kanji"]);
                 $type = mb_escape($type);
                 $checkJapWord = selectWordByNameCheckDuplicate($conn, $japWord,$wordID);
                 if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
-                    $result = updateWord($conn,$wordID, $japWord, $svkWord, $type, $nounType);
+                    $result = updateWord($conn,$wordID, $japWord, $svkWord, $type, $nounType,$kanji);
                     if ($result) {
                         echo json_encode(["scs" => true, "msg" => '<h2 class="blue">Úspešne upravené slovo: ' . $japWord . '</h2>']);
                     } else echo json_encode(["scs" => false, "msg" => '<h2 class="red">' . $conn->error . '</h2>']);
