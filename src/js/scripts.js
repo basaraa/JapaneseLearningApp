@@ -298,7 +298,7 @@ function generateKanjiCombinations(kanji){
         success: function (data) {
             document.getElementById("modal_background").style.display="block";
             document.getElementsByClassName("modal_div")[0].style.display="flex";
-            document.getElementById("kanjiCombinations").innerHTML=data
+            document.getElementById("modal_text").innerHTML=data
         },
         error: function (){
             alert ("Nastala chyba skúste to znova")

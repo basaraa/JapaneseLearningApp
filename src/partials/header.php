@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="partials/style.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <title>Japončina</title>
 </head>
 <body>

@@ -58,5 +58,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else echo json_encode(["scs" => false, "msg" => '<h2 class="red">' . $conn->error . '</h2>']);
             } else http_response_code(400);
         }
+		else if ($editType == 3){
+            if (isset($_POST["kanjiID"]) && isset($_POST["kanji_char"]) && isset($_POST["kunyoumi"]) 
+				&& isset($_POST["onyoumi"]) && isset($_POST["slovak"])) {
+                $kanjiID= intval($_POST["kanjiID"]);
+				$kanji_char=mb_escape($_POST["kanji_char"]);
+				$kunyoumi=mb_escape($_POST["kunyoumi"]);
+				$onyoumi=mb_escape($_POST["onyoumi"]);
+				$slovak=mb_escape($_POST["slovak"]);
+                $result = updateKanji($conn,$kanjiID,$kanji_char,$kunyoumi,$onyoumi,$slovak);
+                if ($result) {
+                    echo json_encode(["scs" => true, "msg" => '<h2 class="blue">Úspešne upravené kanji: ' . $kanji_char . '</h2>']);
+                } else echo json_encode(["scs" => false, "msg" => '<h2 class="red">' . $conn->error . '</h2>']);
+            } else http_response_code(400);
+        }
     } else echo http_response_code(400);
 } else echo http_response_code(400);

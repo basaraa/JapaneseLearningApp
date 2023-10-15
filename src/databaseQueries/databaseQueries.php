@@ -6,10 +6,15 @@ function selectAlphabet($conn,$type){
     else if ($type=="katakana")
         $sql = "SELECT katakana as 'kana',romaji FROM kana";
     else
-        $sql="SELECT kanji_char,kunyoumi,onyoumi,slovak FROM kanji";
+        $sql="SELECT id,kanji_char,kunyoumi,onyoumi,slovak FROM kanji";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 
+}
+function selectKanjiByID($conn,$id){
+	$sql="SELECT kanji_char,kunyoumi,onyoumi,slovak FROM kanji where id='".$id."' limit 1";
+    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
+    return $result;
 }
 
 function selectKanjiCombinations($conn,$kanji){
@@ -41,8 +46,7 @@ function selectWordByNameCheckDuplicate($conn,$word,$id){
     return $result;
 }
 function selectWordByID($conn,$id){
-    $sql="SELECT words.id,jap_word,svk_word,word_type,word_subtype_id,kanji FROM words 
-    where words.id='".$id."' limit 1";
+    $sql="SELECT id,jap_word,svk_word,word_type,word_subtype_id,kanji FROM words where id='".$id."' limit 1";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
@@ -211,7 +215,7 @@ function deleteSingleGrammarSentences($conn,$sentenceID){
 
 //insert queries
 function insertWord($conn,$japWord,$svkWord,$type,$nounType,$kanji){
-    $sql="INSERT INTO words (jap_word,svk_word,word_type,word_subtype_id,day_of_addition,kanji) VALUES ('$japWord','$svkWord','$type',NULLIF('$nounType',''),now(),'$kanji')";
+    $sql="INSERT INTO words (jap_word,svk_word,word_type,word_subtype_id,day_of_addition,kanji) VALUES ('$japWord','$svkWord','$type',NULLIF('$nounType',''),now(),NULLIF('$kanji',''))";
     $result=$conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
@@ -254,4 +258,10 @@ function updateSentence ($conn,$id,$sentenceJap,$sentenceSvk){
     $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
     return $result;
 }
-
+function updateKanji ($conn,$id,$kanji_char,$kunyoumi,$onyoumi,$slovak){
+    $subject = "UPDATE kanji
+                SET kanji_char='".$kanji_char."', kunyoumi='".$kunyoumi."', onyoumi='".$onyoumi."', slovak='".$slovak."'           
+                WHERE id='".$id."'";
+    $result = $conn->query($subject) or die("Chyba pri vykonaní query: " . $conn->error);
+    return $result;
+}
