@@ -99,10 +99,14 @@ function selectSubTypeWords($conn,$type){
 
 }
 function selectVerbWordsByOrigin($conn,$origin,$origins){
-    if (strlen($origin)!=1 && $origin != "suru")
+	if ($origin=="kuru")
+        $sql = "SELECT jap_word FROM words 
+                WHERE word_type = 'sloveso' AND UPPER(jap_word) = '".strtoupper($origin)."'           
+                ORDER by jap_word";
+    else if (strlen($origin)!=1 && $origin != "suru")
         $sql = "SELECT jap_word FROM words 
                 WHERE word_type = 'sloveso' AND jap_word LIKE '%".$origin."' 
-                AND SUBSTR(jap_word,-4) NOT IN ('suru') 
+                AND SUBSTR(jap_word,-4) NOT IN ('suru','Kuru') 
                 ORDER BY jap_word";
 	else if ($origin=="suru")
         $sql = "SELECT jap_word FROM words 
@@ -111,7 +115,7 @@ function selectVerbWordsByOrigin($conn,$origin,$origins){
     else
         $sql = "SELECT jap_word FROM words 
                 WHERE word_type = 'sloveso' AND jap_word LIKE '%".$origin."' 
-                AND SUBSTR(jap_word,-2) NOT IN ('".implode("','",$origins)."') AND SUBSTR(jap_word,-4) NOT IN ('suru')
+                AND SUBSTR(jap_word,-2) NOT IN ('".implode("','",$origins)."') AND SUBSTR(jap_word,-4) NOT IN ('suru','Kuru')
                 ORDER by jap_word";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
