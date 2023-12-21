@@ -89,6 +89,7 @@ if ((isset($_GET["addType"]))) {
                 </form>';
         }
         echo '<h3 class="csvImporth purple">Vložiť z .csv súboru:</h3>
+				<p>Parametre riadku pri pridávaní z .csv súboru sú v rovnakom poradí ako pri manuálnom priradení, kde každý parameter je oddelený bodkočiarkou.</p>
                 <form class="form addFormCSV" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="type" name="addType" value = "'.$addType.'">
                 <div class="form-group">
@@ -106,7 +107,7 @@ else http_response_code(400);
 <div class="modal_div2">
     <div id="modal_vrstva2">
         <div id="modal_text2"></div>
-        <button class="btn btn-primary" onclick="window.location.reload()">Obnoviť stránku</button>
+        <button class="btn btn-primary" onclick="go_back3();">Pridať ďalšie</button>
     </div>
 </div>
 <div id="modal_background"></div>

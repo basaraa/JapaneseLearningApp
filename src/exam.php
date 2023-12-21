@@ -72,6 +72,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["getExamForm"]) && $
 			</select>
 			<label id="nounTypeLabel" for="subType" class="marginx green">Podtyp slova:</label>
 			<select class="form-control" name = "subType" id="nounType">
+				<option value="all">všetky</option>
 			<?php
 				$result = selectNounTypes($conn);
 				if ($result) {

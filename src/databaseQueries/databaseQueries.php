@@ -135,7 +135,7 @@ function selectVerbFormByOrigins($conn,$origin){
 
 //exam
 function selectExamQuestions ($conn,$type,$subType,$language,$dateFrom,$dateTo){
-    if ($subType==0){
+    if ($subType==0 || $subType=="all"){
         if ($language=="SVK"){
 			if ($type=="all")
 				$sql="SELECT DISTINCT id,svk_word as 'word',jap_word as 'translate',word_type FROM words 
@@ -168,7 +168,7 @@ function selectExamQuestions ($conn,$type,$subType,$language,$dateFrom,$dateTo){
 
 }
 function selectExamAnswers ($conn,$type,$subType,$language,$id){
-    if ($subType==0){
+    if ($subType==0 || $subType=="all"){
         if ($language=="SVK")
 			$sql="SELECT DISTINCT svk_word as 'word',jap_word as 'translate' FROM words WHERE word_type='".$type."' and id != '".$id."' ORDER BY RAND () LIMIT 3";
         if ($language=="JP")

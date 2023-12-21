@@ -314,6 +314,11 @@ function go_back2(){
     document.getElementById("modal_background3").style.display="none";
     document.getElementsByClassName("modal_div3")[0].style.display="none";
 }
+function go_back3(){
+    document.getElementById("modal_background2").style.display="none";
+    document.getElementsByClassName("modal_div2")[0].style.display="none";
+	$("input[type=text]").val('');
+}
 $('input#searchBar').quicksearch('table#tabulka tbody tr',{
 		selector: '.searchedValue',
 		delay: 200

@@ -29,9 +29,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     while ($line = fgetcsv($opened_file, 272,";")) {
                         $result = null;
                         if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 128)
-                            && (isset ($line[2]) && in_array($line[2], $types)) && isset ($line[3])) {
+                            && (isset ($line[2]) && in_array($line[2], $types))) {
                             if (($line[2] != "podstatne meno") ||
-                                ($line[2] === "podstatne meno" && (in_array($line[3], $subtypes)))) {
+                                ($line[2] === "podstatne meno" && isset ($line[3]) && (in_array($line[3], $subtypes)))) {
                                 $japWord = mb_escape($line[0]);
                                 $svkWord = mb_escape($line[1]);
                                 $type = $line[2];
