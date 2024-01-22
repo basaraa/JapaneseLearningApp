@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"])){
                 <tr>
                     <th>Znak</th>
                     <th>Slovensky
-                        <span onclick="zoradenie(1,false,0)"> (a)</span>
-                        <span onclick="zoradenie(1,true,0)">(z)</span>
+                        <i class="cursor bi bi-sort-up" onclick="zoradenie(1,false,0)"></i>
+                        <i class="cursor bi bi-sort-down" onclick="zoradenie(1,true,0)"></i>
                     </th>
                 </tr>
               </thead>
@@ -35,16 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"])){
                         <tr>
                             <th>Kanji</th>
                             <th>Kunyomi(Kana)
-                                <span onclick="zoradenie(1,false,0)"> (x)</span>
-                                <span onclick="zoradenie(1,true,0)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(1,false,0)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(1,true,0)"></i>
                             </th>
                             <th>Onyomi(Kanji)
-                                <span onclick="zoradenie(2,false,0)"> (x)</span>
-                                <span onclick="zoradenie(2,true,0)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(2,false,0)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(2,true,0)"></i>
                             </th>
 							<th>Slovensky
-                                <span onclick="zoradenie(3,false,0)"> (x)</span>
-                                <span onclick="zoradenie(3,true,0)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(3,false,0)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(3,true,0)"></i>
                             </th>
 							<th></th>
                         </tr>

@@ -354,7 +354,17 @@ h2,h4{
 button{
 	margin-bottom:10px;
 }
-
+.remainChars{
+	font-size:12px;
+	margin-left : 5px;
+	color : grey;
+}
+.hidden{
+	display: none;
+}
+.bi-sort-down,.bi-sort-up{
+	color: blue;
+}
 
 
 

@@ -7,47 +7,54 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
     $type=intval($_GET["type"]);
     $showType=intval($_GET["showType"]);
     $types=["podstatne meno","pridavne meno","sloveso","all"];
-    if ($type>=0 && $type<=4) {
+	[$fromDate,$toDate]=(isset($_GET["monthWords"]) && $_GET["monthWords"]==1) ? [date("Y-m-d",strtotime("-1 months")),date("Y-m-d")] : ["2000-01-01","3333-03-03"];
+	if ($type>=0 && $type<=4) {
         $orderColumns=["jap_word","svk_word","word_type","word_subtype_id","day_of_addition"];
         $orders=["ASC","DESC"];
         $orderColumn=(isset($_GET["orderColumn"])&&in_array($_GET["orderColumn"],$orderColumns)) ? mb_escape($_GET["orderColumn"]) : "jap_word";
         $order=(isset($_GET["order"])&&in_array($_GET["order"],$orders)) ? mb_escape($_GET["order"]) : "ASC";
         if ($showType!=2)
-            $result = selectWords($conn, $types[$type],$orderColumn,$order);
+            $result = selectWords($conn, $types[$type],$orderColumn,$order,$fromDate,$toDate);
         //zoznam
         if ($showType == 0) {
+			$orderTable=getOrdersForTable($orderColumns,$orderColumn,$order);
 			echo '<label class="purple">Vyhľadaj slovo:</label><input type="text" class="form-control" id="searchBar">';
             $x = 3;
             echo '<table class="tabulka tabfix" id="tabulka">
                     <thead>
                         <tr>
-                            <th>Japonsky
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=jap_word&order=ASC\'"> (x)</span>
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=jap_word&order=DESC\'"> (x)</span>
+                            <th id="th-jap_word" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[0],$orderTable[0]).'\'">
+								Japonsky
+								<i class="bi bi-sort-up hidden"></i>
+								<i class="bi bi-sort-down hidden"></i>
                             </th>
-                            <th>Slovensky
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=svk_word&order=ASC\'"> (x)</span>
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=svk_word&order=DESC\'"> (x)</span>
+                            <th id="th-svk_word" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[1],$orderTable[1]).'\'">
+								Slovensky
+								<i class="bi bi-sort-up hidden"></i>
+								<i class="bi bi-sort-down hidden"></i>
                             </th>
-                            <th>Typ
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_type&order=ASC\'"> (x)</span>
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_type&order=DESC\'"> (x)</span>
+                            <th id="th-word_type" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[2],$orderTable[2]).'\'">
+								Typ
+								<i class="bi bi-sort-up hidden"></i>
+								<i class="bi bi-sort-down hidden"></i>
                             </th>
                             ';
             if ($type === 0) {
-                echo '          <th>Podtyp
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_subtype_id&order=ASC\'"> (x)</span>
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=word_subtype_id&order=DESC\'"> (x)</span>
+                echo '      <th id="th-word_subtype_id" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[3],$orderTable[3]).'\'">
+								Podtyp
+								<i class="bi bi-sort-up hidden"></i>
+								<i class="bi bi-sort-down hidden"></i>
                             </th>';
                 $x = 4;
             }
             echo '                
 							<th>Kanji</th>
-							<th>Dátum pridania
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=day_of_addition&order=ASC\'"> (x)</span>
-                                <span class="cursor" onclick="window.location.href=\'words.php?type='.$type.'&showType='.$showType.'&orderColumn=day_of_addition&order=DESC\'"> (x)</span>
-                              </th>
-                              <th></th>
+							<th id="th-day_of_addition" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[4],$orderTable[4]).'\'">
+								Dátum pridania
+								<i class="bi bi-sort-up hidden"></i>
+								<i class="bi bi-sort-down hidden"></i>
+                            </th>
+                            <th></th>
                          </tr>
                     </thead>
                     <tbody>';
@@ -76,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                     echo '</tr>';
                 }
             }
-            echo '</tbody></table>';
+            echo '</tbody></table>';			
         }
         //kartičky
         else if ($showType == 1 && isset($_GET["frontLanguage"])){

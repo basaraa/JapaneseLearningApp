@@ -24,18 +24,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["subType"]) && (isset($_G
                     <thead>
                         <tr>
                             <th>Japonsky
-                                <span class="cursor" onclick="zoradenie(0,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(0,true,0)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(0,false,0)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(0,true,0)"></i>
                             </th>
                             <th>Slovensky
-                                <span class="cursor" onclick="zoradenie(1,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(1,true,0)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(1,false,0)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(1,true,0)"></i>
                             </th>
 							<th>Kanji</th>
                             ';
             echo '                <th>Dátum pridania
-                                <span class="cursor" onclick="zoradenie(2,false,1)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(2,true,1)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(2,false,1)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(2,true,1)"></i>
                               </th>
 							  
                               <th></th>

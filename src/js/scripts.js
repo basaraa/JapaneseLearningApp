@@ -335,3 +335,22 @@ $(function () {
         $('#'+id).css("display" , "block");
     });
 });
+$.urlParam = function(name){
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (results)
+		return results[1] || 0;
+	else
+		return 0;
+}
+$(function () {
+	if ($.urlParam('orderColumn') && $.urlParam('order')){
+		let tableThId=$('#th-'+$.urlParam('orderColumn'));
+		if (tableThId.find('.bi-sort-up') && tableThId.find('.bi-sort-down')){
+			if ($.urlParam('order')=="ASC")
+				tableThId.find('.bi-sort-up').removeClass('hidden')
+			else 
+				tableThId.find('.bi-sort-down').removeClass('hidden')
+			console.log(tableThId.attr('class'));
+		}
+	}
+});

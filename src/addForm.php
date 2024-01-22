@@ -10,11 +10,11 @@ if ((isset($_GET["addType"]))) {
                     <input type="hidden" id="addType" name="addType" value = "' . $addType . '">';
         //slová
         if ($addType == 0) {
-            echo '<div class="form-group">
-                        <label for="japWord">Japonské slovo:</label>
-                        <input type="text" class="form-control" name= "japWord" id="japWord" placeholder="Zadajte japonské slovo" maxlength="64" required>
-                        <label for="svkWord">Preklad:</label>
-                        <input type="text" class="form-control" name= "svkWord" id="svkWord" placeholder="Zadajte preklad" maxlength="128" required>
+            echo '<div class="form-group">					
+                        <label for="japWord">Japonské slovo: </label><span class="remainChars">{{ RemainingChars(0) }}</span>
+                        <input v-model="formInput[0]" type="text" class="form-control" name= "japWord" id="japWord" placeholder="Zadajte japonské slovo" maxlength="64" required>				
+                        <label for="svkWord">Preklad:</label><span class="remainChars">{{ RemainingChars(1) }}</span>
+                        <input v-model="formInput[1]" type="text" class="form-control" name= "svkWord" id="svkWord" placeholder="Zadajte preklad" maxlength="128" required>
                         <label for="type">Typ slova:</label>
                         <select class="form-control wordType" name= "type" id="type" required>
                             <option value="podstatne meno" >Podstatné meno</option>
@@ -34,8 +34,8 @@ if ((isset($_GET["addType"]))) {
                 }
             }
 			echo '		</select>
-						<label for="kanji">Znak kanji:</label>
-						<input type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16">
+						<label for="kanji">Znak kanji:</label><span class="remainChars">{{ RemainingChars(2) }}</span>
+						<input v-model="formInput[2]" type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16">
 					</div>
 					<button type="submit" class="btn btn-primary">Vložiť slovo</button>
                 </form>';
@@ -44,10 +44,10 @@ if ((isset($_GET["addType"]))) {
         //grammar
         else if ($addType == 1) {
             echo '<div class="form-group">
-                        <label for="grammarTitle">Názov gramatiky:</label>
-                        <input type="text" class="form-control" name= "grammarTitle" id="grammarTitle" placeholder="Zadajte názov gramatiky" maxlength="64" required>
-                        <label for="grammarDescription">Popis gramatiky:</label>
-                        <input type="text" class="form-control" name= "grammarDescription" id="grammarDescription" placeholder="Zadajte popis gramatiky" maxlength="128" required> 
+                        <label for="grammarTitle">Názov gramatiky:</label><span class="remainChars">{{ RemainingChars(0) }}</span>
+                        <input v-model="formInput[0]" type="text" class="form-control" name= "grammarTitle" id="grammarTitle" placeholder="Zadajte názov gramatiky" maxlength="64" required>
+                        <label for="grammarDescription">Popis gramatiky:</label><span class="remainChars">{{ RemainingChars(1) }}</span>
+                        <input v-model="formInput[1]" type="text" class="form-control" name= "grammarDescription" id="grammarDescription" placeholder="Zadajte popis gramatiky" maxlength="128" required> 
                   </div>
                   <button type="submit" class="btn btn-primary">Vložiť gramatiku</button>
                 </form>';
@@ -65,10 +65,10 @@ if ((isset($_GET["addType"]))) {
                     echo "<option value=$grammarID>$grammarTitle</option>";
                 }
             }
-            echo '</select><label for="grammarJapSentence">Veta po japonsky:</label>
-                  <input type="text" class="form-control" name= "grammarJapSentence" id="grammarJapSentence" placeholder="Zadajte vetu ku gramatike po japonsky:" maxlength="128" required>
-                  <label for="grammarSvkSentence">Veta po slovensky:</label>
-                  <input type="text" class="form-control" name= "grammarSvkSentence" id="grammarSvkSentence" placeholder="Zadajte vetu ku gramatike po slovensky:" maxlength="128" required>                
+            echo '</select><label for="grammarJapSentence">Veta po japonsky:</label><span class="remainChars">{{ RemainingChars(0) }}</span>
+                  <input v-model="formInput[0]" type="text" class="form-control" name= "grammarJapSentence" id="grammarJapSentence" placeholder="Zadajte vetu ku gramatike po japonsky:" maxlength="128" required>
+                  <label for="grammarSvkSentence">Veta po slovensky:</label><span class="remainChars">{{ RemainingChars(1) }}</span>
+                  <input v-model="formInput[1]" type="text" class="form-control" name= "grammarSvkSentence" id="grammarSvkSentence" placeholder="Zadajte vetu ku gramatike po slovensky:" maxlength="128" required>                
                   </div>
                   <button type="submit" class="btn btn-primary">Vložiť vetu</button>
                   </form>';
@@ -76,14 +76,14 @@ if ((isset($_GET["addType"]))) {
         //kanji
         else if ($addType == 3) {
             echo '<div class="form-group">
-                        <label for="kanji">Znak kanji:</label>
-                        <input type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16" required>
-                        <label for="kunyoumi">Zadajte kunyoumi (tvar ku kane):</label>
-                        <input type="text" class="form-control" name= "kunyoumi" id="kunyoumi" placeholder="Zadajte kunyoumi" maxlength="32" required>
-                        <label for="onyoumi">Zadajte onyoumi (tvar ku ostatným kanji):</label>
-                        <input type="text" class="form-control" name= "onyoumi" id="onyoumi" placeholder="Zadajte onyoumi" maxlength="32" required>  
-                        <label for="grammarDescription">Význam po slovensky:</label>
-                        <input type="text" class="form-control" name= "slovak" id="slovak" placeholder="Zadajte význam kanji po slovensky" maxlength="32" required>  
+                        <label for="kanji">Znak kanji:</label><span class="remainChars">{{ RemainingChars(0) }}</span>
+                        <input v-model="formInput[0]" type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16" required>
+                        <label for="kunyoumi">Zadajte kunyoumi (tvar ku kane):</label><span class="remainChars">{{ RemainingChars(1) }}</span>
+                        <input v-model="formInput[1]" type="text" class="form-control" name= "kunyoumi" id="kunyoumi" placeholder="Zadajte kunyoumi" maxlength="32" required>
+                        <label for="onyoumi">Zadajte onyoumi (tvar ku ostatným kanji):</label><span class="remainChars">{{ RemainingChars(2) }}</span>
+                        <input v-model="formInput[2]" type="text" class="form-control" name= "onyoumi" id="onyoumi" placeholder="Zadajte onyoumi" maxlength="32" required>  
+                        <label for="grammarDescription">Význam po slovensky:</label><span class="remainChars">{{ RemainingChars(3) }}</span>
+                        <input v-model="formInput[3]" type="text" class="form-control" name= "slovak" id="slovak" placeholder="Zadajte význam kanji po slovensky" maxlength="32" required>  
                   </div>
                   <button type="submit" class="btn btn-primary">Vložiť kanji</button>
                 </form>';

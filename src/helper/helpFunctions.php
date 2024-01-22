@@ -32,3 +32,17 @@ function echo_grammar($conn,$grammar){
 
     }
 }
+function getOrdersForTable($orderColumns,$orderColumn,$order){
+	$ordersTable=[];
+	for ($i=0;$i<count($orderColumns);$i++){
+		if ($orderColumn==$orderColumns[$i] && $order!="DESC")
+			array_push($ordersTable,"DESC");
+		else
+			array_push($ordersTable,"ASC");
+	}
+	return $ordersTable;
+}
+function generateLinkForWords($type,$showType,$orderColumn,$order){
+	$link="words.php?type=$type&showType=$showType&orderColumn=$orderColumn&order=$order";
+	return $link;
+}

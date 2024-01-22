@@ -19,12 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset ($_GET["showType"])){
                     <thead>
                         <tr>
                             <th>Názov gramatiky
-                                <span class="cursor" onclick="zoradenie(0,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(0,true,0)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(0,false,0)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(0,true,0)"></i>
                             </th>
                             <th>Popis gramatiky
-                                <span class="cursor" onclick="zoradenie(1,false,0)"> (x)</span>
-                                <span class="cursor" onclick="zoradenie(1,true,0)">(y)</span>
+                                <i class="cursor bi bi-sort-up" onclick="zoradenie(1,false,0)"></i>
+                                <i class="cursor bi bi-sort-down" onclick="zoradenie(1,true,0)"></i>
                             </th>
                             <th></th>
                         </tr>
