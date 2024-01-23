@@ -23,24 +23,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             echo '<table class="tabulka tabfix" id="tabulka">
                     <thead>
                         <tr>
-                            <th id="th-jap_word" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[0],$orderTable[0]).'\'">
+                            <th id="th-jap_word" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[0],$orderTable[0],$fromDate,$toDate).'\'">
 								Japonsky
 								<i class="bi bi-sort-up hidden"></i>
 								<i class="bi bi-sort-down hidden"></i>
                             </th>
-                            <th id="th-svk_word" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[1],$orderTable[1]).'\'">
+                            <th id="th-svk_word" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[1],$orderTable[1],$fromDate,$toDate).'\'">
 								Slovensky
 								<i class="bi bi-sort-up hidden"></i>
 								<i class="bi bi-sort-down hidden"></i>
                             </th>
-                            <th id="th-word_type" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[2],$orderTable[2]).'\'">
+                            <th id="th-word_type" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[2],$orderTable[2],$fromDate,$toDate).'\'">
 								Typ
 								<i class="bi bi-sort-up hidden"></i>
 								<i class="bi bi-sort-down hidden"></i>
                             </th>
                             ';
             if ($type === 0) {
-                echo '      <th id="th-word_subtype_id" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[3],$orderTable[3]).'\'">
+                echo '      <th id="th-word_subtype_id" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[3],$orderTable[3],$fromDate,$toDate).'\'">
 								Podtyp
 								<i class="bi bi-sort-up hidden"></i>
 								<i class="bi bi-sort-down hidden"></i>
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             }
             echo '                
 							<th>Kanji</th>
-							<th id="th-day_of_addition" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[4],$orderTable[4]).'\'">
+							<th id="th-day_of_addition" class="cursor" onclick="window.location.href=\''.generateLinkForWords($type,$showType,$orderColumns[4],$orderTable[4],$fromDate,$toDate).'\'">
 								Dátum pridania
 								<i class="bi bi-sort-up hidden"></i>
 								<i class="bi bi-sort-down hidden"></i>

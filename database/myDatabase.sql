@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Po 22.Jan 2024, 16:52
+-- Čas generovania: Út 23.Jan 2024, 11:12
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -2357,32 +2357,60 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `word_subtype_id
 (1699, 'Nugu', 'Zobliecť', 'sloveso', NULL, '2023-12-22', NULL),
 (1700, 'Yogoreru', 'Zašpiniť sa', 'sloveso', NULL, '2023-12-22', NULL),
 (1701, 'Yorokobu', 'Tešiť sa', 'sloveso', NULL, '2023-12-22', NULL),
-(1702, 'Ryougaesuru', 'Zmeniť peňažnú menu (napr. euro za fórint)', 'sloveso', NULL, '2024-01-22', NULL),
-(1703, 'Oosugiru', 'Prílišveľa', 'sloveso', NULL, '2024-01-22', NULL),
-(1704, 'Unzarisuru', 'Mať dosť/Byť unavený z niečoho (napr. stále to isté v telke)', 'sloveso', NULL, '2024-01-22', NULL),
+(1702, 'Ryougae suru', 'Zmeniť peňažnú menu (napr. euro za fórint)', 'sloveso', NULL, '2024-01-22', ''),
+(1703, 'Oo sugiru', 'Prílišveľa', 'sloveso', NULL, '2024-01-22', ''),
+(1704, 'Unzari suru', 'Mať dosť/Byť unavený z niečoho (napr. stále to isté v telke)', 'sloveso', NULL, '2024-01-22', ''),
 (1705, 'Torawareru', 'Byť posadnutý (niečím)', 'sloveso', NULL, '2024-01-22', NULL),
 (1706, 'Hieru', 'Mrznúť', 'sloveso', NULL, '2024-01-22', NULL),
 (1707, 'Kutakuta(na)', 'Unavený', 'pridavne meno', NULL, '2024-01-22', NULL),
-(1708, 'Tasseisuru', 'Dosiahnuť', 'sloveso', NULL, '2024-01-22', NULL),
-(1709, 'Ureshii desu/Ukiukisuru', 'Byťšťastný', 'sloveso', NULL, '2024-01-22', NULL),
+(1708, 'Tassei suru', 'Dosiahnuť', 'sloveso', NULL, '2024-01-22', ''),
+(1709, 'Ureshii desu/Ukiuki suru', 'Byťšťastný', 'sloveso', NULL, '2024-01-22', ''),
 (1710, 'Fusawashii', 'Vhodné', 'pridavne meno', NULL, '2024-01-22', NULL),
-(1711, 'Gokaisuru/Kanchigaisuru', 'Zle pochopiť/Prísť k nedorozumeniu', 'sloveso', NULL, '2024-01-22', NULL),
+(1711, 'Gokai suru/Kanchigai suru', 'Zle pochopiť/Prísť k nedorozumeniu', 'sloveso', NULL, '2024-01-22', ''),
 (1712, 'Fusegu', 'Predísť (niečomu)', 'sloveso', NULL, '2024-01-22', NULL),
-(1713, 'Namakemononinaru/Daradarasuru', 'Byťlenivý', 'sloveso', NULL, '2024-01-22', NULL),
+(1713, 'Namakemono ni naru/Daradara suru', 'Byťlenivý', 'sloveso', NULL, '2024-01-22', ''),
 (1714, 'Minaosu', 'Premyslieť/Prehodnotiť', 'sloveso', NULL, '2024-01-22', NULL),
 (1715, 'Yoru(2s)', 'Zastaviť sa (niekde)', 'sloveso', NULL, '2024-01-22', NULL),
 (1716, 'Nigai', 'Horké', 'pridavne meno', NULL, '2024-01-22', NULL),
 (1717, 'Fukai', 'Nepríjemné/Hlboké', 'pridavne meno', NULL, '2024-01-22', NULL),
 (1718, 'Kurai', 'Tmavý', 'pridavne meno', NULL, '2024-01-22', NULL),
 (1719, 'Akarui', 'Svetlý', 'pridavne meno', NULL, '2024-01-22', NULL),
-(1720, 'Tondemonai', 'Absurdné', 'pridavne meno', NULL, '2024-01-22', NULL),
+(1720, 'Tondemo nai', 'Absurdné', 'pridavne meno', NULL, '2024-01-22', ''),
 (1721, 'Osoreru/Kowagaru', 'Báťsa', 'sloveso', NULL, '2024-01-22', NULL),
 (1722, 'Kowai', 'Strašidelný', 'pridavne meno', NULL, '2024-01-22', NULL),
 (1723, 'Torauma', 'Trauma (psychologická)', 'podstatne meno', 9, '2024-01-22', NULL),
 (1724, 'Guuzen', 'Náhoda', 'podstatne meno', 12, '2024-01-22', NULL),
 (1725, 'Waza(na)', 'Schválne', 'pridavne meno', NULL, '2024-01-22', NULL),
 (1726, 'Shoujiki', 'Popravde', 'podstatne meno', 12, '2024-01-22', NULL),
-(1727, 'Ochitsuku', 'Upokojiť sa', 'sloveso', NULL, '2024-01-22', NULL);
+(1727, 'Ochitsuku', 'Upokojiť sa', 'sloveso', NULL, '2024-01-22', NULL),
+(1728, 'Kanzen', 'Úplne', 'podstatne meno', 12, '2024-01-23', NULL),
+(1729, 'Namakemono', 'Lenivec', 'podstatne meno', 11, '2024-01-23', NULL),
+(1730, 'Kyousei', 'Prinútenie/Nátlak', 'podstatne meno', 12, '2024-01-23', NULL),
+(1731, 'Kaiwa', 'Konverzácia', 'podstatne meno', 12, '2024-01-23', NULL),
+(1732, 'X fuu', 'V štýle/tradícii krajiny X', 'podstatne meno', 12, '2024-01-23', NULL),
+(1733, 'Terebi bangumi', 'Televízny program', 'podstatne meno', 27, '2024-01-23', NULL),
+(1734, 'Ryourinin', 'Kuchár', 'podstatne meno', 11, '2024-01-23', NULL),
+(1735, 'Nozomi', 'Prianie/Želanie', 'podstatne meno', 12, '2024-01-23', NULL),
+(1736, 'Yokubou/Ganbou', 'Túžba', 'podstatne meno', 12, '2024-01-23', NULL),
+(1737, 'Kankouteki de nai', 'Nie je prospešné pre zdravie', 'podstatne meno', 26, '2024-01-23', NULL),
+(1738, 'Kateiryouri', 'Domáca strava/varenie', 'podstatne meno', 7, '2024-01-23', NULL),
+(1739, 'Gaishokuryouri', 'Strava z reštaurácie', 'podstatne meno', 7, '2024-01-23', NULL),
+(1740, 'Osusume', 'Odporúčanie', 'podstatne meno', 12, '2024-01-23', NULL),
+(1741, 'Sensu ga ii', 'Mať dobrý vkus', 'podstatne meno', 26, '2024-01-23', NULL),
+(1742, 'Nichijouseikatsu', 'Každodennýživot', 'podstatne meno', 12, '2024-01-23', NULL),
+(1743, 'Gokai/Kanchigai', 'Nedorozumenie', 'podstatne meno', 12, '2024-01-23', NULL),
+(1744, 'Souieba', 'Ak si dobre pamätám/Keď nad tým tak rozmýšľam', 'podstatne meno', 26, '2024-01-23', NULL),
+(1745, 'Shumi o oshitsukeru', 'Vnútiť niekomu svoj názor', 'podstatne meno', 26, '2024-01-23', NULL),
+(1746, 'Yarukoto ga yama no you', 'Mať toho vyše hlavy/Mať toho príliš veľa na práci', 'podstatne meno', 26, '2024-01-23', NULL),
+(1747, 'Dassuishou', 'Dehydratácia', 'podstatne meno', 9, '2024-01-23', NULL),
+(1748, 'Gan', 'Rakovina', 'podstatne meno', 9, '2024-01-23', NULL),
+(1749, 'Kyukyusha', 'Sanitka/Ambulancia', 'podstatne meno', 9, '2024-01-23', NULL),
+(1750, 'Shuukan', 'Zvyk', 'podstatne meno', 12, '2024-01-23', NULL),
+(1751, 'Seikatsushuukan', 'Životný štýl/Každodenné zvyky', 'podstatne meno', 12, '2024-01-23', NULL),
+(1752, 'Piripiri to itai', 'Neprestávajúcabolesť', 'podstatne meno', 9, '2024-01-23', NULL),
+(1753, 'Nagaiki', 'Dlhýživot', 'podstatne meno', 12, '2024-01-23', NULL),
+(1754, 'Kansenshou', 'Infekcia', 'podstatne meno', 9, '2024-01-23', NULL),
+(1755, 'Kyoufu', 'Strach', 'podstatne meno', 12, '2024-01-23', NULL);
 
 --
 -- Kľúče pre exportované tabuľky
@@ -2489,7 +2517,7 @@ ALTER TABLE `verbFormTypes`
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1728;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1756;
 
 --
 -- Obmedzenie pre exportované tabuľky
