@@ -44,7 +44,7 @@ function getOrdersForTable($orderColumns,$orderColumn,$order){
 }
 function generateLinkForWords($type,$showType,$orderColumn,$order,$fromDate=null,$toDate=null){
 	$link="words.php?type=$type&showType=$showType&orderColumn=$orderColumn&order=$order";
-	if ($fromDate !=null && $toDate!=null)
+	if (($fromDate !=null && $fromDate !='2000-01-01') && ($toDate!=null && $toDate!='3333-03-03'))
 		$link.="&monthWords=1";
 	return $link;
 }

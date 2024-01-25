@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $nounType = $type == "podstatne meno" ? $subtypesId[array_search($line[3], $subtypes)] : '';
 								$kanji = (isset ($line[4]) && $line[4]!='NULL') ? mb_escape($line[4]) : '';
                                 $type=mb_escape($type);
-                                $checkJapWord = selectWordByName($conn, $japWord);
+                                $checkJapWord = selectWordByNameTypeNounType($conn, $japWord,$type,$nounType);
                                 if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
                                     $result = insertWord($conn, $japWord, $svkWord, $type, $nounType,$kanji);
                                     if ($result){

@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $nounType = $type == "podstatne meno" ? intval($_POST["nounType"]) : '';
 				$kanji = $_POST["kanji"] == NULL ? '': mb_escape($_POST["kanji"]);
                 $type = mb_escape($type);
-                $checkJapWord = selectWordByNameCheckDuplicate($conn, $japWord,$wordID);
+                $checkJapWord = selectWordByNameCheckDuplicate($conn, $japWord,$wordID,$type,$nounType);
                 if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
                     $result = updateWord($conn,$wordID, $japWord, $svkWord, $type, $nounType,$kanji);
                     if ($result) {

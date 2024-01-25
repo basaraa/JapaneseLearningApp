@@ -39,13 +39,13 @@ function selectWords($conn,$type,$orderColumn,$order,$fromDate="2000-01-01",$toD
     return $result;
 
 }
-function selectWordByName($conn,$word){
-    $sql="SELECT * FROM words where jap_word='".$word."'";
+function selectWordByNameTypeNounType($conn,$word,$type,$nountype){
+    $sql="SELECT * FROM words where jap_word='".$word."' and word_type='".$type."' and word_subtype_id='".$nountype."'";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
-function selectWordByNameCheckDuplicate($conn,$word,$id){
-    $sql="SELECT * FROM words where jap_word='".$word."' and id != '".$id."'";
+function selectWordByNameCheckDuplicate($conn,$word,$id,$type,$nountype){
+    $sql="SELECT * FROM words where jap_word='".$word."' and id != '".$id."' and word_type='".$type."' and word_subtype_id='".$nountype."'";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
