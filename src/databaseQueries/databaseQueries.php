@@ -23,24 +23,36 @@ function selectKanjiCombinations($conn,$kanji){
     return $result;
 
 }
-function selectWords($conn,$type,$orderColumn,$order,$fromDate="2000-01-01",$toDate="3333-03-03"){
-    if ($type == "podstatne meno")
-        $sql="SELECT words.id,jap_word,svk_word,word_type,type_name,day_of_addition,kanji FROM words 
-			JOIN nounTypes ON nounTypes.id=words.word_subtype_id 
-			WHERE word_type='".$type."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
+function selectWords($conn,$type,$orderColumn,$order,$fromDate="2000-01-01",$toDate="3333-03-03",$subType=null){
+	if ($subType!=null)
+		$sql="SELECT words.id,jap_word,svk_word,word_type,type_name,day_of_addition,kanji FROM words
+            JOIN nounTypes ON nounTypes.id=words.word_subtype_id
+            WHERE nounTypes.id='".$subType."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
 			ORDER BY $orderColumn $order";
-    else if ($type!="all")
-        $sql="SELECT * FROM words WHERE word_type='".$type."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
-			ORDER BY $orderColumn $order";
-    else
-        $sql="SELECT * FROM words WHERE day_of_addition between '".$fromDate."' AND '".$toDate."'
-			ORDER BY $orderColumn $order";
+	else {
+		if ($type == "podstatne meno")
+			$sql="SELECT words.id,jap_word,svk_word,word_type,type_name,day_of_addition,kanji FROM words 
+				JOIN nounTypes ON nounTypes.id=words.word_subtype_id 
+				WHERE word_type='".$type."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
+				ORDER BY $orderColumn $order";
+		else if ($type!="all")
+			$sql="SELECT * FROM words 
+				  WHERE word_type='".$type."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
+				  ORDER BY $orderColumn $order";
+		else
+			$sql="SELECT words.id,jap_word,svk_word,word_type,type_name,day_of_addition,kanji FROM words
+				  LEFT JOIN nounTypes ON nounTypes.id=words.word_subtype_id
+				  WHERE day_of_addition between '".$fromDate."' AND '".$toDate."'
+				  ORDER BY $orderColumn $order";
+	}
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
-
 }
 function selectWordByNameTypeNounType($conn,$word,$type,$nountype){
-    $sql="SELECT * FROM words where jap_word='".$word."' and word_type='".$type."' and word_subtype_id='".$nountype."'";
+	if ($nountype!=NULL)
+		$sql="SELECT * FROM words where jap_word='".$word."' and word_type='".$type."' and word_subtype_id='".$nountype."'";
+	else
+		$sql="SELECT * FROM words where jap_word='".$word."' and word_type='".$type."' and word_subtype_id IS NULL";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
 }
@@ -93,14 +105,6 @@ function selectNounTypeByID($conn,$id){
     $sql = "SELECT * FROM nounTypes where id='".$id."' limit 1";
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;
-}
-function selectSubTypeWords($conn,$type){
-    $sql="SELECT words.id,nounTypes.id as 'type_id',jap_word,svk_word,word_type,type_name,day_of_addition,kanji FROM words
-            JOIN nounTypes ON nounTypes.id=words.word_subtype_id
-            WHERE nounTypes.id='".$type."' ORDER BY words.jap_word";
-    $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
-    return $result;
-
 }
 function selectVerbWordsByOrigin($conn,$origin,$origins){
 	if ($origin=="kuru")

@@ -188,38 +188,40 @@ $(function () {
 $(function () {
     $('.deleteX').on('click', function (e) {
         e.preventDefault();
-        let type;
-        if (this.classList.contains('word'))
-            type=0;
-        else
-            type=1
-        $.ajax({
-            type: 'post',
-            url: 'postHandlers/delete.php',
-            data: {id:this.id,type:type},
-            success: function (data) {
-                try {
-                    let result = JSON.parse(data)
-                    if(result.scs===true){
-                        document.getElementById("modal_background2").style.display="block";
-                        document.getElementsByClassName("modal_div2")[0].style.display="flex";
-                        document.getElementById("result").innerHTML=result.msg;
-                    }
-                    else{
-                        document.getElementById("modal_background").style.display="block";
-                        document.getElementsByClassName("modal_div")[0].style.display="flex";
-                        document.getElementById("modal_text").innerHTML=result.msg;
-                    }
-                }
-                catch{
-                    alert (data)
-                }
-            },
-            error: function (){
-                alert ("Nastala chyba skúste to znova")
-            }
-        });
-    })
+		if(confirm("Si si istý, že to chceš vymazať?")){
+			let type;
+			if (this.classList.contains('word'))
+				type=0;
+			else
+				type=1
+			$.ajax({
+				type: 'post',
+				url: 'postHandlers/delete.php',
+				data: {id:this.id,type:type},
+				success: function (data) {
+					try {
+						let result = JSON.parse(data)
+						if(result.scs===true){
+							document.getElementById("modal_background2").style.display="block";
+							document.getElementsByClassName("modal_div2")[0].style.display="flex";
+							document.getElementById("result").innerHTML=result.msg;
+						}
+						else{
+							document.getElementById("modal_background").style.display="block";
+							document.getElementsByClassName("modal_div")[0].style.display="flex";
+							document.getElementById("modal_text").innerHTML=result.msg;
+						}
+					}
+					catch{
+						alert (data)
+					}
+				},
+				error: function (){
+					alert ("Nastala chyba skúste to znova")
+				}
+			});
+		}
+	})
 });
 
 //edit

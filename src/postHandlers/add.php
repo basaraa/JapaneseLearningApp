@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $japWord = mb_escape($_POST["japWord"]);
                 $svkWord = mb_escape($_POST["svkWord"]);
                 $type = mb_escape($_POST["type"]);
-                $nounType = $type=="podstatne meno" ? intval($_POST["nounType"]) : '';
+                $nounType = $type=="podstatne meno" ? intval($_POST["nounType"]) : NULL;
 				$kanji = $_POST["kanji"] == NULL ? '': mb_escape($_POST["kanji"]);
                 $type=mb_escape($type);
                 $checkJapWord = selectWordByNameTypeNounType($conn, $japWord,$type,$nounType);

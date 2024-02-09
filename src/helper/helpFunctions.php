@@ -42,8 +42,14 @@ function getOrdersForTable($orderColumns,$orderColumn,$order){
 	}
 	return $ordersTable;
 }
-function generateLinkForWords($type,$showType,$orderColumn,$order,$fromDate=null,$toDate=null){
-	$link="words.php?type=$type&showType=$showType&orderColumn=$orderColumn&order=$order";
+function generateLinkForWords($type,$showType,$orderColumn=null,$order=null,$fromDate=null,$toDate=null,$subType=null,$frontLanguage=null){	
+	$link="words.php?type=$type&showType=$showType";
+	if ($orderColumn!=null && $order!=null)
+		$link.="&orderColumn=$orderColumn&order=$order";
+	if ($frontLanguage!=null && in_array($frontLanguage,["JP","SVK"]))
+		$link.="&frontLanguage=$frontLanguage";
+	if ($subType!=null)
+		$link.="&subType=".$subType;
 	if (($fromDate !=null && $fromDate !='2000-01-01') && ($toDate!=null && $toDate!='3333-03-03'))
 		$link.="&monthWords=1";
 	return $link;

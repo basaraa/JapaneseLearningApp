@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $japWord = mb_escape($line[0]);
                                 $svkWord = mb_escape($line[1]);
                                 $type = $line[2];
-                                $nounType = $type == "podstatne meno" ? $subtypesId[array_search($line[3], $subtypes)] : '';
+                                $nounType = $type == "podstatne meno" ? $subtypesId[array_search($line[3], $subtypes)] : NULL;
 								$kanji = (isset ($line[4]) && $line[4]!='NULL') ? mb_escape($line[4]) : '';
                                 $type=mb_escape($type);
                                 $checkJapWord = selectWordByNameTypeNounType($conn, $japWord,$type,$nounType);
