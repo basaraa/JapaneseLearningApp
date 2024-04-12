@@ -6,16 +6,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
     include "helper/helpFunctions.php";
     $type=intval($_GET["type"]);
     $showType=intval($_GET["showType"]);
-    $types=["podstatne meno","pridavne meno","sloveso","all"];
+    $types=["podstatne meno","pridavne meno","sloveso","all","veta"];
 	[$fromDate,$toDate]=(isset($_GET["monthWords"]) && $_GET["monthWords"]==1) ? [date("Y-m-d",strtotime("-1 months")),date("Y-m-d")] : ["2000-01-01","3333-03-03"];
 	if ($type>=0 && $type<=4) {
         $orderColumns=["jap_word","svk_word","word_type","word_subtype_id","day_of_addition"];
         $orders=["ASC","DESC"];
         $orderColumn=(isset($_GET["orderColumn"])&&in_array($_GET["orderColumn"],$orderColumns)) ? mb_escape($_GET["orderColumn"]) : "jap_word";
         $order=(isset($_GET["order"])&&in_array($_GET["order"],$orders)) ? mb_escape($_GET["order"]) : "ASC";
-		$subType=(isset ($_GET["subType"]) && (intval($_GET["subType"]) >=1 && intval($_GET["subType"])<28)) ? intval($_GET["subType"]) : null;
+		$subType=(isset ($_GET["subType"]) && (intval($_GET["subType"]) >=1 && intval($_GET["subType"])<29)) ? intval($_GET["subType"]) : null;
         if ($showType!=2)
-			$result = selectWords($conn, $types[$type],$orderColumn,$order,$fromDate,$toDate,$subType);
+			$result = selectWords($conn,$types[$type],$orderColumn,$order,$fromDate,$toDate,$subType);
 		if ($subType==17){
 			echo '<div class="midd">
 					  <h2>Ľudské telo:</h2>
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                     <tbody>';
 
             if (isset($result) && $result) {
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {			
                     echo '<tr>';
                     if ($type==2 && !(str_contains($row["jap_word"], ' ')))
                         echo '<td><a class="cursor searchedValue" onclick="window.location.href=\'verbForms.php?verb='.$row["jap_word"].'&getVerbForms=8\'">' . $row["jap_word"] . '</a></td>';
@@ -71,8 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                         echo '<td class="searchedValue">' . $row["jap_word"] . '</td>';
                     echo '<td class="searchedValue">' . $row["svk_word"] . '</td>';
                     echo '<td>' . $row["word_type"] . '</td>';
-					$row_subtype=(isset($row["type_name"]) && $row["type_name"] != NULL) ? $row["type_name"] : '';
-                    echo '<td>' . $row_subtype . '</td>';
+                    echo '<td>' . ((isset($row["typeNames"]) && $row["typeNames"]) ? str_replace(',',', ',$row["typeNames"]) : '') . '</td>';
 					$kanji = $row["kanji"] == NULL ? '' : $row["kanji"];
 					echo '<td>' .$kanji. '</td>';
                     echo '<td>' . date("d.m.Y", strtotime($row["day_of_addition"])) . '</td>';
@@ -111,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             else http_response_code(400);
         }
         //zoznam kategórii podstatných mien
-        else if ($showType == 2 && $type==0){
+        else if ($showType == 2 && ($type==0 || $type==4)){
             $result=selectNounTypes($conn);
             if ($result){
                 echo '<div class="flexdiv">';

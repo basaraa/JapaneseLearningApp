@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $subtypesId = [];
                     $file_name = $_FILES["fileCSV"]["tmp_name"];
                     $opened_file = fopen($file_name, "r");
-                    $types = ["podstatne meno", "pridavne meno", "sloveso"];
+                    $types = ["podstatne meno", "pridavne meno", "sloveso", "veta"];
                     $nounTypesRows = 0;
                     $result = selectNounTypes($conn);
                     if ($result) {
@@ -26,21 +26,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             array_push($subtypesId, $subtype["id"]);
                         }
                     }
-                    while ($line = fgetcsv($opened_file, 272,";")) {
+                    while ($line = fgetcsv($opened_file, 336,";")) {
                         $result = null;
-                        if ((isset ($line[0]) && strlen($line[0]) <= 64) && (isset ($line[1]) && strlen($line[1]) <= 128)
+                        if ((isset ($line[0]) && strlen($line[0]) <= 128) && (isset ($line[1]) && strlen($line[1]) <= 128)
                             && (isset ($line[2]) && in_array($line[2], $types))) {
-                            if (($line[2] != "podstatne meno") ||
-                                ($line[2] === "podstatne meno" && isset ($line[3]) && (in_array($line[3], $subtypes)))) {
+                            if (($line[2] != "podstatne meno" && $line[2] != "veta") ||
+                                (($line[2] === "podstatne meno" || $line[2] === "veta") &&
+								isset ($line[3]) && (in_array($line[3], $subtypes)))) {
                                 $japWord = mb_escape($line[0]);
                                 $svkWord = mb_escape($line[1]);
                                 $type = $line[2];
-                                $nounType = $type == "podstatne meno" ? $subtypesId[array_search($line[3], $subtypes)] : NULL;
+                                $nounTypeLine = ($type == "podstatne meno" || $type == "veta") ? explode(',',$line[3]) : NULL;
+								$nounTypes=[];
+								if ($nounTypeLine!=NULL){
+									foreach ($nounTypeLine as $nounType)
+										array_push($nounTypes,$subtypesId[array_search($nounType, $subtypes)]) ;
+								}
+								else
+									$nounTypes=NULL;
 								$kanji = (isset ($line[4]) && $line[4]!='NULL') ? mb_escape($line[4]) : '';
                                 $type=mb_escape($type);
-                                $checkJapWord = selectWordByNameTypeNounType($conn, $japWord,$type,$nounType);
-                                if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
-                                    $result = insertWord($conn, $japWord, $svkWord, $type, $nounType,$kanji);
+								$checkNounTypes=$nounTypes != NULL ? implode(',',$nounTypes) : NULL;
+                                $checkJapWord = selectWordByNameTypeNounType($conn, $japWord,$type,$checkNounTypes);
+								if ($checkJapWord && $checkJapWord->num_rows===0) {
+                                    $result = insertWord($conn, $japWord, $svkWord, $type,$kanji);
+									if ($nounTypes != NULL){
+										$insertedID=$conn->insert_id;
+										foreach ($nounTypes as $nounTypeID){
+											insertWordSubtypes($conn,$insertedID,$nounTypeID);
+										}
+									}
                                     if ($result){
                                         $msg .= $line[0] . ', ';
 										$count += 1;

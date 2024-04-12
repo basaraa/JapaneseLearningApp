@@ -29,7 +29,6 @@ function echo_grammar($conn,$grammar){
                         <i class = "bi bi-trash"></i></a></p></div>';
 
         }
-
     }
 }
 function getOrdersForTable($orderColumns,$orderColumn,$order){

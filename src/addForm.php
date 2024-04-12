@@ -20,21 +20,21 @@ if ((isset($_GET["addType"]))) {
                             <option value="podstatne meno" >Podstatné meno</option>
                             <option value="pridavne meno" >Prídavné meno</option>
                             <option value="sloveso" >Sloveso</option>
+							<option value="veta" >Veta</option>
                         </select>
-                        <label id="nounTypeLabel" for="nounType">Podtyp slova:</label>
-                        <select class="form-control" name = "nounType" id="nounType">
-                       
+                        <label id="nounTypeLabel" for="nounType">Podtyp slova:</label></br>                      
                     ';
             $result = selectNounTypes($conn);
             if ($result) {
                 while ($nounType = mysqli_fetch_assoc($result)) {
                     $subType = $nounType["type_name"];
                     $id = $nounType["id"];
-                    echo "<option value=$id>$subType</option>";
+                    echo "<label class='fw-normal mb-1 me-3 form-check-label nounType'>
+							<input class='form-check-input' type='checkbox' name='nounType[]' value=$id> $subType
+						</label>";
                 }
             }
-			echo '		</select>
-						<label for="kanji">Znak kanji:</label><span class="remainChars">{{ RemainingChars(2) }}</span>
+			echo '</br><label for="kanji">Znak kanji:</label><span class="remainChars">{{ RemainingChars(2) }}</span>
 						<input v-model="formInput[2]" type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16">
 					</div>
 					<button type="submit" class="btn btn-primary">Vložiť slovo</button>

@@ -13,13 +13,13 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
             $japWord=htmlspecialchars($wordRow["jap_word"]);
             $svkWord=htmlspecialchars($wordRow["svk_word"]);
             $wordType=$wordRow["word_type"];
-            $types=["podstatne meno","pridavne meno","sloveso","ostatne"];
-            $typesString=["Podstatné meno","Prídavné meno","Sloveso","Ostatné"];
+            $types=["podstatne meno","pridavne meno","sloveso","veta"];
+            $typesString=["Podstatné meno","Prídavné meno","Sloveso","Veta"];
 			$kanji_char=$wordRow["kanji"]==NULL ? '' : htmlspecialchars($wordRow["kanji"]);
-            if ($wordType==$types[0])
-                $wordSubTypeID=$wordRow["word_subtype_id"];
+            if ($wordType==$types[0] || $wordType==$types[3])
+                $wordSubTypeID=explode(',',$wordRow["word_subtype_id"]);
             else
-                $wordSubTypeID=NULL;
+                $wordSubTypeID=NULL;	
             echo '		<input type="hidden" id="editType" name="editType" value = "' . $type . '">
                         <input type="hidden" id="wordID" name="wordID" value = "' . $id . '">
                         <label for="japWord">Japonské slovo:</label>
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
                          value="'.$svkWord.'" maxlength="128" required>
                         <label for="type">Typ slova:</label>
                         <select class="form-control wordType" name= "type" id="type" required>                          
-                    ';
+                    ';	
             for ($x=0;$x<count($types);$x++){
                 if ($types[$x]==$wordType)
                     echo '<option value="'.$types[$x].'" selected>'.$typesString[$x].'</option>';
@@ -38,24 +38,23 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST["id"]) && isset($_POST["t
                     echo '<option value="'.$types[$x].'" >'.$typesString[$x].'</option>';
             }
             echo '</select>';
-            if ($wordSubTypeID)
-                echo '<label id="nounTypeLabel" for="nounType">Podtyp slova:</label>
-                    <select class="form-control" name = "nounType" id="nounType">';
+            if ($wordType && in_array($wordType,['podstatne meno','veta']))
+                echo '<label id="nounTypeLabel" for="nounType">Podtyp slova:</label><div class="nounType w-50 mx-auto">';
             else
-                echo '<label id="nounTypeLabel" for="nounType" style="display: none">Podtyp slova:</label>
-                    <select class="form-control" name = "nounType" id="nounType" style="display: none">';
+                echo '<label id="nounTypeLabel" for="nounType" style="display: none">Podtyp slova:</label><div class="nounType w-50 ms-auto me-auto" style="display: none">';
             $resultNounTypes=selectNounTypes($conn);
             if ($resultNounTypes) {
                 while ($nounType = mysqli_fetch_assoc($resultNounTypes)) {
                     $subType = $nounType["type_name"];
-                    $subTypeID = $nounType["id"];
-                    if ($wordSubTypeID && $subTypeID==$wordSubTypeID)
-                        echo "<option value=$subTypeID selected>$subType</option>";
-                    else
-                        echo "<option value=$subTypeID>$subType</option>";
+                    $subTypeID = $nounType["id"];					
+                    echo "<label class='fw-normal mb-1 me-3 form-check-label'>
+							<input class='form-check-input' type='checkbox' name='nounType[]' value=$subTypeID";
+						if ($wordSubTypeID && in_array($subTypeID,$wordSubTypeID))
+							echo " checked ";						
+						echo ">$subType</label>";           
                 }
             }
-            echo '</select><label for="kanji">Znak kanji:</label>
+            echo '</div></br><label for="kanji">Znak kanji:</label>
 						<input type="text" class="form-control" name= "kanji" id="kanji" placeholder="Zadajte kanji znak" maxlength="16" value="'.$kanji_char.'">
 					</div>
                     <button type="submit" class="btn btn-primary">Upraviť slovo</button>';

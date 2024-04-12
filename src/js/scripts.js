@@ -102,15 +102,15 @@ $(function (){
 $(function () {
     $(".wordType").change(function(){
         let index = $(".wordType option:selected").index();
-        let nounType=document.getElementById("nounType");
-        let nounTypeLabel=document.getElementById("nounTypeLabel");
-        if (index===0){
-            nounType.style.display="block";
-            nounTypeLabel.style.display="block";
+        let nounType=$(".nounType");
+        let nounTypeLabel=$("#nounTypeLabel");
+        if (index===0 || index===3){
+            nounType.css("display","inline-block");
+            nounTypeLabel.css("display","block");
         }
         else{
-            nounType.style.display="none";
-            nounTypeLabel.style.display="none";
+            nounType.css("display","none");
+            nounTypeLabel.css("display","none");
         }
     })
 });
@@ -255,7 +255,7 @@ $(function () {
                 }
             },
             error: function (){
-                alert ("Nastala chyba skúste to znova")
+				alert ("Nastala chyba skúste to znova");
             }
         });
     })
@@ -273,16 +273,16 @@ function generateEditForm(id,type){
             document.getElementById("modal_text").innerHTML=data
             $(".wordType").change(function(){
                 let index = $(".wordType option:selected").index();
-                let nounType=document.getElementById("nounType");
-                let nounTypeLabel=document.getElementById("nounTypeLabel");
-                if (index===0){
-                    nounType.style.display="block";
-                    nounTypeLabel.style.display="block";
-                }
-                else{
-                    nounType.style.display="none";
-                    nounTypeLabel.style.display="none";
-                }
+				let nounType=$(".nounType");
+				let nounTypeLabel=$("#nounTypeLabel");
+				if (index===0 || index===3){
+					nounType.css("display","inline-block");
+					nounTypeLabel.css("display","block");
+				}
+				else{
+					nounType.css("display","none");
+					nounTypeLabel.css("display","none");
+				}
             })
         },
         error: function (){

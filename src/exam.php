@@ -5,9 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["type"]) && isset ($_PO
 	&& isset($_POST["questionLanguage"]) && isset($_POST["dateFrom"]) && isset($_POST["dateTo"])){
     require_once("config/config.php");
     include "databaseQueries/databaseQueries.php";
-	$types=["podstatne meno","pridavne meno","sloveso","all"];
+	$types=["podstatne meno","pridavne meno","sloveso","all","veta"];
     $type=$_POST["type"];
-    $subType=$types[$type] == "podstatne meno" ? intval($_POST["subType"]) : 0;
+    $subType= ($types[$type] == "podstatne meno" || $types[$type] == "veta") ? intval($_POST["subType"]) : 0;
     $questionLanguage=$_POST["questionLanguage"];
     $answerLanguage = $questionLanguage =="SVK" ? "JP" : "SVK";
 	$dateFrom = ($_POST["dateFrom"] == NULL | date('Y-m-d', strtotime($_POST["dateFrom"])) != $_POST["dateFrom"]) ? "1111-01-01" : date('Y-m-d', strtotime($_POST["dateFrom"]));
@@ -68,6 +68,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["getExamForm"]) && $
 				<option value="0" >Podstatné meno</option>
 				<option value="1" >Prídavné meno</option>
 				<option value="2" >Sloveso</option>
+				<option value="4" >Veta</option>
 				<option value="3" >Všetky</option>
 			</select>
 			<label id="nounTypeLabel" for="subType" class="marginx green">Podtyp slova:</label>

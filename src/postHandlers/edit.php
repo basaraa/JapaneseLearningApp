@@ -7,19 +7,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $editType = intval($_POST["editType"]);
         //word
         if ($editType == 0) {
-            if (isset($_POST["wordID"]) && isset($_POST["japWord"])  && isset($_POST["svkWord"])
-                && isset($_POST["type"]) && isset($_POST["nounType"]) && isset($_POST["kanji"])) {
+            if (isset($_POST["wordID"]) && isset($_POST["japWord"]) && isset($_POST["svkWord"])
+				&& isset($_POST["type"]) && (isset($_POST["nounType"]) 
+					|| (in_array($_POST["type"],['pridavne meno','sloveso']))) 
+				&& isset($_POST["kanji"])) {
                 $japWord = mb_escape($_POST["japWord"]);
                 $svkWord = mb_escape($_POST["svkWord"]);
                 $wordID= intval($_POST["wordID"]);
                 $type = $_POST["type"];
-                $nounType = $type == "podstatne meno" ? intval($_POST["nounType"]) : '';
+                $nounTypes = ($type == "podstatne meno" || $type == "veta") ? $_POST["nounType"] : NULL;
 				$kanji = $_POST["kanji"] == NULL ? '': mb_escape($_POST["kanji"]);
                 $type = mb_escape($type);
-                $checkJapWord = selectWordByNameCheckDuplicate($conn, $japWord,$wordID,$type,$nounType);
-                if ($checkJapWord && ($checkJapWord->num_rows) === 0) {
-                    $result = updateWord($conn,$wordID, $japWord, $svkWord, $type, $nounType,$kanji);
+				$checkNounTypes=$nounTypes != NULL ? implode(',',$nounTypes) : NULL;
+				$checkJapWord = selectWordByNameTypeNounType($conn, $japWord,$type,$checkNounTypes);				
+                //ak sa nenašlo žiadne slovo alebo našlo len samého seba
+				if ($checkJapWord && 
+						($checkJapWord->num_rows==0 ||
+						mysqli_fetch_assoc($checkJapWord)['id']==$wordID 
+							&& $checkJapWord->num_rows==1
+						)
+					)
+				{
+                    $result = updateWord($conn,$wordID, $japWord, $svkWord, $type,$kanji);
                     if ($result) {
+						if ($nounTypes != NULL){
+							//generovanie podtypov slova
+							$result_wordSubtypes=selectWordSubtypesNamesByWordID($conn,$wordID);
+							if ($result_wordSubtypes){
+								$wordSubtypesRow=mysqli_fetch_assoc($result_wordSubtypes);
+								$rowSubTypes=explode(',',$wordSubtypesRow['word_subtype_id']);
+								//prechádzanie všetkých typov a mazanie tých čo už neplatia+pridávanie nových
+								foreach ($nounTypes as $nounTypeID){
+									if (!(in_array($nounTypeID,$rowSubTypes)))
+										insertWordSubtypes($conn,$wordID,$nounTypeID);
+									else{
+										unset($rowSubTypes[array_search($nounTypeID,$rowSubTypes)]);
+										$rowSubTypes=array_values($rowSubTypes);
+									}
+								}
+								$rowSubTypes=array_values($rowSubTypes);
+								foreach ($rowSubTypes as $rowSubTypeID){
+									deleteWordSubtypesByWordID($conn,$wordID,$rowSubTypeID);
+								}
+							}
+						}
                         echo json_encode(["scs" => true, "msg" => '<h2 class="blue">Úspešne upravené slovo: ' . $japWord . '</h2>']);
                     } else echo json_encode(["scs" => false, "msg" => '<h2 class="red">' . $conn->error . '</h2>']);
                 } else
