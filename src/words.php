@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
                         echo '<td class="searchedValue">' . $row["jap_word"] . '</td>';
                     echo '<td class="searchedValue">' . $row["svk_word"] . '</td>';
                     echo '<td>' . $row["word_type"] . '</td>';
-                    echo '<td>' . ((isset($row["typeNames"]) && $row["typeNames"]) ? str_replace(',',', ',$row["typeNames"]) : '') . '</td>';
+                    echo '<td>' . ((isset($row["typeNames"]) && $row["typeNames"]) ? $row["typeNames"] : '') . '</td>';
 					$kanji = $row["kanji"] == NULL ? '' : $row["kanji"];
 					echo '<td>' .$kanji. '</td>';
                     echo '<td>' . date("d.m.Y", strtotime($row["day_of_addition"])) . '</td>';

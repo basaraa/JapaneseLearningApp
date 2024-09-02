@@ -45,7 +45,7 @@ function selectWords($conn,$type,$orderColumn,$order,$fromDate="2000-01-01",$toD
 		else if ($type!="all")
 			$sql="SELECT * FROM words 
 				  WHERE word_type='".$type."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
-				  ORDER BY $orderColumn $order";
+				  ORDER BY MIN($orderColumn) $order";
 		//all words
 		else
 			$sql="SELECT words.id,jap_word,svk_word,word_type,day_of_addition,kanji,GROUP_CONCAT(type_name ORDER BY type_name SEPARATOR ', ') as typeNames FROM words
@@ -53,7 +53,7 @@ function selectWords($conn,$type,$orderColumn,$order,$fromDate="2000-01-01",$toD
 				LEFT JOIN nounTypes ON nounTypes.id=wordSubtypes.word_subtype_id	
 				  WHERE day_of_addition between '".$fromDate."' AND '".$toDate."'
 				  GROUP BY words.id
-				  ORDER BY $orderColumn $order";
+				  ORDER BY MIN($orderColumn) $order";
 	}
     $result = $conn->query($sql) or die ("Chyba pri vykonaní select query".$conn->error);
     return $result;

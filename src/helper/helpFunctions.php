@@ -53,3 +53,16 @@ function generateLinkForWords($type,$showType,$orderColumn=null,$order=null,$fro
 		$link.="&monthWords=1";
 	return $link;
 }
+
+function importCSVtooltip($addtype){
+	$returnText= "Parametre riadku pri pridávaní z .csv súboru sú v rovnakom poradí ako pri manuálnom priradení, kde každý parameter je oddelený bodkočiarkou:\n";
+	if ($addtype == 0)
+		return $returnText."	japonsky;slovensky;typ;podtyp,podtyp2;kanji";
+	else if ($addtype == 1)
+		return $returnText."	názovGramatiky;popisGramatiky";
+	else if ($addtype == 2)
+		return $returnText."	názovGramatiky;japonskaVeta;prekladVety";
+	else if ($addtype == 3)		 
+		return $returnText."	kanjiZnak;kunyoumi;onyoumi;preklad";
+	return ;
+}

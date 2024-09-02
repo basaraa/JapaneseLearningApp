@@ -26,21 +26,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             array_push($subtypesId, $subtype["id"]);
                         }
                     }
-                    while ($line = fgetcsv($opened_file, 336,";")) {
+                    while ($line = fgetcsv($opened_file, 500,";")) {
                         $result = null;
                         if ((isset ($line[0]) && strlen($line[0]) <= 128) && (isset ($line[1]) && strlen($line[1]) <= 128)
                             && (isset ($line[2]) && in_array($line[2], $types))) {
                             if (($line[2] != "podstatne meno" && $line[2] != "veta") ||
                                 (($line[2] === "podstatne meno" || $line[2] === "veta") &&
-								isset ($line[3]) && (in_array($line[3], $subtypes)))) {
+								isset ($line[3]))) {
                                 $japWord = mb_escape($line[0]);
                                 $svkWord = mb_escape($line[1]);
                                 $type = $line[2];
                                 $nounTypeLine = ($type == "podstatne meno" || $type == "veta") ? explode(',',$line[3]) : NULL;
 								$nounTypes=[];
 								if ($nounTypeLine!=NULL){
-									foreach ($nounTypeLine as $nounType)
-										array_push($nounTypes,$subtypesId[array_search($nounType, $subtypes)]) ;
+									foreach ($nounTypeLine as $nounType){
+										if ((in_array($nounType, $subtypes)))
+											array_push($nounTypes,$subtypesId[array_search($nounType, $subtypes)]) ;
+									}
 								}
 								else
 									$nounTypes=NULL;

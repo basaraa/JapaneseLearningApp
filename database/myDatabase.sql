@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Pi 12.Apr 2024, 18:03
+-- Čas generovania: Po 02.Sep 2024, 08:10
 -- Verzia serveru: 8.0.32
 -- Verzia PHP: 8.0.19
 
@@ -890,10 +890,10 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `day_of_addition
 (203, 'Kinyoubi', 'Piatok', 'podstatne meno', '2023-05-10', NULL),
 (204, 'Doyoubi', 'Sobota', 'podstatne meno', '2023-05-10', NULL),
 (205, 'Nichiyoubi', 'Nedeľa ', 'podstatne meno', '2023-05-10', NULL),
-(206, 'Ichigatsu', 'Január (mesiace v roku= číslo+gatsu)', 'podstatne meno', '2023-05-10', NULL),
-(207, 'Shigatsu', 'Apríl', 'podstatne meno', '2023-05-10', NULL),
-(208, 'Shichigatsu', 'Júl', 'podstatne meno', '2023-05-10', NULL),
-(209, 'Kugatsu', 'September', 'podstatne meno', '2023-05-10', NULL),
+(206, 'Ichigatsu', 'Január', 'podstatne meno', '2023-05-10', '一月'),
+(207, 'Shigatsu', 'Apríl', 'podstatne meno', '2023-05-10', '四月'),
+(208, 'Shichigatsu', 'Júl', 'podstatne meno', '2023-05-10', '七月'),
+(209, 'Kugatsu', 'September', 'podstatne meno', '2023-05-10', '九月'),
 (210, 'Kono shuumatsu', 'Tento víkend', 'podstatne meno', '2023-05-10', NULL),
 (211, 'Senshuumatsu', 'Minulý víkend', 'podstatne meno', '2023-05-10', NULL),
 (212, 'Raishuumatsu', 'Budúci víkend', 'podstatne meno', '2023-05-10', NULL),
@@ -2640,7 +2640,36 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `day_of_addition
 (1985, 'Kuuki o yomu', 'Čítať situáciu/Vycítiť náladu', 'veta', '2024-04-12', NULL),
 (1986, 'Shougekiteki(na)', 'Šokujúce', 'pridavne meno', '2024-04-12', NULL),
 (1987, 'Kontorooru', 'Kontrola (svojích emócii)', 'podstatne meno', '2024-04-12', NULL),
-(1988, 'Hitogara', 'Charakteristika/Vlastnosť (ľudská)', 'podstatne meno', '2024-04-12', NULL);
+(1988, 'Hitogara', 'Charakteristika/Vlastnosť (ľudská)', 'podstatne meno', '2024-04-12', NULL),
+(1989, 'Doko kara kita ka', 'Odkiaľ ste? (neformálne)', 'veta', '2024-09-02', NULL),
+(1990, 'Goshusshin wa dochira desu ka', 'Odkiaľ ste? (formálne)', 'veta', '2024-09-02', NULL),
+(1991, 'Doko ni sunde imasu ka', 'Kde bývate?', 'veta', '2024-09-02', NULL),
+(1992, 'Kore wa nan desu ka', 'Čo je to?', 'veta', '2024-09-02', NULL),
+(1993, 'X gatsu', 'X-tý mesiac', 'podstatne meno', '2024-09-02', NULL),
+(1994, 'Nigatsu', 'Február', 'podstatne meno', '2024-09-02', '二月'),
+(1995, 'Sangatsu', 'Marec', 'podstatne meno', '2024-09-02', '三月'),
+(1996, 'Gogatsu', 'Máj', 'podstatne meno', '2024-09-02', '五月'),
+(1997, 'Rokugatsu', 'Jún', 'podstatne meno', '2024-09-02', '六月'),
+(1998, 'Hachigatsu', 'August', 'podstatne meno', '2024-09-02', '八月'),
+(1999, 'Juugatsu', 'Október', 'podstatne meno', '2024-09-02', '十月'),
+(2000, 'Juuichigatsu', 'November', 'podstatne meno', '2024-09-02', '十一月'),
+(2001, 'Juunigatsu', 'December', 'podstatne meno', '2024-09-02', '十二月'),
+(2002, 'Pinku', 'Ružová', 'pridavne meno', '2024-09-02', NULL),
+(2003, 'Kore wa ikura desu ka', 'Koľko to stojí?', 'veta', '2024-09-02', NULL),
+(2004, 'Ijou de yoroshii desu ka', 'Je to všetko?', 'veta', '2024-09-02', NULL),
+(2005, 'Nani ka osagashi desu ka', 'Hľadáte niečo?', 'veta', '2024-09-02', NULL),
+(2006, 'X made dou yatte ikeba ii desu ka', 'Ako sa dostanem do X?', 'veta', '2024-09-02', NULL),
+(2007, 'X wa doko desu ka', 'Kde sa nachádza X?', 'veta', '2024-09-02', NULL),
+(2008, 'Ima wa nan ji desu ka', 'Koľko je hodín?', 'veta', '2024-09-02', NULL),
+(2009, 'Yoyaku mei wa nan desu ka', 'Na aké meno je rezervácia?', 'veta', '2024-09-02', NULL),
+(2010, 'X no yoyaku shite imasu', 'Mám rezerváciu na meno X', 'veta', '2024-09-02', NULL),
+(2011, 'Kono jyusho made tsurete itte kudasai', 'Vezmite ma prosím na túto adresu.', 'veta', '2024-09-02', NULL),
+(2012, 'Koko de tomatte kudasai', 'Tu mi zastavte prosím.', 'veta', '2024-09-02', NULL),
+(2013, 'Kono basu wa X ni ikimasu', 'Ide tento autobus do X (stanice)?', 'veta', '2024-09-02', NULL),
+(2014, 'Sono densha wa X de tomarimasu ka', 'Stojí tento vlak na X(stanici)?', 'veta', '2024-09-02', NULL),
+(2015, 'Chekkuin shitai desu', 'Chcel by som sa ubytovať.', 'veta', '2024-09-02', NULL),
+(2016, 'Chekkuin wa nan ji desu ka', 'Kedy je čas ubytovania sa?', 'veta', '2024-09-02', NULL),
+(2017, 'Hoteru ni wa waifai ga arimasu ka', 'Máte v tomto hoteli wifi?', 'veta', '2024-09-02', NULL);
 
 -- --------------------------------------------------------
 
@@ -4060,7 +4089,47 @@ INSERT INTO `wordSubtypes` (`id`, `word_id`, `word_subtype_id`) VALUES
 (1699, 1983, 11),
 (1700, 1985, 12),
 (1701, 1987, 12),
-(1702, 1988, 12);
+(1702, 1988, 12),
+(1703, 1989, 28),
+(1704, 1990, 28),
+(1705, 1991, 28),
+(1706, 1992, 28),
+(1707, 1993, 4),
+(1708, 1994, 4),
+(1709, 1995, 4),
+(1710, 1996, 4),
+(1711, 1997, 4),
+(1712, 1998, 4),
+(1713, 1999, 4),
+(1714, 2000, 4),
+(1715, 2001, 4),
+(1716, 2003, 28),
+(1717, 2004, 28),
+(1718, 2005, 28),
+(1719, 2006, 28),
+(1720, 2006, 2),
+(1721, 2007, 28),
+(1722, 2007, 2),
+(1723, 2008, 28),
+(1724, 2008, 4),
+(1725, 2009, 28),
+(1726, 2009, 2),
+(1727, 2010, 28),
+(1728, 2010, 2),
+(1729, 2011, 28),
+(1730, 2011, 2),
+(1731, 2012, 28),
+(1732, 2012, 2),
+(1733, 2013, 28),
+(1734, 2013, 2),
+(1735, 2014, 28),
+(1736, 2014, 2),
+(1737, 2015, 28),
+(1738, 2015, 2),
+(1739, 2016, 28),
+(1740, 2016, 2),
+(1741, 2017, 28),
+(1742, 2017, 2);
 
 --
 -- Kľúče pre exportované tabuľky
@@ -4174,13 +4243,13 @@ ALTER TABLE `verbFormTypes`
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1989;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2018;
 
 --
 -- AUTO_INCREMENT pre tabuľku `wordSubtypes`
 --
 ALTER TABLE `wordSubtypes`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1703;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1743;
 
 --
 -- Obmedzenie pre exportované tabuľky
