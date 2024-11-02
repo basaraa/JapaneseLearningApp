@@ -11,7 +11,7 @@ services:
         networks:
             - default
     db:
-        image: mysql:latest
+        image: mysql:8.4
         restart: always
         ports: 
             - "3306:3306"
@@ -23,7 +23,7 @@ services:
             - persistent:/var/lib/mysql
         networks:
             - default
-        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--mysql-native-password=ON']
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         restart: always
