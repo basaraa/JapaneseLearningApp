@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: db
--- Čas generovania: Po 02.Sep 2024, 08:10
--- Verzia serveru: 8.0.32
--- Verzia PHP: 8.0.19
+-- Čas generovania: So 22.Feb 2025, 14:03
+-- Verzia serveru: 8.4.3
+-- Verzia PHP: 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -105,7 +105,8 @@ INSERT INTO `grammar` (`id`, `grammar_title`, `grammar_description`) VALUES
 (67, 'Poďme niečo robiť', 'Spojením základu slovesa spolu s \"you\" alebo \"mashou\" hovoríme o tom, že idem/e niečo urobiť.'),
 (68, 'Dôvod pre niečo', 'Použitím vety so slovesom v normalnom tvare spolu s \"wake desu\" na konci hovoríme o znení dôvodu prečo niečo robíme/nerobíme.'),
 (69, 'Privlastnenie niekomu', 'Použitím \"X ni wa Y\" tým privlastňujeme nejaký výraz(Y) nejakej osobe/skupine osôb(X).'),
-(70, 'Mať urobiť/byť', 'Spojením základu slova a \"beki\" (pri slušnom aj \"desu\") hovoríme o niečom čo by sa malo urobiť alebo čím by sme mali byť.');
+(70, 'Mať urobiť/byť', 'Spojením základu slova a \"beki\" (pri slušnom aj \"desu\") hovoríme o niečom čo by sa malo urobiť alebo čím by sme mali byť.'),
+(71, 'Rozdiel medzi \"de\" a \"e\"', '\"De\" sa používa pri vyjadrení miesta deja alebo spôsobu vykonania činnosti. \"E\" pri vyjadrení smeru alebo cieľa pohybu');
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,11 @@ INSERT INTO `grammar_sentences` (`id`, `grammar_id`, `jap_sentence`, `svk_senten
 (90, 70, 'Keitai denwa no dengen kiru beki desu.', 'Mal by ste si vypnúť telefón.'),
 (91, 70, 'Watashi tachi wa kono shokuji o ryouri suru beki desu', 'Mali by sme uvariť/navariť to jedlo.'),
 (92, 70, 'Watashi wa motto yasashiku naru beki desu', 'Mal by som byť viac láskavý.'),
-(93, 70, 'Yaru beki koto wa yarimasu.', 'Spravím to čo mám.');
+(93, 70, 'Yaru beki koto wa yarimasu.', 'Spravím to čo mám.'),
+(94, 71, 'Gakkou de benkyou shimashita.', 'Učím sa v škole.'),
+(95, 71, 'Basu de ryokou shimasu.', 'Cestujem autobusom.'),
+(96, 71, 'Toukyou e ikimasu', 'Idem do Tokya.'),
+(97, 71, 'Basu de Toukyou e ryokou shimasu.', 'Cestujem autobusom do Tokya.');
 
 -- --------------------------------------------------------
 
@@ -2669,7 +2674,45 @@ INSERT INTO `words` (`id`, `jap_word`, `svk_word`, `word_type`, `day_of_addition
 (2014, 'Sono densha wa X de tomarimasu ka', 'Stojí tento vlak na X(stanici)?', 'veta', '2024-09-02', NULL),
 (2015, 'Chekkuin shitai desu', 'Chcel by som sa ubytovať.', 'veta', '2024-09-02', NULL),
 (2016, 'Chekkuin wa nan ji desu ka', 'Kedy je čas ubytovania sa?', 'veta', '2024-09-02', NULL),
-(2017, 'Hoteru ni wa waifai ga arimasu ka', 'Máte v tomto hoteli wifi?', 'veta', '2024-09-02', NULL);
+(2017, 'Hoteru ni wa waifai ga arimasu ka', 'Máte v tomto hoteli wifi?', 'veta', '2024-09-02', NULL),
+(2018, 'Ringoku', 'Susedný štát', 'podstatne meno', '2025-02-22', NULL),
+(2019, 'Rinjin', 'Sused', 'podstatne meno', '2025-02-22', NULL),
+(2020, 'Kasou sekai', 'Umelý/Virtuálny svet', 'podstatne meno', '2025-02-22', NULL),
+(2021, 'Juugyouin', 'Zamestnanec', 'podstatne meno', '2025-02-22', NULL),
+(2022, 'Saigai', 'Katastrofa', 'podstatne meno', '2025-02-22', NULL),
+(2023, 'Shizen saigai', 'Prírodná katastrofa', 'podstatne meno', '2025-02-22', NULL),
+(2024, 'Hinan kunren', 'Nácvik evakuácie', 'podstatne meno', '2025-02-22', NULL),
+(2025, 'Hinan suru', 'Evakuovať sa', 'sloveso', '2025-02-22', NULL),
+(2026, 'Shimekiri', 'Deadline (v práci)', 'podstatne meno', '2025-02-22', NULL),
+(2027, 'Intaanetto setsuzoku', 'Internetové pripojenie', 'podstatne meno', '2025-02-22', NULL),
+(2028, 'Intaanetto setsuzoku o kakunin shite kudasai.', 'Skontrolujte si prosím internetové pripojenie.', 'veta', '2025-02-22', NULL),
+(2029, 'Faiyaawooru no settei o kakunin shite kudasai.', 'Skontrolujte si prosím nastavenia firewallu.', 'veta', '2025-02-22', NULL),
+(2030, 'Bagu o mitsuketa node, shuuzei shinakereba narimasen.', 'Našiel som bug takže ho musím opraviť.', 'veta', '2025-02-22', NULL),
+(2031, 'Kono koodo wa nazeka kinou shimasen.', 'Tento kód z nejakého dôvodu nefunguje.', 'veta', '2025-02-22', NULL),
+(2032, 'Kore wa purodakushon kankyou de tesuto shite mo daijoubu desu ka.', 'Toto je produkcia je v poriadku tu robiť testy ?', 'veta', '2025-02-22', NULL),
+(2033, 'Rogu o kakunin shitara, mondai no genin ga wakaru kamo shiremasen.', 'Ak skontrolujeme logy, možno zistíme príčinu problému', 'veta', '2025-02-22', NULL),
+(2034, 'Deetabeesu ni akusesu dekimasen', 'Nedokážem sa pripojiť na databázu', 'veta', '2025-02-22', NULL),
+(2035, 'Deetabeesu', 'Databáza', 'podstatne meno', '2025-02-22', NULL),
+(2036, 'Bakkuappu o toraterimasu ka', 'Urobili ste zálohu ?', 'veta', '2025-02-22', NULL),
+(2037, 'Kono kueri wa jikkou jikan ga nagasugiru', 'Toto query je príliš dlhé.', 'veta', '2025-02-22', NULL),
+(2038, 'Kono mondai wa doko made kaiketsu shimashita ka', 'Do akej miery bol tento problém vyriešený ?', 'veta', '2025-02-22', NULL),
+(2039, 'Byouin wa nanji kara aiteimasu ka', 'Odkedy je nemocnica otvorená ?', 'veta', '2025-02-22', NULL),
+(2040, 'Watashi o shinsatsu o onegai shimasu.', 'Potreboval by som vyšetriť prosím.', 'veta', '2025-02-22', NULL),
+(2041, 'Machi jikan wa dorekurai desu ka.', 'Ako dlho budem čakať ?', 'veta', '2025-02-22', NULL),
+(2042, 'Netsu ga arimasu.', 'Mám teplotu.', 'veta', '2025-02-22', NULL),
+(2043, 'Kaze o hiita kamo shiremasen.', 'Možno som prechladol', 'veta', '2025-02-22', NULL),
+(2044, 'Atama ga itai desu.', 'Bolí ma hlava.', 'veta', '2025-02-22', NULL),
+(2045, 'Onaka ga itai desu.', 'Bolí ma brucho.', 'veta', '2025-02-22', NULL),
+(2046, 'Nodo ga itai node, hanashinikui desu.', 'Bolí ma hrdlo, takže sa mi ťažko rozpráva.', 'veta', '2025-02-22', NULL),
+(2047, 'Senaka ni hidoi itami ga arimasu.', 'Mám silnú bolesť chrbta.', 'veta', '2025-02-22', NULL),
+(2048, 'Soretomo betsu no byouki desu ka.', 'Alebo je to nejaká iná choroba?', 'veta', '2025-02-22', NULL),
+(2049, 'Kusuri wa itsu nomeba ii desu ka.', 'Kedy mám užívať lieky?', 'veta', '2025-02-22', NULL),
+(2050, 'Fukusayou wa arimasu ka?', 'Má to nejaké vedľajšie účinky?', 'veta', '2025-02-22', NULL),
+(2051, 'Fukusayou', 'Vedľajšie účinky', 'podstatne meno', '2025-02-22', NULL),
+(2052, 'Nyuuin suru hitsuyou ga arimasu ka.', 'Je nutná hospitalizácia ?', 'veta', '2025-02-22', NULL),
+(2053, 'Chiryou', 'Liečba', 'podstatne meno', '2025-02-22', NULL),
+(2054, 'Kurejitto kaado wa tsukaemasu ka,', 'Môžem platiť kartou ?', 'veta', '2025-02-22', NULL),
+(2055, 'Satoo iri no cha o kudasai.', 'Čaj s cukrom problém.', 'veta', '2025-02-22', NULL);
 
 -- --------------------------------------------------------
 
@@ -4129,7 +4172,44 @@ INSERT INTO `wordSubtypes` (`id`, `word_id`, `word_subtype_id`) VALUES
 (1739, 2016, 28),
 (1740, 2016, 2),
 (1741, 2017, 28),
-(1742, 2017, 2);
+(1742, 2017, 2),
+(1743, 2018, 8),
+(1744, 2019, 11),
+(1745, 2020, 26),
+(1746, 2020, 1),
+(1747, 2021, 11),
+(1748, 2021, 23),
+(1749, 2022, 12),
+(1750, 2023, 14),
+(1751, 2024, 14),
+(1752, 2026, 12),
+(1753, 2027, 26),
+(1754, 2028, 26),
+(1755, 2029, 26),
+(1756, 2030, 26),
+(1757, 2031, 26),
+(1758, 2032, 26),
+(1759, 2033, 26),
+(1760, 2034, 26),
+(1761, 2035, 26),
+(1762, 2036, 26),
+(1763, 2037, 26),
+(1764, 2038, 12),
+(1765, 2039, 9),
+(1766, 2040, 9),
+(1767, 2041, 12),
+(1768, 2042, 9),
+(1769, 2043, 9),
+(1770, 2044, 9),
+(1771, 2045, 9),
+(1772, 2046, 9),
+(1773, 2047, 9),
+(1774, 2048, 9),
+(1775, 2051, 9),
+(1776, 2052, 9),
+(1777, 2053, 9),
+(1778, 2054, 12),
+(1779, 2055, 23);
 
 --
 -- Kľúče pre exportované tabuľky
@@ -4201,13 +4281,13 @@ ALTER TABLE `wordSubtypes`
 -- AUTO_INCREMENT pre tabuľku `grammar`
 --
 ALTER TABLE `grammar`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT pre tabuľku `grammar_sentences`
 --
 ALTER TABLE `grammar_sentences`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT pre tabuľku `kana`
@@ -4243,13 +4323,13 @@ ALTER TABLE `verbFormTypes`
 -- AUTO_INCREMENT pre tabuľku `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2018;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2056;
 
 --
 -- AUTO_INCREMENT pre tabuľku `wordSubtypes`
 --
 ALTER TABLE `wordSubtypes`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1743;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1780;
 
 --
 -- Obmedzenie pre exportované tabuľky

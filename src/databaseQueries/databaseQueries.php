@@ -25,12 +25,15 @@ function selectKanjiCombinations($conn,$kanji){
 }
 function selectWords($conn,$type,$orderColumn,$order,$fromDate="2000-01-01",$toDate="3333-03-03",$subType=null){
 	//nouns/sentences with certain subtype
-	if ($subType!=null)
+	if ($subType!=null){
+		if ($type=="all")
+			$type="podstatne meno','veta";
 		$sql="SELECT words.id,jap_word,svk_word,word_type,type_name as typeNames,day_of_addition,kanji FROM words
             JOIN wordSubtypes ON wordSubtypes.word_id=words.id
 			JOIN nounTypes ON nounTypes.id=wordSubtypes.word_subtype_id
-			WHERE nounTypes.id='".$subType."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
+			WHERE word_type IN ('".$type."') AND nounTypes.id='".$subType."' AND day_of_addition BETWEEN '".$fromDate."' AND '".$toDate."'
 			ORDER BY $orderColumn $order";
+	}
 	else {
 		//nouns/sentences
 		if ($type == "podstatne meno" || $type == "veta")

@@ -110,14 +110,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"]) && isset ($_GET[
             else http_response_code(400);
         }
         //zoznam kategórii podstatných mien
-        else if ($showType == 2 && ($type==0 || $type==4)){
+        else if ($showType == 2 && in_array($type,[0,3,4])){
             $result=selectNounTypes($conn);
             if ($result){
                 echo '<div class="flexdiv">';
                 while ($row=mysqli_fetch_assoc($result)){
                     $nounTypeName=$row["type_name"];
                     $nounTypeId=$row["id"];
-                    echo '<div class="inflexdiv" onclick="location.href=\'words.php?type=0&subType='.$nounTypeId.'&showType=0\'">                            
+                    echo '<div class="inflexdiv" onclick="location.href=\'words.php?type='.$type.'&subType='.$nounTypeId.'&showType=0\'">                            
                             <img src="img/nounTypes/'.$row["image_name"].'" class="imgx" alt="x">
                             <h2>'.$nounTypeName.'</h2>
                           </div>';

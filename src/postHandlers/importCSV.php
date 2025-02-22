@@ -50,7 +50,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $type=mb_escape($type);
 								$checkNounTypes=$nounTypes != NULL ? implode(',',$nounTypes) : NULL;
                                 $checkJapWord = selectWordByNameTypeNounType($conn, $japWord,$type,$checkNounTypes);
-								if ($checkJapWord && $checkJapWord->num_rows===0) {
+								if (($checkJapWord && $checkJapWord->num_rows===0)
+								&& !(($type === "podstatne meno" || $type === "veta") && $nounTypes == NULL)) {
                                     $result = insertWord($conn, $japWord, $svkWord, $type,$kanji);
 									if ($nounTypes != NULL){
 										$insertedID=$conn->insert_id;
